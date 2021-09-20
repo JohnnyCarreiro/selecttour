@@ -1,32 +1,33 @@
 const defaultTheme = {
   colors:{
-      gray_100: '#00000F',
-      gray_200: '#343940',
-      gray_300: '#697380',
-      gray_400: '#9DACBF',
-      gray_500: '#D1E5FF',
-      gray_600: '#DAEAFF',
-      gray_700: '#E4EFFF',
-      gray_800: '#EDF5FF',
-      gray_900: '#F6FAFF',
-      gray_1000: '#F7FAFF',
+    gray_100:  '#231f20',
+    gray_200:  '#333139',
+    gray_300:  '#343143',
+    gray_400:  '#2A2945',
+    gray_500:  '#141A44',
+    gray_600:  '#38385B',
+    gray_700:  '#5C5977',
+    gray_800:  '#858199',
+    gray_900:  '#B8B5C4',
+    gray_1000: '#E4E2F1',
+    white:     '#FBFAFF',
 
-      main:'#7029E1',
-      primary: '#1279FF',
-      secondary: '#F78D1E',
+    main: '#243E92',
+    primary: '#243E92',
+    secondary: '#FAA943',
 
-      alert: '#6BA2F6',
-      danger: '#d31e45',
-      success:'#45FF29',
+    alert: '#2E7CB7',
+    danger: '#F05223',
+    success:'#78C145',
 
   },
   texts:{
-    main_title:'900 3rem/4.25rem Roboto, sans-serif',//h1
-    title:'700 2rem/3.5rem Roboto, sans-serif',//h2
-    sub_title:'700 1.5rem/3rem Roboto, sans-serif',//h3
-    main_text:'400 1rem/1.5rem Roboto, sans-serif',//p, a ...
-    main_strong:'700 1rem/1.5rem Roboto, sans-serif',//strong
-    small_text:'300 0.875rem/1.3125rem Roboto, sans-serif'//p, a, small ..
+    main_title: '700 2.875rem/3.125rem EB Garamond, sans-serif', // h1
+    title: '700 1.875rem/2.125rem EB Garamond, sans-serif', // h2
+    sub_title: '700 1.25rem/1.5rem EB Garamond, sans-serif', // h3
+    main_text: '400 1.25rem/1.5rem EB Garamond, sans-serif', // p, a ...
+    main_strong: '600 1.25rem/1.5rem EB Garamond, sans-serif', // strong
+    small_text: '400 0.875rem/1rem EB Garamond, sans-serif', // p, a, small ..
   }
 }
 
