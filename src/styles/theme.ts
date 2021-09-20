@@ -14,7 +14,7 @@ const defaultTheme = {
 
     main: '#243E92',
     primary: '#243E92',
-    secondary: '#FAA943',
+    secondary: '#E99123',
 
     alert: '#2E7CB7',
     danger: '#F05223',
