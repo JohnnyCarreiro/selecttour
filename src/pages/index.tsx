@@ -12,6 +12,11 @@ export default function Home() {
       <Header current="Inicio"/>
       <section>
         <Showcase>
+          <div className="wrapper">
+            <img src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
+            <h1>Mais que uma simples viagem</h1>
+            <h2>Something goes here</h2>
+          </div>
         </Showcase>
       </section>
     </Container>

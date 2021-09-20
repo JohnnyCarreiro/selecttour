@@ -25,6 +25,7 @@ export const Container = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index:-100;
     /* opacity: 0.8; */
   }
   .overlay {
@@ -35,7 +36,7 @@ export const Container = styled.div`
     height: 100%;
     background: #FAA94399;
     mix-blend-mode: multiply;
-    opacity: 0.7;
+    opacity: 0.4;
   }
   :nth-child() {
     z-index: 10;

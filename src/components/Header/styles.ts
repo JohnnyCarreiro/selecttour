@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 // const height = window.innerHeight.toString()
 
 export const Container = styled.header`
@@ -8,7 +8,7 @@ top:0;
 width:100%;
 height:auto;
 z-index:100;
-background: ${({theme}) => theme.colors.secondary };
+background-color: ${({theme}) => theme.colors.secondary};
 /* Top Nav Bar
 It needs to implemensts adaptative layout
 */
@@ -20,7 +20,6 @@ It needs to implemensts adaptative layout
         display:flex;
         flex-direction:row;
         justify-content:center;
-        /* background:${({theme})=>theme.colors.gray_300}; */
         width:100%;
         padding:0 100px;
     }
@@ -172,12 +171,12 @@ export const NavContainer = styled.div`
         }
         nav .menuItem a:hover{
             border-bottom:1px solid ${({theme})=>theme.colors.gray_1000};
-            background:${({theme})=>theme.colors.blue_primary};
+            background:${({theme})=>theme.colors.primary};
         }
         nav .menuItem a.active{
             cursor:default;
             border-bottom:1px solid ${({theme})=>theme.colors.gray_1000};
-            background:${({theme})=>theme.colors.blue_primary};
+            background:${({theme})=>theme.colors.primary};
             width:100%;
         }
     }
