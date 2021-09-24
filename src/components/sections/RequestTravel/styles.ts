@@ -10,7 +10,7 @@ export const Container = styled.div`
   margin-top:-160px;
   margin-bottom: 2rem;
   border-radius: 0.5rem;
-  background: #fff;
+  background: ${({theme}) => theme.colors.white};
   margin-bottom: 5rem;
   form {
     position: relative;
@@ -26,7 +26,7 @@ export const Container = styled.div`
     border-radius: 0.5rem 0.5rem 0 0;
     padding: 1rem;
     border: 2px solid ${({theme}) => theme.colors.secondary};
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid ${({theme}) => theme.colors.white};;
 
     font: ${({theme}) => theme.texts.sub_title};
     color: ${({theme}) => theme.colors.primary};
