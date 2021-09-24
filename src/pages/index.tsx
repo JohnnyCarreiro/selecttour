@@ -14,6 +14,7 @@ import { Destination } from '@/components/Destination'
 import Testimonials from '@/components/sections/Testimonials'
 import { Latests } from '@/components/sections/Latests'
 import { Contact } from '@/components/sections/Contact'
+import { Footer } from '@/components/Footer'
 
 export default function Home() {
   return (
@@ -34,7 +35,7 @@ export default function Home() {
       <section id="travel-request" className="wrapper" >
         <RequestTravel />
       </section>
-      <section className="section-bg" >
+      <section id="how-we-work" className="section-bg" >
         <div className="wrapper">
           <TextBlock content_data={{main_title: "Como Atuamos", subtitle:"Saiba como podemos te ajudar a ter uma experiência inesquecível", image:'assets/images/image.svg', contents:[{title:"title"}]}}/>
         </div>
@@ -78,6 +79,7 @@ export default function Home() {
           <Contact/>
         </div>
       </section>
+      <Footer/>
     </Container>
   )
 }

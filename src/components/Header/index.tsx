@@ -44,19 +44,25 @@ export const Header: React.FC<NavProps> = ({current}) => {
             <nav className={display ? 'showMenu' : ''}>
               <ul>
                 <li className={current === 'Inicio' ? 'menuItem active' : 'menuItem'} >
-                  <a className={current === 'Inicio' ? 'active' : ''} onClick={closeMobileMenu} href="/">Inicio</a>
+                  <a className={current === 'Inicio' ? 'active' : ''} onClick={closeMobileMenu} href="#home">Inicio</a>
                 </li>
                 <li className={current === 'Sobre' ? 'menuItem active' : 'menuItem'} >
-                  <a className={current === 'Sobre' ? 'active' : ''} onClick={closeMobileMenu} href="/sobre">Sobre</a>
+                  <a className={current === 'Sobre' ? 'active' : ''} onClick={closeMobileMenu} href="#about">Sobre</a>
                 </li>
                 <li className={current === 'Produtos' ? 'menuItem active' : 'menuItem'} >
-                  <a className={current === 'Produtos' ? 'active' : ''} onClick={closeMobileMenu} href="/produtos">Produtos</a>
+                  <a className={current === 'Produtos' ? 'active' : ''} onClick={closeMobileMenu} href="#how-we-work">Voos</a>
                 </li>
                 <li className={current === 'Serviços' ? 'menuItem active' : 'menuItem'} >
-                  <a className={current === 'Serviços' ? 'active' : ''} onClick={closeMobileMenu} href="/servicos">Serviços</a>
+                  <a className={current === 'Serviços' ? 'active' : ''} onClick={closeMobileMenu} href="#how-we-work">Hoteis</a>
                 </li>
                 <li className={current === 'Contato' ? 'menuItem active' : 'menuItem'} >
-                  <a className={current === 'Contato' ? 'active' : ''} onClick={closeMobileMenu} href="/contato">Contato</a>
+                  <a className={current === 'Contato' ? 'active' : ''} onClick={closeMobileMenu} href="#top-packages">Pacotes</a>
+                </li>
+                <li className={current === 'Contato' ? 'menuItem active' : 'menuItem'} >
+                  <a className={current === 'Contato' ? 'active' : ''} onClick={closeMobileMenu} href="#contact">Contato</a>
+                </li>
+                <li className={current === 'Contato' ? 'menuItem active' : 'menuItem'} >
+                  <a className={current === 'Contato' ? 'active' : ''} onClick={closeMobileMenu} href="/blog">Blog</a>
                 </li>
               </ul>
             </nav>
