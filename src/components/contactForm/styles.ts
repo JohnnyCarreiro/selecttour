@@ -4,9 +4,15 @@ export const Container = styled.div`
   display:flex;
   flex-direction: column;
   width:100%;
-  padding-left: 1rem;
+  max-width: 1140px;
+
+  form {
+    div {
+      padding-top: 1rem;
+    }
+  }
 
   @media screen and (max-width:1024px) {
-    padding:0;
+    padding:0 2rem;
   }
 `;

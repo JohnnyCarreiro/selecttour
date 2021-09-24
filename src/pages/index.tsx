@@ -4,7 +4,6 @@ import { Header } from '@/components/Header'
 import { TextBlock } from '@/components/TextBlock'
 import { RequestTravel } from '@/components/sections/RequestTravel'
 import { Showcase } from '@/components/sections/Showcase'
-import Image from 'assets/imgs/image.svg'
 
 import { Container } from '../styles/Home'
 import React from 'react'
@@ -14,6 +13,7 @@ import { TopDestinations } from '@/components/sections/TopDestinations'
 import { Destination } from '@/components/Destination'
 import Testimonials from '@/components/sections/Testimonials'
 import { Latests } from '@/components/sections/Latests'
+import { Contact } from '@/components/sections/Contact'
 
 export default function Home() {
   return (
@@ -72,6 +72,11 @@ export default function Home() {
       </section>
       <section id="latests" className="wrapper">
         <Latests />
+      </section>
+      <section id="contact" className="section-bg">
+        <div className="wrapper">
+          <Contact/>
+        </div>
       </section>
     </Container>
   )

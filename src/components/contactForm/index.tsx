@@ -20,35 +20,9 @@ interface SignInFormData {
   subject:string
   message:string
 }
-interface FormFieldProps {
-  form_fields: {
-    name_label: string
-    name_field: string
-    email_label: string
-    email_field: string
-    phone_label: string
-    phone_field: string
-    subject_label: string
-    subject_field: string
-    message_label: string
-    message_field: string
-    whatsapp_message: string
-  }
-}
 
-export const ContactForm:React.FC<FormFieldProps> = ({ form_fields }) => {
-  const {
-    name_label,
-    name_field,
-    email_label,
-    email_field,
-    phone_label,
-    phone_field,
-    subject_label,
-    subject_field,
-    message_label,
-    message_field,
-   } = form_fields
+export const ContactForm:React.FC = () => {
+
   const formRef = useRef<FormHandles>(null)
 
   const history = useRouter()
@@ -131,52 +105,49 @@ export const ContactForm:React.FC<FormFieldProps> = ({ form_fields }) => {
         <Input
           name="name"
           type="text"
-          label={name_label}
+          label="Nome"
           icon={FaUser}
-          placeholder={name_field}
+          placeholder="Nome"
           onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setName(event.target.value)}}
           value={name}
         />
         <Input
           name="email"
           type="email"
-          label={email_label}
+          label="E-mail"
           icon={FaEnvelope}
-          placeholder={email_field}
+          placeholder="E-mail"
           onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setEmail(event.target.value)}}
           value={email}
         />
         <Input
           name="phone"
           type="text"
-          label={phone_label}
+          label="Telefone"
           icon={FaMobile}
-          placeholder={phone_field}
+          placeholder="Telefone"
           onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setPhone(event.target.value)}}
           value={phone}
         />
         <Input
           name="subject"
           type="text"
-          label={subject_label}
+          label="Assunto"
           icon={FaTag}
-          placeholder={subject_field}
+          placeholder="Assunto"
           onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setSubject(event.target.value)}}
           value={subject}
         />
         <TextArea
           name="message"
           type="text"
-          label={message_label}
+          label="Mensagem"
           icon={FaScroll}
-          placeholder={message_field}
+          placeholder="Deixe sua mensagem"
           onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setMessage(event.target.value)}}
           value={message}
         />
-        { locale === 'en-us'
-          ? (<Button text="Send" isPrimary primaryColor type="submit" />)
-          : (<Button text="Enviar" isPrimary primaryColor type="submit" />)
-        }
+        <Button text="Enviar" isPrimary primaryColor type="submit" />
 
       </Form>
     </Container>
