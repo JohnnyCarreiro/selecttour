@@ -32,7 +32,7 @@ export default function Home() {
       <section id="travel-request" className="wrapper" >
         <RequestTravel />
       </section>
-      <section className="how-we-work" >
+      <section className="section-bg" >
         <div className="wrapper">
           <TextBlock content_data={{main_title: "Como Atuamos", subtitle:"Saiba como podemos te ajudar a ter uma experiência inesquecível", image:'assets/images/image.svg', contents:[{title:"title"}]}}/>
         </div>
@@ -47,7 +47,7 @@ export default function Home() {
           <Package />
         </TopPackages>
       </section>
-      <section id="about" className="about-sec" >
+      <section id="about" className="section-bg" >
         <div className="wrapper">
         <TextBlock content_data={{main_title: "Sobre a Select Tour", subtitle:"Saiba mais a nosso respeito, como atuamos e como temos você, nosso cliente no centro de tudo!", image:'assets/images/LOGO.svg', contents:[{title:"Something goes here"}]}}/>
         </div>
@@ -59,6 +59,11 @@ export default function Home() {
           <Destination />
           <Destination />
         </TopDestinations>
+      </section>
+      <section id="team" className="section-bg">
+        <div className="wrapper">
+          <TextBlock content_data={{main_title: "Conheça o nosso Time", subtitle:"Saiba mais a nosso respeito, como atuamos e como temos você, nosso cliente no centro de tudo!", image:'assets/images/LOGO.svg', contents:[{title:"Something goes here"}]}}/>
+        </div>
       </section>
     </Container>
   )

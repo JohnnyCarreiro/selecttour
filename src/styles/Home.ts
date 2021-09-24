@@ -22,10 +22,7 @@ export const Container = styled.div `
       color: ${({theme}) => theme.colors.main};
     }
   }
-  .how-we-work {
-    background-color: ${({theme}) => theme.colors.white};
-  }
-  .about-sec {
+  .section-bg {
     background-color: ${({theme}) => theme.colors.white};
   }
 
