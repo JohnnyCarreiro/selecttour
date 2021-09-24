@@ -13,6 +13,7 @@ import { Package } from '@/components/Package'
 import { TopDestinations } from '@/components/sections/TopDestinations'
 import { Destination } from '@/components/Destination'
 import Testimonials from '@/components/sections/Testimonials'
+import { Latests } from '@/components/sections/Latests'
 
 export default function Home() {
   return (
@@ -68,6 +69,9 @@ export default function Home() {
       </section>
       <section id="testimonials" className="wrapper">
         <Testimonials testimonials={{main_title: "O que nossos clientes dizem", subtitle: "Mussum Ipsum, cacilds vidis litro abertis. Mauris nec dolor in eros commodo tempor."}} />
+      </section>
+      <section id="latests" className="wrapper">
+        <Latests />
       </section>
     </Container>
   )
