@@ -13,7 +13,7 @@ import { Package } from '@/components/Package'
 
 export default function Home() {
   return (
-    <Container>
+    <Container id="home">
       <Head>
         <title>Select Tour - Mais que uma uma Viagem</title>
       </Head>
@@ -27,15 +27,15 @@ export default function Home() {
           </div>
         </Showcase>
       </section>
-      <section className="wrapper" >
+      <section id="travel-request" className="wrapper" >
         <RequestTravel />
       </section>
       <section className="how-we-work" >
         <div className="wrapper">
-          <TextBlock content_data={{image:'assets/images/image.svg', contents:[{title:"title"}]}}/>
+          <TextBlock content_data={{main_title: "Como Atuamos", subtitle:"Saiba como podemos te ajudar a ter uma experiência inesquecível", image:'assets/images/image.svg', contents:[{title:"title"}]}}/>
         </div>
       </section>
-      <section className="wrapper">
+      <section id="top-packages" className="wrapper">
         <TopPackages>
           <Package />
           <Package />
@@ -44,6 +44,11 @@ export default function Home() {
           <Package />
           <Package />
         </TopPackages>
+      </section>
+      <section id="about" className="about-sec" >
+        <div className="wrapper">
+        <TextBlock content_data={{main_title: "Sobre a Select Tour", subtitle:"Saiba mais a nosso respeito, como atuamos e como temos você, nosso cliente no centro de tudo!", image:'assets/images/LOGO.svg', contents:[{title:"Something goes here"}]}}/>
+        </div>
       </section>
     </Container>
   )

@@ -27,8 +27,8 @@ export const TextBlock:React.FC<AboutProps> = ({content_data}) => {
   return (
     <Container ref={currentElement} >
       <div className="about">
-        <h2>Como Atuamos</h2>
-        <h3>Saiba como podemos te ajudar a ter uma experiência inesquecível</h3>
+        <h2>{main_title}</h2>
+        <h3>{subtitle}</h3>
       </div>
       <div className="container">
         <div className="imageContainer" >
