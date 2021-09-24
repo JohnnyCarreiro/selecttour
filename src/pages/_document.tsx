@@ -49,8 +49,8 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap"
             rel="stylesheet"
           />
-          <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png" />
-          <link rel="icon" href="assets/images/favicon.png" />
+          <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png" />
+          <link rel="icon" href="/assets/images/favicon.png" />
           <meta name="theme-color" content="#673AB6" />
         </Head>
         <body>

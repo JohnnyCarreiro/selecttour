@@ -8,17 +8,16 @@ export const Container = styled.div<{primaryColor:boolean}>`
     justify-content:center;
     align-items:center;
     text-align:center;
-    border: none;
     border-radius:0.25rem;
     margin-top:2.5rem;
     padding:0.5rem 2.5rem;
     transition:.2s;
     cursor:pointer;
+    border: 2px solid transparent;
     a{
       text-align:center;
-      border: 2px solid transparent;
       color:${({theme})=>theme.colors.gray_1000};
-      font: ${({theme}) => theme.texts.title};
+      font: ${({theme}) => theme.texts.sub_title};
       text-transform: uppercase;
     }
   }
@@ -26,7 +25,7 @@ export const Container = styled.div<{primaryColor:boolean}>`
       background:transparent;
       border: 2px solid ${({primaryColor})=> primaryColor ? ({theme})=> theme.colors.primary :({theme})=> theme.colors.secondary };
       a{
-        color:${({primaryColor})=> primaryColor ? ({theme})=> theme.colors.gray_1000 :({theme})=> theme.colors.gray_1000 };
+        color:${({primaryColor})=> primaryColor ? ({theme})=> theme.colors.primary :({theme})=> theme.colors.secondary };
       }
     }
   .secondary{
@@ -45,14 +44,14 @@ export const Container = styled.div<{primaryColor:boolean}>`
     a{
       text-align:center;
       color:${({primaryColor})=> primaryColor ? ({theme})=> theme.colors.primary :({theme})=> theme.colors.secondary };
-      font: 700 1.5rem/2.25rem Roboto, sans-serif;
+      font: ${({theme}) => theme.texts.sub_title};
     }
   }
   .secondary:hover{
     background:${({primaryColor})=> primaryColor ? ({theme})=> theme.colors.primary :({theme})=> theme.colors.secondary };
     opacity:0.7;
     a{
-      color:${({theme})=> theme.colors.gray_900};
+      color:${({theme})=> theme.colors.secondary};
     }
   }
 `

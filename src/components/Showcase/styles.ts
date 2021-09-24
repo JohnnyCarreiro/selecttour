@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  position: absolute;
+  position: relative;
   right: 0;
   width: 100%;
   min-height: 100vh;
@@ -12,7 +12,7 @@ export const Container = styled.div`
   justify-content:space-between;
   align-items: center;
 
-  background-color: ${({theme}) => theme.colors.gray_1000};
+  background-color: ${({theme}) => theme.colors.gray_900};
   color: ${({theme}) => theme.colors.gray_300};
   z-index: 2;
 

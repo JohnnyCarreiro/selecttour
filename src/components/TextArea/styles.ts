@@ -12,11 +12,10 @@ export const Container = styled.div`
     margin-top:0.5rem;
   }
   > label {
-    display:none;
-    font: ${({theme}) => theme.texts.sub_title};
+    font: ${({theme}) => theme.texts.main_strong};
+    color: ${({theme}) => theme.colors.gray_600};
     text-transform: uppercase;
-    font-size:  1.5rem;
-    padding-left:0.25rem;
+    padding-left: 0.25rem;
   }
 `
 
@@ -29,7 +28,7 @@ export const TextAreaContainer = styled.div<ContainerProps>`
   display:flex;
   align-items: flex-start;
 
-  border: 2px solid ${({theme})=>theme.colors.gray_1000};
+  border: 2px solid ${({theme})=>theme.colors.primary};
   color: ${({theme})=>theme.colors.gray_400};
 
   ${props=>props.isErrored && css`
@@ -61,16 +60,16 @@ export const TextAreaContainer = styled.div<ContainerProps>`
     flex:1;
     background:transparent;
     border:none;
-    color:${({theme})=>theme.colors.gray_1000};
+    color:${({theme})=>theme.colors.gray_400};
     font: ${({theme}) => theme.texts.main_text};
     &::placeholder{
-      color:${({theme})=>theme.colors.gray_1000};
+      color:${({theme})=>theme.colors.gray_400};
       font: ${({theme}) => theme.texts.main_text};
     }
   }
   svg{
     margin-right:1rem;
-    color:${({theme})=> theme.colors.gray_1000};
+    color:${({theme})=> theme.colors.gray_400};
   }
 `
 export const Error = styled(Tooltip)`

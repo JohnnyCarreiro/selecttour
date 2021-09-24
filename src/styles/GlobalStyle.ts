@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle<Props>`
     @media (max-width: 720px){
       font-size:87.5%;
     }
-    background-color: ${({theme}) => theme.colors.gray_300};
+    background-color: ${({theme}) => theme.colors.gray_900};
   }
 
   body{

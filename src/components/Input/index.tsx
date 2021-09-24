@@ -39,12 +39,13 @@ export const Input:React.FC<InputProps> = ({name, icon:Icon, label, ...props}) =
 
   return (
     <Container>
-      <label>
-        {label}
-      </label>
+      <div className="label">
+      {Icon && <Icon size={24}/>}
+        <label>
+          {label}
+        </label>
+      </div>
       <InputContainer isErrored={!! error} isFilled={isFilled} isFocused={isFocused} >
-        {Icon && <Icon size={20}/>}
-
           <input
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}

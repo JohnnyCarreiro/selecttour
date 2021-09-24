@@ -9,15 +9,26 @@ interface ContainerProps extends ThemeProps<Theme> {
 }
 
 export const Container = styled.div`
-  & + div {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: initial;
+  width: 100%;
+  min-width: 100px;
+  /* & + div {
     margin-top:0.5rem;
-  }
-  > label {
-    display: none;
-    font: ${({theme}) => theme.texts.sub_title};
-    text-transform: uppercase;
-    font-size:  1.5rem;
-    padding-left:0.25rem;
+  } */
+  .label {
+    display: flex;
+    align-items: center;
+    > label {
+      font: ${({theme}) => theme.texts.main_strong};
+      color: ${({theme}) => theme.colors.gray_600};
+      text-transform: uppercase;
+    }
+    svg{
+      margin-right:1rem;
+      color:${({theme})=> theme.colors.primary};
+    }
   }
 `
 
@@ -26,11 +37,12 @@ export const InputContainer = styled.div<ContainerProps>`
   border-radius:.5rem;
   margin-top: .5rem;
   padding:1rem;
-  width:100%;
+  max-width:100%;
+  min-width:100px;
   display:flex;
   align-items: center;
 
-  border: 2px solid ${({theme})=>theme.colors.gray_1000};
+  border: 2px solid ${({theme})=>theme.colors.primary};
   color: ${({theme})=>theme.colors.gray_400};
 
   ${props=>props.isErrored && css`
@@ -59,20 +71,26 @@ export const InputContainer = styled.div<ContainerProps>`
     transition: background-color 5000s ease-in-out 0s;
   }
   input{
-    flex:1;
+    min-width: 100px;
     background:transparent;
     border:none;
-    color:${({theme})=>theme.colors.gray_1000};
+    color:${({theme})=>theme.colors.gray_400};
     font: ${({theme}) => theme.texts.main_text};
+    line-height: 1.25rem;
     &::placeholder{
-      color:${({theme})=>theme.colors.gray_1000};
+      color:${({theme})=>theme.colors.gray_400};
       font: ${({theme}) => theme.texts.main_text};
     }
   }
-  svg{
-    margin-right:1rem;
-    color:${({theme})=> theme.colors.gray_1000};
-  }
+  input[type="date"] {
+  position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: ${({theme})=>theme.colors.primary};
+  width: 22px;
+  height: 22px;
+}
 `
 export const Error = styled(Tooltip)`
   height:1.25rem;
@@ -94,7 +112,7 @@ export const Error = styled(Tooltip)`
     margin-left:1rem;
     svg{
       margin:0;
-      color:${({theme})=> theme.colors.gray_1000};
+      color:${({theme})=> theme.colors.primary};
       cursor: pointer;
 
     }
