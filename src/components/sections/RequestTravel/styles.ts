@@ -10,7 +10,8 @@ export const Container = styled.div`
   margin-top:-160px;
   margin-bottom: 2rem;
   border-radius: 0.5rem;
-  background: ${({theme}) => theme.colors.gray_1000};
+  background: #fff;
+  margin-bottom: 5rem;
   form {
     position: relative;
     z-index:9;
@@ -25,7 +26,7 @@ export const Container = styled.div`
     border-radius: 0.5rem 0.5rem 0 0;
     padding: 1rem;
     border: 2px solid ${({theme}) => theme.colors.secondary};
-    border-bottom: 2px solid ${({theme}) => theme.colors.gray_1000};
+    border-bottom: 2px solid #fff;
 
     font: ${({theme}) => theme.texts.sub_title};
     color: ${({theme}) => theme.colors.primary};
@@ -87,6 +88,7 @@ export const Container = styled.div`
 
 
   @media screen and (max-width:1024px) {
+    margin-bottom: 5rem;
     padding:0;
   }
   @media (max-width: 891px){

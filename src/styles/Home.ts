@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from './theme'
 
 export const Container = styled.div `
   background: ${({theme}) => theme.colors.gray_1000};
@@ -20,6 +21,9 @@ export const Container = styled.div `
       font: ${({theme}) => theme.texts.title};
       color: ${({theme}) => theme.colors.main};
     }
+  }
+  .how-we-work {
+    background-color: #fff;
   }
   .elevation {
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 12px 32px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 0px 12px rgba(0, 0, 0, 0.25)) drop-shadow(2px 0px 12px rgba(0, 0, 0, 0.25));

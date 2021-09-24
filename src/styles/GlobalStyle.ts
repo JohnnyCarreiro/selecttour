@@ -29,9 +29,17 @@ export const GlobalStyle = createGlobalStyle<Props>`
   }
 
   body, input, textarea, select, button{
-    font: 400 1rem 'Roboto', sans-serif;
+    font: ${({theme}) => theme.texts.main_text};
   }
-
+  h1{
+    font: ${({theme}) => theme.texts.main_title};
+  }
+  h2{
+    font: ${({theme}) => theme.texts.title};
+  }
+  h3{
+    font: ${({theme}) => theme.texts.sub_title};
+  }
   button{
     cursor:pointer;
   }
