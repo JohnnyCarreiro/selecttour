@@ -10,6 +10,8 @@ import { Container } from '../styles/Home'
 import React from 'react'
 import { TopPackages } from '@/components/sections/TopPackages'
 import { Package } from '@/components/Package'
+import { TopDestinations } from '@/components/sections/TopDestinations'
+import { Destination } from '@/components/Destination'
 
 export default function Home() {
   return (
@@ -49,6 +51,14 @@ export default function Home() {
         <div className="wrapper">
         <TextBlock content_data={{main_title: "Sobre a Select Tour", subtitle:"Saiba mais a nosso respeito, como atuamos e como temos você, nosso cliente no centro de tudo!", image:'assets/images/LOGO.svg', contents:[{title:"Something goes here"}]}}/>
         </div>
+      </section>
+      <section id="top-destinations" className="wrapper">
+        <TopDestinations>
+          <Destination />
+          <Destination />
+          <Destination />
+          <Destination />
+        </TopDestinations>
       </section>
     </Container>
   )
