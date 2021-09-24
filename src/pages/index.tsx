@@ -12,6 +12,7 @@ import { TopPackages } from '@/components/sections/TopPackages'
 import { Package } from '@/components/Package'
 import { TopDestinations } from '@/components/sections/TopDestinations'
 import { Destination } from '@/components/Destination'
+import Testimonials from '@/components/sections/Testimonials'
 
 export default function Home() {
   return (
@@ -64,6 +65,9 @@ export default function Home() {
         <div className="wrapper">
           <TextBlock content_data={{main_title: "Conheça o nosso Time", subtitle:"Saiba mais a nosso respeito, como atuamos e como temos você, nosso cliente no centro de tudo!", image:'assets/images/LOGO.svg', contents:[{title:"Something goes here"}]}}/>
         </div>
+      </section>
+      <section id="testimonials" className="wrapper">
+        <Testimonials testimonials={{main_title: "O que nossos clientes dizem", subtitle: "Mussum Ipsum, cacilds vidis litro abertis. Mauris nec dolor in eros commodo tempor."}} />
       </section>
     </Container>
   )
