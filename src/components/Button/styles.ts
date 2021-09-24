@@ -10,7 +10,7 @@ export const Container = styled.div<{primaryColor:boolean}>`
     text-align:center;
     border-radius:0.25rem;
     margin-top:2.5rem;
-    padding:0.5rem 2.5rem;
+    padding:0.5rem 2rem;
     transition:.2s;
     cursor:pointer;
     border: 2px solid transparent;
@@ -35,9 +35,9 @@ export const Container = styled.div<{primaryColor:boolean}>`
     justify-content:center;
     align-items:center;
     text-align:center;
-    border: 1px solid ${({primaryColor})=> primaryColor ? ({theme})=> theme.colors.primary :({theme})=> theme.colors.secondary };
-    border-radius:0.5rem;
-    padding:0.5rem 2.5rem;
+    border: 2px solid ${({primaryColor})=> primaryColor ? ({theme})=> theme.colors.primary :({theme})=> theme.colors.secondary };
+    border-radius:0.25rem;
+    padding:0.5rem 2rem;
     margin-top:2.5rem;
     transition:0.2s;
 
@@ -51,7 +51,7 @@ export const Container = styled.div<{primaryColor:boolean}>`
     background:${({primaryColor})=> primaryColor ? ({theme})=> theme.colors.primary :({theme})=> theme.colors.secondary };
     opacity:0.7;
     a{
-      color:${({theme})=> theme.colors.secondary};
+      color:${({primaryColor})=> primaryColor ? ({theme})=> theme.colors.white :({theme})=> theme.colors.white };
     }
   }
 `

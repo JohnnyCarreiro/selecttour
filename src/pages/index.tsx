@@ -8,6 +8,8 @@ import Image from 'assets/imgs/image.svg'
 
 import { Container } from '../styles/Home'
 import React from 'react'
+import { TopPackages } from '@/components/sections/TopPackages'
+import { Package } from '@/components/Package'
 
 export default function Home() {
   return (
@@ -32,6 +34,16 @@ export default function Home() {
         <div className="wrapper">
           <TextBlock content_data={{image:'assets/images/image.svg', contents:[{title:"title"}]}}/>
         </div>
+      </section>
+      <section className="wrapper">
+        <TopPackages>
+          <Package />
+          <Package />
+          <Package />
+          <Package />
+          <Package />
+          <Package />
+        </TopPackages>
       </section>
     </Container>
   )
