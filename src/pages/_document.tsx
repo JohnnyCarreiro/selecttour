@@ -7,7 +7,6 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document'
-// import icon from '../assets/images/logo/favicon.ico'
 import { ServerStyleSheet } from 'styled-components'
 
 export default class MyDocument extends Document {
@@ -41,17 +40,35 @@ export default class MyDocument extends Document {
 
   render(): JSX.Element {
     return (
-      <Html>
+      <Html lang="pt-BR" >
         <Head>
           <meta charSet="utf-8" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap"
+          {/* <link rel="preconnect" href="https://fonts.gstatic.com" /> */}
+          {/* <link
+            href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&display=swap"
             rel="stylesheet"
-          />
+          /> */}
           <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png" />
           <link rel="icon" href="/assets/images/favicon.png" />
           <meta name="theme-color" content="#673AB6" />
+          {/* <style data-href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&display=swap" /> */}
+          <link
+            rel="preload"
+            as="style"
+            href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&display=swap"
+          />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&display=swap"
+            media="print"
+            // onLoad={this.componentDidMount()}
+          />
+          <noscript>
+            <link
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&display=swap"
+            />
+          </noscript>
         </Head>
         <body>
           <Main />

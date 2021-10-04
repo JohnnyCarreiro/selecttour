@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import Prismic from '@prismicio/client'
@@ -232,6 +232,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       content
     },
-    revalidate: 60 + 60 * 24 //24 hours
+    revalidate: 60 + 60 //24 hours
   }
 }

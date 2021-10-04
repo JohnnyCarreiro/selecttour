@@ -31,7 +31,6 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
   const formRef = useRef<FormHandles>(null)
 
   const history = useRouter()
-  const { locale } = useRouter()
 
   const [name, setName] = useState('')
   const [surname, setSurname] = useState('')
@@ -56,40 +55,17 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
 
       const schema = Yup.object().shape({
         name:Yup.string()
-          .min(3, String(locale === 'en-us'
-            ? 'The name should have at least 3 characters'
-            : 'O Nome deve ter mais que 3 caracteres.'
-          ))
-          .required(String(locale === 'en-us'
-            ? 'Name is mandatory'
-            : 'Nome obrigatório'
-          )),
+          .min(3, String('O Nome deve ter mais que 3 caracteres.'))
+          .required(String('Nome obrigatório')),
         email:Yup.string()
-          .required(String(locale === 'en-us'
-            ? 'Email is mandatory'
-            : 'E-mail obrigatório'
-          ))
-          .email(String(locale === 'en-us'
-            ? 'Insert a valid email address'
-            : 'Insira um e-mail válido'
-          )),
+          .required(String('E-mail obrigatório'))
+          .email(String('Insira um e-mail válido')),
         phone:Yup.number()
-          .required(String(locale === 'en-us'
-            ? 'Phone number is mandatory'
-            : 'Telefone obrigatório'
-          )),
-        company:Yup.string()
-          .optional(),
+          .required(String('Telefone obrigatório')),
         subject:Yup.string()
-          .required(String(locale === 'en-us'
-            ? 'Subject is mandatory'
-            : 'Assunto obrigatório'
-          )),
+          .required(String('Assunto obrigatório')),
         message:Yup.string()
-          .required(String(locale === 'en-us'
-            ? 'Message is mandatory'
-            : 'Messagem obrigatório'
-          )),
+          .required(String('Messagem obrigatório')),
 
       })
       await schema.validate(data, {
@@ -235,7 +211,7 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
                 icon={FaUser}
                 label={"Sobrenome"}
                 placeholder={"Sobrenome"}
-                onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setName(event.target.value)}}
+                onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setSurname(event.target.value)}}
                 value={surname}
               />
             </div>
@@ -246,7 +222,7 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
                 icon={FaWhatsapp}
                 label={"Telefone"}
                 placeholder={"Telefone"}
-                onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setName(event.target.value)}}
+                onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setPhone(event.target.value)}}
                 value={phone}
               />
               <Input
@@ -255,7 +231,7 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
                 icon={FaEnvelope}
                 label={"E-mail"}
                 placeholder={"E-mail"}
-                onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setName(event.target.value)}}
+                onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setEmail(event.target.value)}}
                 value={email}
               />
             </div>

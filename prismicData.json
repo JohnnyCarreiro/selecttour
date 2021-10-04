@@ -1,0 +1,546 @@
+[
+  {
+    "id": "YU40yBEAAC8A75iE",
+    "uid": "main_content",
+    "url": null,
+    "type": "selecttour",
+    "href": "https://selecttour.cdn.prismic.io/api/v2/documents/search?ref=YVdY1BEAAC8ATtNC&q=%5B%5B%3Ad+%3D+at%28document.id%2C+%22YU40yBEAAC8A75iE%22%29+%5D%5D",
+    "tags": [],
+    "first_publication_date": "2021-09-30T19:03:37+0000",
+    "last_publication_date": "2021-10-01T18:52:04+0000",
+    "slugs": [
+      "selecttour"
+    ],
+    "linked_documents": [],
+    "lang": "pt-br",
+    "alternate_languages": [],
+    "data": {
+      "main_title": [
+        {
+          "type": "heading1",
+          "text": "Mais que uma simples Viagem",
+          "spans": []
+        }
+      ],
+      "main_subtitle": [],
+      "body": [
+        {
+          "slice_type": "text_image",
+          "slice_label": "how_we_work",
+          "items": [
+            {}
+          ],
+          "primary": {
+            "title": [
+              {
+                "type": "heading2",
+                "text": "Como Atuamos",
+                "spans": []
+              }
+            ],
+            "subtitle": [
+              {
+                "type": "heading3",
+                "text": "Saiba como podemos te ajudar a ter uma experiência inesquecível",
+                "spans": []
+              }
+            ],
+            "text_image_img": {
+              "dimensions": {
+                "width": 149,
+                "height": 150
+              },
+              "alt": null,
+              "copyright": null,
+              "url": "https://selecttour.cdn.prismic.io/selecttour/7a713476-d968-45a1-b9d2-ccddc47e758b_image.svg"
+            },
+            "content": [
+              {
+                "type": "paragraph",
+                "text": "Mussum Ipsum, cacilds vidis litro abertis. Per aumento de cachacis, eu reclamis. Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo! Suco de cevadiss deixa as pessoas mais interessantis. Admodum accumsan disputationi eu sit. Vide electram sadipscing et per.\n\nMé faiz elementum girarzis, nisi eros vermeio. Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis! Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum. Mussum Ipsum, cacilds vidis litro abertis.\n\nPer aumento de cachacis, eu reclamis. Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo! Suco de cevadiss deixa as pessoas mais interessantis. Admodum accumsan disputationi eu sit. Vide electram sadipscing et per.\n\nMé faiz elementum girarzis, nisi eros vermeio. Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis! Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum.",
+                "spans": []
+              }
+            ]
+          }
+        },
+        {
+          "slice_type": "pacotes_especiais",
+          "slice_label": "top_peckage",
+          "items": [
+            {
+              "peckage_img": {
+                "dimensions": {
+                  "width": 359,
+                  "height": 290
+                },
+                "alt": null,
+                "copyright": null,
+                "url": "https://images.prismic.io/selecttour/a2d5dca1-48bf-43fd-b84b-a2f9de40d6a9_travel.png?auto=compress,format"
+              },
+              "destination": [
+                {
+                  "type": "heading3",
+                  "text": "Destino 1",
+                  "spans": []
+                }
+              ],
+              "value": [
+                {
+                  "type": "heading3",
+                  "text": "5000",
+                  "spans": []
+                }
+              ],
+              "time_amount": [
+                {
+                  "type": "paragraph",
+                  "text": "Pacote de 5 dias e 4 noites",
+                  "spans": []
+                }
+              ],
+              "hotel_classification": [
+                {
+                  "type": "paragraph",
+                  "text": "Hospedagem 5 estrelas",
+                  "spans": []
+                }
+              ],
+              "transportations": [
+                {
+                  "type": "paragraph",
+                  "text": "Metros, taxis e ônibus",
+                  "spans": []
+                }
+              ],
+              "meal_options": [
+                {
+                  "type": "paragraph",
+                  "text": "Restaurantes próximos",
+                  "spans": []
+                }
+              ],
+              "qualification": 5
+            },
+            {
+              "peckage_img": {
+                "dimensions": {
+                  "width": 359,
+                  "height": 290
+                },
+                "alt": null,
+                "copyright": null,
+                "url": "https://images.prismic.io/selecttour/a2d5dca1-48bf-43fd-b84b-a2f9de40d6a9_travel.png?auto=compress,format"
+              },
+              "destination": [
+                {
+                  "type": "heading3",
+                  "text": "Destino 2",
+                  "spans": []
+                }
+              ],
+              "value": [
+                {
+                  "type": "heading3",
+                  "text": "5000",
+                  "spans": []
+                }
+              ],
+              "time_amount": [
+                {
+                  "type": "paragraph",
+                  "text": "Pacote de 5 dias e 4 noites",
+                  "spans": []
+                }
+              ],
+              "hotel_classification": [
+                {
+                  "type": "paragraph",
+                  "text": "Hospedagem 5 estrelas",
+                  "spans": []
+                }
+              ],
+              "transportations": [
+                {
+                  "type": "paragraph",
+                  "text": "Metros, taxis e ônibus",
+                  "spans": []
+                }
+              ],
+              "meal_options": [
+                {
+                  "type": "paragraph",
+                  "text": "Restaurantes próximos",
+                  "spans": []
+                }
+              ],
+              "qualification": 4
+            },
+            {
+              "peckage_img": {
+                "dimensions": {
+                  "width": 359,
+                  "height": 290
+                },
+                "alt": null,
+                "copyright": null,
+                "url": "https://images.prismic.io/selecttour/a2d5dca1-48bf-43fd-b84b-a2f9de40d6a9_travel.png?auto=compress,format"
+              },
+              "destination": [
+                {
+                  "type": "heading3",
+                  "text": "Destino 3 ",
+                  "spans": []
+                }
+              ],
+              "value": [
+                {
+                  "type": "heading3",
+                  "text": "5000`",
+                  "spans": []
+                }
+              ],
+              "time_amount": [
+                {
+                  "type": "paragraph",
+                  "text": "Pacote de 5 dias e 4 noites",
+                  "spans": []
+                }
+              ],
+              "hotel_classification": [
+                {
+                  "type": "paragraph",
+                  "text": "Hospedagem 5 estrelas",
+                  "spans": []
+                }
+              ],
+              "transportations": [
+                {
+                  "type": "paragraph",
+                  "text": "Metros, taxis e ônibus",
+                  "spans": []
+                }
+              ],
+              "meal_options": [
+                {
+                  "type": "paragraph",
+                  "text": "Restaurantes próximos",
+                  "spans": []
+                }
+              ],
+              "qualification": 5
+            }
+          ],
+          "primary": {
+            "peckage_title": [
+              {
+                "type": "heading2",
+                "text": "PACOTES ESPECIAIS",
+                "spans": []
+              }
+            ],
+            "peckage_subtitle": [
+              {
+                "type": "heading3",
+                "text": "Selecionamos pacotes especias para maximizar suas experiência e conforto",
+                "spans": []
+              }
+            ]
+          }
+        },
+        {
+          "slice_type": "text_image",
+          "slice_label": "about_us",
+          "items": [
+            {}
+          ],
+          "primary": {
+            "title": [
+              {
+                "type": "heading2",
+                "text": "Sobre a Select Tour",
+                "spans": []
+              }
+            ],
+            "subtitle": [
+              {
+                "type": "heading3",
+                "text": "Saiba mais a nosso respeito, como atuamos e como temos você, nosso cliente no centro de tudo!",
+                "spans": []
+              }
+            ],
+            "text_image_img": {
+              "dimensions": {
+                "width": 300,
+                "height": 86
+              },
+              "alt": null,
+              "copyright": null,
+              "url": "https://selecttour.cdn.prismic.io/selecttour/b7be64f6-4edf-4d0d-99ad-6e732633294f_LOGO.svg"
+            },
+            "content": [
+              {
+                "type": "paragraph",
+                "text": "Mussum Ipsum, cacilds vidis litro abertis. Per aumento de cachacis, eu reclamis. Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo! Suco de cevadiss deixa as pessoas mais interessantis. Admodum accumsan disputationi eu sit. Vide electram sadipscing et per.\n\nMé faiz elementum girarzis, nisi eros vermeio. Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis! Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum. Mussum Ipsum, cacilds vidis litro abertis.\n\nPer aumento de cachacis, eu reclamis. Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo! Suco de cevadiss deixa as pessoas mais interessantis. Admodum accumsan disputationi eu sit. Vide electram sadipscing et per.\n\nMé faiz elementum girarzis, nisi eros vermeio. Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis! Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum.",
+                "spans": []
+              }
+            ]
+          }
+        },
+        {
+          "slice_type": "destinos",
+          "slice_label": "destinations",
+          "items": [
+            {
+              "img": {
+                "dimensions": {
+                  "width": 359,
+                  "height": 290
+                },
+                "alt": null,
+                "copyright": null,
+                "url": "https://images.prismic.io/selecttour/a2d5dca1-48bf-43fd-b84b-a2f9de40d6a9_travel.png?auto=compress,format"
+              },
+              "country": [
+                {
+                  "type": "heading3",
+                  "text": "Japão",
+                  "spans": []
+                }
+              ],
+              "tour": [
+                {
+                  "type": "paragraph",
+                  "text": "15",
+                  "spans": []
+                }
+              ],
+              "places": [
+                {
+                  "type": "paragraph",
+                  "text": "10",
+                  "spans": []
+                }
+              ]
+            },
+            {
+              "img": {
+                "dimensions": {
+                  "width": 359,
+                  "height": 290
+                },
+                "alt": null,
+                "copyright": null,
+                "url": "https://images.prismic.io/selecttour/a2d5dca1-48bf-43fd-b84b-a2f9de40d6a9_travel.png?auto=compress,format"
+              },
+              "country": [
+                {
+                  "type": "heading3",
+                  "text": "Paris",
+                  "spans": []
+                }
+              ],
+              "tour": [
+                {
+                  "type": "paragraph",
+                  "text": "20",
+                  "spans": []
+                }
+              ],
+              "places": [
+                {
+                  "type": "paragraph",
+                  "text": "10",
+                  "spans": []
+                }
+              ]
+            },
+            {
+              "img": {
+                "dimensions": {
+                  "width": 2560,
+                  "height": 1442
+                },
+                "alt": null,
+                "copyright": null,
+                "url": "https://images.prismic.io/selecttour/f639bd4e-6969-458e-baee-64405e235fe3_experience.png?auto=compress,format"
+              },
+              "country": [
+                {
+                  "type": "heading3",
+                  "text": "Maldivas",
+                  "spans": []
+                }
+              ],
+              "tour": [
+                {
+                  "type": "paragraph",
+                  "text": "20",
+                  "spans": []
+                }
+              ],
+              "places": [
+                {
+                  "type": "paragraph",
+                  "text": "12",
+                  "spans": []
+                }
+              ]
+            }
+          ],
+          "primary": {
+            "title": [
+              {
+                "type": "heading2",
+                "text": "CONHEÇA ESTES DESTINOS EM ALTA",
+                "spans": []
+              }
+            ],
+            "subtitle": [
+              {
+                "type": "heading3",
+                "text": "Selecionamos lugares especias que valem muito a pena conhecer, consulte-nos para mais informações",
+                "spans": []
+              }
+            ]
+          }
+        },
+        {
+          "slice_type": "text_image",
+          "slice_label": "our_team",
+          "items": [
+            {}
+          ],
+          "primary": {
+            "title": [
+              {
+                "type": "heading2",
+                "text": "CONHEÇA O NOSSO TIME",
+                "spans": []
+              }
+            ],
+            "subtitle": [
+              {
+                "type": "heading3",
+                "text": "Saiba mais a nosso respeito, como atuamos e como temos você, nosso cliente no centro de tudo!",
+                "spans": []
+              }
+            ],
+            "text_image_img": {
+              "dimensions": {
+                "width": 800,
+                "height": 800
+              },
+              "alt": null,
+              "copyright": null,
+              "url": "https://images.prismic.io/selecttour/1005c036-27c1-4676-bf77-e0f4121868ab_avatar.jpg?auto=compress,format"
+            },
+            "content": [
+              {
+                "type": "paragraph",
+                "text": "Mussum Ipsum, cacilds vidis litro abertis. Per aumento de cachacis, eu reclamis. Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo! Suco de cevadiss deixa as pessoas mais interessantis. Admodum accumsan disputationi eu sit. Vide electram sadipscing et per.\n\nMé faiz elementum girarzis, nisi eros vermeio. Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis! Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum. Mussum Ipsum, cacilds vidis litro abertis.\n\nPer aumento de cachacis, eu reclamis. Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo! Suco de cevadiss deixa as pessoas mais interessantis. Admodum accumsan disputationi eu sit. Vide electram sadipscing et per.\n\nMé faiz elementum girarzis, nisi eros vermeio. Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis! Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum.",
+                "spans": []
+              }
+            ]
+          }
+        },
+        {
+          "slice_type": "depoimentos",
+          "slice_label": "testimonials",
+          "items": [
+            {
+              "customer_img": {
+                "dimensions": {
+                  "width": 800,
+                  "height": 800
+                },
+                "alt": null,
+                "copyright": null,
+                "url": "https://images.prismic.io/selecttour/1005c036-27c1-4676-bf77-e0f4121868ab_avatar.jpg?auto=compress,format"
+              },
+              "name": [
+                {
+                  "type": "heading3",
+                  "text": "João Victor ",
+                  "spans": []
+                }
+              ],
+              "testimonial": [
+                {
+                  "type": "paragraph",
+                  "text": "\"O Melhor atendimento do Mundo\"",
+                  "spans": []
+                }
+              ]
+            },
+            {
+              "customer_img": {
+                "dimensions": {
+                  "width": 800,
+                  "height": 800
+                },
+                "alt": null,
+                "copyright": null,
+                "url": "https://images.prismic.io/selecttour/1005c036-27c1-4676-bf77-e0f4121868ab_avatar.jpg?auto=compress,format"
+              },
+              "name": [
+                {
+                  "type": "heading3",
+                  "text": "John Doe",
+                  "spans": []
+                }
+              ],
+              "testimonial": [
+                {
+                  "type": "paragraph",
+                  "text": "Mussum Ipsum, cacilds vidis litro abertis. Mauris nec dolor in eros commodo tempor.",
+                  "spans": []
+                }
+              ]
+            },
+            {
+              "customer_img": {
+                "dimensions": {
+                  "width": 800,
+                  "height": 800
+                },
+                "alt": null,
+                "copyright": null,
+                "url": "https://images.prismic.io/selecttour/1005c036-27c1-4676-bf77-e0f4121868ab_avatar.jpg?auto=compress,format"
+              },
+              "name": [
+                {
+                  "type": "heading3",
+                  "text": "John Doe",
+                  "spans": []
+                }
+              ],
+              "testimonial": [
+                {
+                  "type": "paragraph",
+                  "text": "Mussum Ipsum, cacilds vidis litro abertis. Mauris nec dolor in eros commodo tempor.",
+                  "spans": []
+                }
+              ]
+            }
+          ],
+          "primary": {
+            "title": [
+              {
+                "type": "heading2",
+                "text": "O QUE NOSSOS CLIENTES DIZEM",
+                "spans": []
+              }
+            ],
+            "subtitle": [
+              {
+                "type": "heading3",
+                "text": "Mussum Ipsum, cacilds vidis litro abertis. Mauris nec dolor in eros commodo tempor.",
+                "spans": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+]
