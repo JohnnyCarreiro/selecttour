@@ -92,7 +92,39 @@ export const Container = styled.div`
     padding:0;
   }
   @media (max-width: 891px){
-    .travel{
+    .travel-inputs {
+      display: flex;
+      flex-direction: column;
+      > div {
+        display: flex;
+        flex-direction: column;
+        & + div {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
+    .registration-inputs {
+      display: flex;
+      flex-direction: column;
+      > div {
+        width: 100%;
+      }
+      > :last-child {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .registration-name {
+        display: flex;
+        flex-direction: column;
+      }
+      .registration-contacts {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    /* .travel{
       div{
         display: inline-block;
         width: 100%;
@@ -106,6 +138,6 @@ export const Container = styled.div`
           }
         }
       }
-    }
+    } */
   }
 `;

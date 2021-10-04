@@ -32,6 +32,7 @@ export const Container = styled.div`
   }
   .nav{
     display:flex;
+    flex-wrap: wrap;
     .nav-link {
       color: ${({theme})=> theme.colors.gray_1000};
     }
@@ -47,5 +48,27 @@ export const Container = styled.div`
         }
       }
     }
+  }
+  @media screen and (max-width: 1024px){
+    .nav{
+    display:flex;
+    .nav-link {
+      color: ${({theme})=> theme.colors.gray_1000};
+    }
+
+    div > ul{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content:center;
+
+      li{
+        padding-top: 2rem;
+        & + li{
+          padding-left:2rem;
+        }
+      }
+    }
+  }
   }
 `;

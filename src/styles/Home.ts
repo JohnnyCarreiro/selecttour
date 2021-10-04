@@ -29,4 +29,9 @@ export const Container = styled.div `
   .elevation {
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 12px 32px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 0px 12px rgba(0, 0, 0, 0.25)) drop-shadow(2px 0px 12px rgba(0, 0, 0, 0.25));
   }
+  @media (max-width:1024px){
+    .sowcase-content {
+      margin: 0 2rem;
+    }
+  }
 `

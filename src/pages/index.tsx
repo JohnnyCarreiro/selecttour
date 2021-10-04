@@ -38,12 +38,14 @@ export default function Home({content}: IContent) {
       <Header current="Inicio"/>
       <section>
         <Showcase>
-          <div className="wrapper sowcase-content">
-            <img src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
-            <h1>{show_case_section?.main_title}</h1>
-            { show_case_section?.sub_title && (
-              <h2>Something goes here</h2>
-            ) }
+          <div className="wrapper">
+            <div className="sowcase-content" >
+              <img src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
+              <h1>{show_case_section?.main_title}</h1>
+              { show_case_section?.sub_title && (
+                <h2>{show_case_section?.sub_title}</h2>
+              ) }
+            </div>
           </div>
         </Showcase>
       </section>

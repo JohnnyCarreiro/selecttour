@@ -2,15 +2,14 @@ import { useRouter } from 'next/router'
 import { Container } from './styles'
 
 export const Footer:React.FC = () => {
-  const { locale } = useRouter()
   return (
     <Container>
-      <div className="container">
+      <div className="container wrapper">
         <div className="logo">
-          <strong>CONNECT</strong><small>GDN</small>
+          <strong>Select Tour</strong><small> Viagens</small>
         </div>
         <div className="contact">
-          <p><a href="mailto:contato@selecttour.com.br">contato@selecttour.com.br</a></p>
+          <p><a href="mailto:contato@selecttour.com.br">contato@selecttourviagens.com.br</a></p>
         </div>
         <div className="nav">
           <div>
