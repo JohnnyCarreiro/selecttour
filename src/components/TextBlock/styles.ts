@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    /* background: ${({theme})=>theme.colors.gray_500}; */
     padding: 5rem 0 2rem;
     color: ${({theme})=>theme.colors.gray_600};
     .about{
@@ -26,25 +25,31 @@ export const Container = styled.div`
     align-items:flex-start;
     margin:0 auto;
     max-width:1140px;
+    height:100%;
+    width:100%;
     }
     .imageContainer{
       flex:1;
       height:100%;
       width:100%;
       padding-right: 2rem;
+      img {
+        height:100%;
+        width:100%;
+      }
     }
     .mainContent{
+      display:flex;
+      flex-direction: column;
       flex:2;
+      height:100%;
+      width:100%;
       color: ${({theme})=>theme.colors.gray_200};
-      h2{
-        color: ${({theme})=>theme.colors.gray_600};
-        margin-bottom: 1rem;
-      }
+      margin-bottom: 3rem;
 
-      div{
-        & + div{
-          margin-top: 2rem;
-        }
+      div {
+        height:100%;
+        width:100%;
       }
     }
     @media screen and (max-width:1024px){

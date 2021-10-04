@@ -16,14 +16,11 @@ export const Container = styled.div`
     min-height: 312px;
     max-height: 312px;
     img {
-      display: block;
-      margin: auto;
-
+      object-fit: cover;
+      min-height: 312px;
+      max-height: 312px;
       height: 100%;
-      max-height: 100%;
-
       width: 100%;
-      max-width: 100%;
       border-radius: 1rem;
     }
   }

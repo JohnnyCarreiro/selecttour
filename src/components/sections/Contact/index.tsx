@@ -11,8 +11,8 @@ export const  Contact: React.FC<LatestsProps> =({ children }) => {
   return (
     <Container>
       <div className="latests">
-        <h2>Ultimas do blog</h2>
-        <h3>Confira nossa ultimas postagens e tenha inspirações incriveis para suas príximas férias</h3>
+        <h2>Entre em contato</h2>
+        <h3>Tire suas dúvidas e planeje viagens incríveis e sem preocupações</h3>
       </div>
       <div className="content">
         <ContactForm />

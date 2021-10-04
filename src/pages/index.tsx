@@ -1,22 +1,35 @@
+import React from 'react'
 import Head from 'next/head'
+import { GetStaticProps } from 'next'
+import Prismic from '@prismicio/client'
+import { RichText } from 'prismic-dom'
 
 import { Header } from '@/components/Header'
 import { TextBlock } from '@/components/TextBlock'
 import { RequestTravel } from '@/components/sections/RequestTravel'
 import { Showcase } from '@/components/sections/Showcase'
-
-import { Container } from '../styles/Home'
-import React from 'react'
 import { TopPackages } from '@/components/sections/TopPackages'
-import { Package } from '@/components/Package'
 import { TopDestinations } from '@/components/sections/TopDestinations'
-import { Destination } from '@/components/Destination'
 import Testimonials from '@/components/sections/Testimonials'
 import { Latests } from '@/components/sections/Latests'
 import { Contact } from '@/components/sections/Contact'
 import { Footer } from '@/components/Footer'
 
-export default function Home() {
+import { Container } from '../styles/Home'
+
+import { getPrismicClient } from '@/services/prismic'
+import { IContent } from '@/interfaces/IHome'
+
+export default function Home({content}: IContent) {
+  const {
+    show_case_section,
+    how_we_work_section,
+    top_destinations_section,
+    about_us_section,
+    top_packages_section,
+    our_team_section,
+    testimonials_section
+  } = content[0]
   return (
     <Container id="home">
       <Head>
@@ -27,8 +40,10 @@ export default function Home() {
         <Showcase>
           <div className="wrapper sowcase-content">
             <img src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
-            <h1>Mais que uma simples viagem</h1>
-            <h2>Something goes here</h2>
+            <h1>{show_case_section?.main_title}</h1>
+            { show_case_section?.sub_title && (
+              <h2>Something goes here</h2>
+            ) }
           </div>
         </Showcase>
       </section>
@@ -37,39 +52,27 @@ export default function Home() {
       </section>
       <section id="how-we-work" className="section-bg" >
         <div className="wrapper">
-          <TextBlock content_data={{main_title: "Como Atuamos", subtitle:"Saiba como podemos te ajudar a ter uma experiência inesquecível", image:'assets/images/image.svg', contents:[{title:"title"}]}}/>
+          <TextBlock content_data={ how_we_work_section }/>
         </div>
       </section>
       <section id="top-packages" className="wrapper">
-        <TopPackages>
-          <Package />
-          <Package />
-          <Package />
-          <Package />
-          <Package />
-          <Package />
-        </TopPackages>
+        <TopPackages content_data={ top_packages_section } />
       </section>
       <section id="about" className="section-bg" >
         <div className="wrapper">
-        <TextBlock content_data={{main_title: "Sobre a Select Tour", subtitle:"Saiba mais a nosso respeito, como atuamos e como temos você, nosso cliente no centro de tudo!", image:'assets/images/LOGO.svg', contents:[{title:"Something goes here"}]}}/>
+          <TextBlock content_data={ about_us_section }/>
         </div>
       </section>
       <section id="top-destinations" className="wrapper">
-        <TopDestinations>
-          <Destination />
-          <Destination />
-          <Destination />
-          <Destination />
-        </TopDestinations>
+        <TopDestinations content_data={top_destinations_section} />
       </section>
       <section id="team" className="section-bg">
         <div className="wrapper">
-          <TextBlock content_data={{main_title: "Conheça o nosso Time", subtitle:"Saiba mais a nosso respeito, como atuamos e como temos você, nosso cliente no centro de tudo!", image:'assets/images/LOGO.svg', contents:[{title:"Something goes here"}]}}/>
+          <TextBlock content_data={ our_team_section }/>
         </div>
       </section>
       <section id="testimonials" className="wrapper">
-        <Testimonials testimonials={{main_title: "O que nossos clientes dizem", subtitle: "Mussum Ipsum, cacilds vidis litro abertis. Mauris nec dolor in eros commodo tempor."}} />
+        <Testimonials content_data={testimonials_section} />
       </section>
       <section id="latests" className="wrapper">
         <Latests />
@@ -82,4 +85,98 @@ export default function Home() {
       <Footer/>
     </Container>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+
+  const prismic = getPrismicClient()
+
+  const response = await prismic.query([
+    Prismic.predicates.at('document.type', 'selecttour')
+  ])
+
+  const content = response.results.map(content => {
+    const showCase = content.data
+    const howWeWork = content.data.body.find((section: any) => section.slice_label === 'how_we_work')
+    const packages = content.data.body.find((section: any) => section.slice_label === 'top_package')
+    const aboutUs = content.data.body.find((section: any) => section.slice_label === 'about_us')
+    const topDestinations = content.data.body.find((section: any) => section.slice_label === 'destinations')
+    const ourTeam = content.data.body.find((section: any) => section.slice_label === 'our_team')
+    const testimonials = content.data.body.find((section: any) => section.slice_label === 'testimonials')
+
+    return {
+      show_case_section:{
+        main_title: RichText.asText(showCase.main_title),
+        sub_title: RichText.asText(showCase.main_subtitle),
+      },
+      how_we_work_section: {
+        title: RichText.asText(howWeWork.primary.title),
+        subtitle: RichText.asText(howWeWork.primary.subtitle),
+        image_url: howWeWork.primary.text_image_img.url,
+        content: RichText.asHtml(howWeWork.primary.content)
+      },
+      top_packages_section: {
+        title: RichText.asText(packages.primary.package_title),
+        subtitle: RichText.asText(packages.primary.package_subtitle),
+        packages: packages.items.map((travelPackage: any) => {
+          return {
+            image: travelPackage.package_img.url,
+            destination: RichText.asText(travelPackage.destination),
+            value: new Intl.NumberFormat('pt-BR', {
+              style:'currency',
+              currency:'BRL',
+            }).format(Number(RichText.asText(travelPackage.value))),
+            time_amount: RichText.asText(travelPackage.time_amount),
+            hotel_classification: RichText.asText(travelPackage.hotel_classification),
+            transportations: RichText.asText(travelPackage.transportations),
+            meal_options: RichText.asText(travelPackage.meal_options),
+            qualification: travelPackage.qualification,
+          }
+        })
+      },
+      about_us_section: {
+        title: RichText.asText(aboutUs.primary.title),
+        subtitle: RichText.asText(aboutUs.primary.subtitle),
+        image_url: aboutUs.primary.text_image_img.url,
+        content: RichText.asHtml(aboutUs.primary.content)
+      },
+      top_destinations_section: {
+        title: RichText.asText(topDestinations.primary.title),
+        subtitle: RichText.asText(topDestinations.primary.subtitle),
+        destinations: topDestinations.items.map((destination: any) => {
+          return {
+            image: destination.img.url,
+            destination: RichText.asText(destination.country),
+            tours: RichText.asText(destination.tour),
+            places: RichText.asText(destination.places),
+
+          }
+        })
+      },
+      our_team_section: {
+        title: RichText.asText(ourTeam.primary.title),
+        subtitle: RichText.asText(ourTeam.primary.subtitle),
+        image_url: ourTeam.primary.text_image_img.url,
+        content: RichText.asHtml(ourTeam.primary.content)
+      },
+      testimonials_section: {
+        title: RichText.asText(testimonials.primary.title),
+        subtitle: RichText.asText(testimonials.primary.subtitle),
+        testimonials: testimonials.items.map((testimonial: any) => {
+          return {
+            image: testimonial.customer_img.url,
+            name: RichText.asText(testimonial.name),
+            testimonial: RichText.asText(testimonial.testimonial),
+          }
+        })
+      },
+    }
+  })
+
+  return {
+    props: {
+      content
+    },
+    revalidate: 60 + 60 * 24 //24 hours
+  }
 }

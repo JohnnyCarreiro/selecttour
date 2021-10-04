@@ -5,21 +5,33 @@ import Button from '../Button'
 import { Container } from './styles'
 
 interface PackageProps {
+  content_data: {
+    image: string
+    destination: string
+    tours: string
+    places: string
+  }
   children?: ReactNode
 }
 
-export const Destination:React.FC<PackageProps> = ({ children }) => {
+export const Destination:React.FC<PackageProps> = ({ children, content_data }) => {
+  const {
+    image,
+    destination,
+    tours,
+    places
+   } = content_data
   return (
     <Container className="elevation">
       <div className="img-container">
-        <img src="assets/images/travel.png" alt="Destino" />
+        <img src={image} alt="Destino" />
       </div>
       <div className="destination-info">
         <div className="destination-header">
-          <h3>Japão</h3>
+          <h3>{destination}</h3>
           <div>
-            <p>20 tours</p>
-            <p>15 lugares</p>
+            <p>{tours}</p>
+            <p>{places}</p>
           </div>
         </div>
         <div className="ctas">

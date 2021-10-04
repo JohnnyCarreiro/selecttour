@@ -2,24 +2,24 @@ import { ReactNode } from 'react'
 import { Container } from './styles'
 
 interface TestimonialProps {
-  testimonial: {
+  content_data: {
+    image: string
     name: string
-    imageUrl: string
-    text: string
+    testimonial: string
   }
   children?: ReactNode
 }
 
-export const Testimonial:React.FC<TestimonialProps> = ({ children, testimonial }) => {
-  const { name, imageUrl, text } = testimonial
+export const Testimonial:React.FC<TestimonialProps> = ({ children, content_data }) => {
+  const { name, image, testimonial } = content_data
   return (
     <Container>
       <div className="image-container">
-        <img src={imageUrl} alt="" />
+        <img src={image} alt="" />
       </div>
       <div className="content">
         <h3>{name}</h3>
-        <blockquote>{text}</blockquote>
+        <blockquote>{testimonial}</blockquote>
       </div>
     </Container>
   )
