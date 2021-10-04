@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import Prismic from '@prismicio/client'
@@ -19,6 +19,8 @@ import { Container } from '../styles/Home'
 
 import { getPrismicClient } from '@/services/prismic'
 import { IContent } from '@/interfaces/IHome'
+import { useVisibility } from '@/utils/useVisibility'
+
 
 export default function Home({content}: IContent) {
   const {
@@ -28,14 +30,18 @@ export default function Home({content}: IContent) {
     about_us_section,
     top_packages_section,
     our_team_section,
-    testimonials_section
+    testimonials_section,
+    contact_form_section,
+    site_contacts_section
   } = content[0]
+  const [isVisible, currentElement] = useVisibility<HTMLDivElement>(100)
+  console.log(currentElement)
   return (
-    <Container id="home">
+    <Container ref={currentElement} id="home">
       <Head>
         <title>Select Tour - Mais que uma uma Viagem</title>
       </Head>
-      <Header current="Inicio"/>
+      <Header contacts={site_contacts_section} current={currentElement}/>
       <section>
         <Showcase>
           <div className="wrapper">
@@ -52,36 +58,66 @@ export default function Home({content}: IContent) {
       <section id="travel-request" className="wrapper" >
         <RequestTravel />
       </section>
-      <section id="how-we-work" className="section-bg" >
-        <div className="wrapper">
-          <TextBlock content_data={ how_we_work_section }/>
-        </div>
-      </section>
-      <section id="top-packages" className="wrapper">
-        <TopPackages content_data={ top_packages_section } />
-      </section>
-      <section id="about" className="section-bg" >
+      <section
+        ref={currentElement}
+        style={{scrollMargin:"6.25rem 0 0 0"}}
+        id="about"
+        className="section-bg"
+      >
         <div className="wrapper">
           <TextBlock content_data={ about_us_section }/>
         </div>
       </section>
-      <section id="top-destinations" className="wrapper">
+      <section
+        style={{scrollMargin:"6.25rem 0 0 0"}}
+        id="top-packages"
+        className="wrapper"
+        ref={currentElement}
+      >
+        <TopPackages content_data={ top_packages_section } />
+      </section>
+      <section
+        style={{scrollMargin:"6.25rem 0 0 0"}}
+        id="how-we-work"
+        className="section-bg"
+      >
+        <div className="wrapper">
+          <TextBlock content_data={ how_we_work_section }/>
+        </div>
+      </section>
+      <section
+        style={{scrollMargin:"6.25rem 0 0 0"}}
+        id="top-destinations"
+        className="wrapper"
+      >
         <TopDestinations content_data={top_destinations_section} />
       </section>
-      <section id="team" className="section-bg">
+      <section
+        style={{scrollMargin:"6.25rem 0 0 0"}}
+        id="team"
+        className="section-bg"
+      >
         <div className="wrapper">
           <TextBlock content_data={ our_team_section }/>
         </div>
       </section>
-      <section id="testimonials" className="wrapper">
+      <section
+        style={{scrollMargin:"6.25rem 0 0 0"}}
+        id="testimonials"
+        className="wrapper"
+      >
         <Testimonials content_data={testimonials_section} />
       </section>
-      <section id="latests" className="wrapper">
+      {/* <section id="latests" className="wrapper">
         <Latests />
-      </section>
-      <section id="contact" className="section-bg">
+      </section> */}
+      <section
+        style={{scrollMargin:"6.25rem 0 0 0"}}
+        id="contact"
+        className="section-bg"
+      >
         <div className="wrapper">
-          <Contact/>
+          <Contact content_data={contact_form_section} />
         </div>
       </section>
       <Footer/>
@@ -105,6 +141,8 @@ export const getStaticProps: GetStaticProps = async () => {
     const topDestinations = content.data.body.find((section: any) => section.slice_label === 'destinations')
     const ourTeam = content.data.body.find((section: any) => section.slice_label === 'our_team')
     const testimonials = content.data.body.find((section: any) => section.slice_label === 'testimonials')
+    const contacts = content.data.body.find((section: any) => section.slice_label === 'contact_form')
+    const siteContacts = content.data.body.find((section: any) => section.slice_label === 'site_contacts')
 
     return {
       show_case_section:{
@@ -172,6 +210,21 @@ export const getStaticProps: GetStaticProps = async () => {
           }
         })
       },
+      contact_form_section: {
+        title: RichText.asText(contacts.primary.title),
+        subtitle: RichText.asText(contacts.primary.subtitle),
+        email: RichText.asText(contacts.primary.email),
+        phone: RichText.asText(contacts.primary.phone),
+      },
+      site_contacts_section: {
+        whatsapp_number: RichText.asText(siteContacts.primary.whatsapp_number),
+        whatsapp_message: RichText.asText(siteContacts.primary.whatsapp_message),
+        phone_number: RichText.asText(siteContacts.primary.phone_number),
+        email: RichText.asText(siteContacts.primary.email),
+        facebook: RichText.asText(siteContacts.primary.facebook),
+        instagram: RichText.asText(siteContacts.primary.instagram),
+        linkedin: RichText.asText(siteContacts.primary.linkedin),
+      }
     }
   })
 

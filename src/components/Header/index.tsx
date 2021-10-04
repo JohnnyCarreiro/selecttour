@@ -3,11 +3,32 @@ import { FaFacebookSquare, FaInstagramSquare, FaLinkedinIn, FaTimes, FaBars } fr
 import Logo from '../../assets/imgs/LOGO.svg'
 
 import { BottomNavBar, Container, NavContainer } from './styles'
-interface NavProps{
-  current:string
+interface NavProps {
+  contacts:{
+    whatsapp_number: string
+    whatsapp_message: string
+    phone_number: string
+    email: string
+    facebook: string
+    instagram: string
+    linkedin: string
+  }
+  // current:string
+  current:  React.RefObject<HTMLDivElement>
 }
-export const Header: React.FC<NavProps> = ({current}) => {
+export const Header: React.FC<NavProps> = ({current, contacts}) => {
+  const {
+    whatsapp_number,
+    whatsapp_message,
+    phone_number,
+    email,
+    facebook,
+    instagram,
+    linkedin
+  } = contacts
+  const phone = phone_number.replace('-', '').replace(' ', '')
   const [ display, setDisplay ] = useState(false)
+  console.log('Header', current)
 
   const handleShowingMenu = () => {
     setDisplay(!display)
@@ -22,16 +43,16 @@ export const Header: React.FC<NavProps> = ({current}) => {
           <div className="contactsContainer">
             <div className="socialMedia">
               <ul>
-                <li><a href="#"><FaFacebookSquare/></a></li>
-                <li><a href="#"><FaInstagramSquare/></a></li>
-                <li><a href="#"><FaLinkedinIn/></a></li>
+                <li><a href={facebook ? facebook : "#"}><FaFacebookSquare/></a></li>
+                <li><a href={instagram ? instagram : "#"}><FaInstagramSquare/></a></li>
+                <li><a href={linkedin ? linkedin : "#"}><FaLinkedinIn/></a></li>
                 <a href=""></a>
               </ul>
             </div>
             <div className="mainContacts">
               <ul>
-                <li><a href="tel:+5511998253434">11 99825-3434</a></li>
-                <li><a href="mailto:contato@selecttour.com.br">contato@selecttour.com.br</a></li>
+                <li><a href={`tel:+55${phone}`}>{phone_number}</a></li>
+                <li><a href={`mailto:${email}`}>{email}</a></li>
               </ul>
             </div>
           </div>
@@ -43,27 +64,27 @@ export const Header: React.FC<NavProps> = ({current}) => {
             </div>
             <nav className={display ? 'showMenu' : ''}>
               <ul>
-                <li className={current === 'Inicio' ? 'menuItem active' : 'menuItem'} >
-                  <a className={current === 'Inicio' ? 'active' : ''} onClick={closeMobileMenu} href="#home">Inicio</a>
+                <li className={current?.current?.id === 'home' ? 'menuItem active' : 'menuItem'} >
+                  <a className={current?.current?.id === 'home' ? 'active' : ''} onClick={closeMobileMenu} href="#home">Inicio</a>
                 </li>
-                <li className={current === 'Sobre' ? 'menuItem active' : 'menuItem'} >
-                  <a className={current === 'Sobre' ? 'active' : ''} onClick={closeMobileMenu} href="#about">Sobre</a>
+                <li className={current?.current?.id === 'about' ? 'menuItem active' : 'menuItem'} >
+                  <a className={current?.current?.id === 'about' ? 'active' : ''} onClick={closeMobileMenu} href="#about">Sobre</a>
                 </li>
-                <li className={current === 'Produtos' ? 'menuItem active' : 'menuItem'} >
-                  <a className={current === 'Produtos' ? 'active' : ''} onClick={closeMobileMenu} href="#how-we-work">Voos</a>
+                <li className={current?.current?.id === 'top-packages' ? 'menuItem active' : 'menuItem'} >
+                  <a className={current?.current?.id === 'top-packages' ? 'active' : ''} onClick={closeMobileMenu} href="#top-packages">Pacotes</a>
                 </li>
-                <li className={current === 'Serviços' ? 'menuItem active' : 'menuItem'} >
-                  <a className={current === 'Serviços' ? 'active' : ''} onClick={closeMobileMenu} href="#how-we-work">Hoteis</a>
+                <li className={current?.current?.id === 'how-we-work' ? 'menuItem active' : 'menuItem'} >
+                  <a className={current?.current?.id === 'how-we-work' ? 'active' : ''} onClick={closeMobileMenu} href="#how-we-work">Voos & Hoteis</a>
                 </li>
-                <li className={current === 'Contato' ? 'menuItem active' : 'menuItem'} >
-                  <a className={current === 'Contato' ? 'active' : ''} onClick={closeMobileMenu} href="#top-packages">Pacotes</a>
+                <li className={current?.current?.id === 'top-destinations' ? 'menuItem active' : 'menuItem'} >
+                  <a className={current?.current?.id === 'top-destinations' ? 'active' : ''} onClick={closeMobileMenu} href="#top-destinations">Destinos</a>
                 </li>
-                <li className={current === 'Contato' ? 'menuItem active' : 'menuItem'} >
-                  <a className={current === 'Contato' ? 'active' : ''} onClick={closeMobileMenu} href="#contact">Contato</a>
+                <li className={current?.current?.id === 'Contato' ? 'menuItem active' : 'menuItem'} >
+                  <a className={current?.current?.id === 'Contato' ? 'active' : ''} onClick={closeMobileMenu} href="#contact">Contato</a>
                 </li>
-                <li className={current === 'Contato' ? 'menuItem active' : 'menuItem'} >
-                  <a className={current === 'Contato' ? 'active' : ''} onClick={closeMobileMenu} href="/blog">Blog</a>
-                </li>
+                {/* <li className={current?.current?.id === 'blog' ? 'menuItem active' : 'menuItem'} >
+                  <a className={current?.current?.id === 'blog' ? 'active' : ''} onClick={closeMobileMenu} href="/blog">Blog</a>
+                </li> */}
               </ul>
             </nav>
             <div className="menuIcon" onClick={handleShowingMenu}>

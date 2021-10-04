@@ -22,8 +22,11 @@ interface SignInFormData {
   message:string
 }
 
+interface RequestFormData {
+  current?:  Promise<React.RefObject<HTMLDivElement>>
+}
 
-export const RequestTravel:React.FC = () => {
+export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
 
   const formRef = useRef<FormHandles>(null)
 

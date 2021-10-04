@@ -56,5 +56,20 @@ interface IHome {
       name: string
       testimonial: string
     }>
+  },
+  contact_form_section: {
+    title: string
+    subtitle: string
+    email: string
+    phone: string
+  },
+  site_contacts_section: {
+    whatsapp_number: string
+    whatsapp_message: string
+    phone_number: string
+    email: string
+    facebook: string
+    instagram: string
+    linkedin: string
   }
 }

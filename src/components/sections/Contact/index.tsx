@@ -4,15 +4,27 @@ import { ReactNode } from 'react'
 import { Container } from './styles'
 
 interface LatestsProps {
+  content_data:{
+    title: string
+    subtitle: string
+    email: string
+    phone: string
+  }
   children?: ReactNode
 }
 
-export const  Contact: React.FC<LatestsProps> =({ children }) => {
+export const  Contact: React.FC<LatestsProps> =({ children, content_data }) => {
+  const {
+    title,
+    subtitle,
+    email,
+    phone
+   } = content_data
   return (
     <Container>
       <div className="latests">
-        <h2>Entre em contato</h2>
-        <h3>Tire suas dúvidas e planeje viagens incríveis e sem preocupações</h3>
+        <h2>{title}</h2>
+        <h3>{subtitle}</h3>
       </div>
       <div className="content">
         <ContactForm />

@@ -6,10 +6,9 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   color: ${({theme}) => theme.colors.gray_600};
-  padding: 5rem 0 2rem;
+  padding: 5rem 0 0rem;
   margin:0 auto;
   max-width:1140px;
-  margin-bottom:4rem;
 
   .testimonial {
     display: flex;
