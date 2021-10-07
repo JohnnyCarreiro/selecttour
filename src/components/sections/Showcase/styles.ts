@@ -26,7 +26,7 @@ export const Container = styled.div`
     height: 100%;
     object-fit: cover;
     z-index:-100;
-    /* opacity: 0.8; */
+    padding-top: 4rem;
   }
   .overlay {
     position: absolute;
@@ -40,5 +40,12 @@ export const Container = styled.div`
   }
   :nth-child() {
     z-index: 10;
+  }
+
+  @media screen and (max-width:1024px){
+    > video {
+      object-fit: cover;
+      height: 100%
+    }
   }
 `

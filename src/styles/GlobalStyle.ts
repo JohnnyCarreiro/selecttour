@@ -43,6 +43,9 @@ export const GlobalStyle = createGlobalStyle<Props>`
   button{
     cursor:pointer;
   }
+  p, a, textarea, input{
+    font: ${({theme}) => theme.texts.main_text};
+  }
 
   a{
     color:inherit;

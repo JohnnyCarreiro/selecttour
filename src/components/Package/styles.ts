@@ -6,6 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   max-width: 360px;
   width: 100%;
+  min-height: 712px;
   height: 100%;
   border:none;
   border-radius: 1rem;
@@ -26,6 +27,11 @@ export const Container = styled.div`
     }
   }
   .destination-info {
+    flex-grow: initial;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 100%;
     width: 100%;
 

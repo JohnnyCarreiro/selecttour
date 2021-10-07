@@ -22,11 +22,11 @@ const defaultTheme = {
 
   },
   texts:{
-    main_title: '700 2.875rem/3.125rem EB Garamond, sans-serif', // h1
-    title: '700 1.875rem/2.125rem EB Garamond, sans-serif', // h2
-    sub_title: '700 1.25rem/1.5rem EB Garamond, sans-serif', // h3
-    main_text: '400 1.25rem/1.5rem EB Garamond, sans-serif', // p, a ...
-    main_strong: '600 1.25rem/1.5rem EB Garamond, sans-serif', // strong
+    main_title: '700 2.125rem/2.5rem EB Garamond, sans-serif', // h1
+    title: '700 1.75rem/1.875rem EB Garamond, sans-serif', // h2
+    sub_title: '700 1rem/1.5rem EB Garamond, sans-serif', // h3
+    main_text: '400 1rem/1.5rem EB Garamond, sans-serif', // p, a ...
+    main_strong: '600 1rem/1.5rem EB Garamond, sans-serif', // strong
     small_text: '400 0.875rem/1rem EB Garamond, sans-serif', // p, a, small ..
   }
 }

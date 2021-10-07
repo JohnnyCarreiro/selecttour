@@ -10,7 +10,7 @@ export const Container = styled.div<{primaryColor:boolean}>`
     text-align:center;
     border-radius:0.25rem;
     margin-top:2.5rem;
-    padding:0.5rem 1.75rem;
+    padding:0.5rem 2rem;
     transition:.2s;
     cursor:pointer;
     border: 2px solid transparent;
@@ -37,7 +37,7 @@ export const Container = styled.div<{primaryColor:boolean}>`
     text-align:center;
     border: 2px solid ${({primaryColor})=> primaryColor ? ({theme})=> theme.colors.primary :({theme})=> theme.colors.secondary };
     border-radius:0.25rem;
-    padding:0.5rem 1.75rem;
+    padding:0.5rem 2rem;
     margin-top:2.5rem;
     transition:0.2s;
 

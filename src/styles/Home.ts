@@ -1,12 +1,11 @@
 import styled from 'styled-components'
-import theme from './theme'
 
 export const Container = styled.div `
   background: ${({theme}) => theme.colors.gray_1000};
   .wrapper {
     display: flex;
     flex-direction: column;
-    max-width: 1120px;
+    max-width: 70rem;
     margin: 0 auto;
   }
   .sowcase-content {
