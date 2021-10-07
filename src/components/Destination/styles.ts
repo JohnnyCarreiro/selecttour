@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 360px;
-  min-height: 524px;
+  min-height: 548px;
   width: 100%;
   height: auto;
   border:none;
@@ -55,7 +55,6 @@ export const Container = styled.div`
         align-items: center;
         justify-content: space-between;
         gap: 0.5rem;
-        margin: auto;
         height: 100%;
         padding-bottom: 0;
       }
