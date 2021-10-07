@@ -4,7 +4,7 @@ import { Form } from '@unform/web'
 import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
 import axios from 'axios'
-import { FaChild, FaEnvelope, FaHotel, FaPlaneArrival, FaPlaneDeparture, FaUser, FaWhatsapp } from 'react-icons/fa'
+import { FaChild, FaEnvelope, FaHotel, FaPlaneArrival, FaPlaneDeparture, FaScroll, FaUser, FaWhatsapp } from 'react-icons/fa'
 import { MdEvent, MdEventSeat } from 'react-icons/md'
 
 import { Container } from './styles'
@@ -239,8 +239,9 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
               <TextArea
                 name="observations"
                 type="text"
+                icon={FaScroll}
                 label={"Message"}
-                placeholder={"Leave a message to us"}
+                placeholder={"Informe aqui mais informações"}
                 onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setObservations(event.target.value)}}
                 value={observations}
               />

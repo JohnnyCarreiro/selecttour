@@ -39,11 +39,13 @@ export const TextArea:React.FC<InputProps> = ({name, icon:Icon, label,...props})
 
   return (
     <Container>
-      <label>
-        {label}
-      </label>
-      <TextAreaContainer isErrored={!! error} isFilled={isFilled} isFocused={isFocused} >
+      <div className="label">
         {Icon && <Icon size={20}/>}
+        <label>
+          {label}
+        </label>
+      </div>
+      <TextAreaContainer isErrored={!! error} isFilled={isFilled} isFocused={isFocused} >
         <textarea
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}

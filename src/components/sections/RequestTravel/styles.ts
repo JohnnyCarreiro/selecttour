@@ -58,6 +58,9 @@ export const Container = styled.div`
         align-items: end;
       }
     }
+    > :last-child {
+      margin-top: 1rem;
+    }
   }
   .registration-inputs {
     display: flex;

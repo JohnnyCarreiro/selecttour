@@ -11,11 +11,20 @@ export const Container = styled.div`
   & + div {
     margin-top:0.5rem;
   }
-  > label {
-    font: ${({theme}) => theme.texts.main_strong};
-    color: ${({theme}) => theme.colors.gray_600};
-    text-transform: uppercase;
-    padding-left: 0.25rem;
+  .label {
+    display: flex;
+    align-items: center;
+    > label {
+      font: ${({theme}) => theme.texts.main_strong};
+      color: ${({theme}) => theme.colors.gray_600};
+      text-transform: uppercase;
+    }
+    svg{
+      height: 18px;
+      width: auto;
+      margin-right:0.5rem;
+      color:${({theme})=> theme.colors.primary};
+    }
   }
 `
 

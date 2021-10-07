@@ -157,7 +157,7 @@ export const NavContainer = styled.div`
             position:relative;
         }
         nav .menuItem a{
-            height:60px;
+            height:50px;
             line-height:60px;
             padding:0 24px;
             width:100%;

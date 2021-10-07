@@ -20,13 +20,16 @@ export const Container = styled.div`
   .label {
     display: flex;
     align-items: center;
+    margin-left: 0.45rem;
     > label {
       font: ${({theme}) => theme.texts.main_strong};
       color: ${({theme}) => theme.colors.gray_600};
       text-transform: uppercase;
     }
     svg{
-      margin-right:1rem;
+      height: 18px;
+      width: auto;
+      margin-right:0.5rem;
       color:${({theme})=> theme.colors.primary};
     }
   }

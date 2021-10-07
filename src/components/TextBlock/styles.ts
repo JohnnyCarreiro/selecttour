@@ -62,7 +62,7 @@ export const Container = styled.div`
       padding: 0.5rem;
       >p{
         padding-top: 1rem;
-        &+:nth-child() {
+        > :nth-child() {
           padding-top: 1rem;
         }
       }
