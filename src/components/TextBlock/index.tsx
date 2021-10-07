@@ -3,6 +3,7 @@ import { useVisibility } from '../../utils/useVisibility'
 import { Container } from './styles'
 
 interface AboutProps {
+  slice_label?: string
   content_data: {
     title: string
     subtitle: string
@@ -11,7 +12,7 @@ interface AboutProps {
   }
 }
 
-export const TextBlock:React.FC<AboutProps> = ({content_data}) => {
+export const TextBlock:React.FC<AboutProps> = ({slice_label, content_data}) => {
   const [isVisible, currentElement] = useVisibility<HTMLDivElement>(100)
 
   const {
@@ -29,7 +30,7 @@ export const TextBlock:React.FC<AboutProps> = ({content_data}) => {
       </div>
       <div className="container">
         <div className="imageContainer" >
-          <img src={image_url} alt="" />
+          <img className={slice_label === 'our_team' ? 'team' : ''} src={image_url} alt="" />
         </div>
         {/* <div className="mainContent"> */}
           <div className="mainContent" dangerouslySetInnerHTML={{ __html:content}} />

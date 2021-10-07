@@ -32,7 +32,7 @@ export const Package:React.FC<PackageProps> = ({ children, package_data }) => {
   return (
     <Container className="elevation">
       <div className="img-container">
-        <img src="assets/images/travel.png" alt="Destino" />
+        <img src={image} alt="Destino" />
       </div>
       <div className="destination-info">
         <div className="destination-header">

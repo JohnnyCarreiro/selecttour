@@ -35,7 +35,7 @@ export default function Home({content}: IContent) {
     site_contacts_section
   } = content[0]
   const [isVisible, currentElement] = useVisibility<HTMLDivElement>(100)
-  console.log(currentElement)
+  console.log(testimonials_section.testimonials)
   return (
     <Container ref={currentElement} id="home">
       <Head>
@@ -98,16 +98,20 @@ export default function Home({content}: IContent) {
         className="section-bg"
       >
         <div className="wrapper">
-          <TextBlock content_data={ our_team_section }/>
+          <TextBlock slice_label="our_team" content_data={ our_team_section }/>
         </div>
       </section>
-      <section
-        style={{scrollMargin:"6.25rem 0 0 0"}}
-        id="testimonials"
-        className="wrapper"
-      >
-        <Testimonials content_data={testimonials_section} />
-      </section>
+      { testimonials_section.testimonials.length > 0
+          && (
+            <section
+              style={{scrollMargin:"6.25rem 0 0 0"}}
+              id="testimonials"
+              className="wrapper"
+            >
+              <Testimonials content_data={testimonials_section} />
+            </section>
+          )
+      }
       {/* <section id="latests" className="wrapper">
         <Latests />
       </section> */}
@@ -162,10 +166,11 @@ export const getStaticProps: GetStaticProps = async () => {
           return {
             image: travelPackage.package_img.url,
             destination: RichText.asText(travelPackage.destination),
-            value: new Intl.NumberFormat('pt-BR', {
-              style:'currency',
-              currency:'BRL',
-            }).format(Number(RichText.asText(travelPackage.value))),
+            // value: new Intl.NumberFormat('pt-BR', {
+            //   style:'currency',
+            //   currency:'BRL',
+            // }).format(Number(RichText.asText(travelPackage.value))),
+            value: RichText.asText(travelPackage.value),
             time_amount: RichText.asText(travelPackage.time_amount),
             hotel_classification: RichText.asText(travelPackage.hotel_classification),
             transportations: RichText.asText(travelPackage.transportations),

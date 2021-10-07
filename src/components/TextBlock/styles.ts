@@ -29,17 +29,31 @@ export const Container = styled.div`
     width:100%;
     }
     .imageContainer{
-      flex:1;
-      height:100%;
-      width:100%;
+      flex: 1;
+      object-fit: cover;
+      min-height: 212px;
+      max-height: 212px;
       padding-right: 2rem;
-      img {
-        height:100%;
-        width:100%;
+      > img {
+        height: 100%;
+        width: 100%;
+      }
+      .team {
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+        min-height: 212px;
+        max-height: 212px;
+        height: 100%;
+        width: auto;
+        > img {
+          height: 100%;
+          width: auto;
+        }
       }
     }
     .mainContent{
-      flex:2;
+      flex:3;
       height:100%;
       width:100%;
       color: ${({theme})=>theme.colors.gray_200};
@@ -67,6 +81,9 @@ export const Container = styled.div`
         }
         .imageContainer{
           margin-bottom: 2rem;
+          .team {
+            border-radius: 50%;
+          }
         }
       }
     }

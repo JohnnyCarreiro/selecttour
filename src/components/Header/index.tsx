@@ -74,7 +74,7 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
                   <a className={current?.current?.id === 'top-packages' ? 'active' : ''} onClick={closeMobileMenu} href="#top-packages">Pacotes</a>
                 </li>
                 <li className={current?.current?.id === 'how-we-work' ? 'menuItem active' : 'menuItem'} >
-                  <a className={current?.current?.id === 'how-we-work' ? 'active' : ''} onClick={closeMobileMenu} href="#how-we-work">Voos & Hoteis</a>
+                  <a className={current?.current?.id === 'how-we-work' ? 'active' : ''} onClick={closeMobileMenu} href="#how-we-work">Como Atuamos</a>
                 </li>
                 <li className={current?.current?.id === 'top-destinations' ? 'menuItem active' : 'menuItem'} >
                   <a className={current?.current?.id === 'top-destinations' ? 'active' : ''} onClick={closeMobileMenu} href="#top-destinations">Destinos</a>

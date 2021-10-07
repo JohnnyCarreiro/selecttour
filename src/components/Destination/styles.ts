@@ -5,11 +5,15 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 360px;
+  min-height: 524px;
   width: 100%;
-  height: 100%;
+  height: auto;
   border:none;
   border-radius: 1rem;
   background: ${({theme}) => theme.colors.white};
+
+  margin-bottom: 0;
+
   .img-container {
     overflow: hidden;
     width: 100%;
@@ -25,15 +29,20 @@ export const Container = styled.div`
     }
   }
   .destination-info {
+    flex-grow: initial;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 100%;
-    width: 100%;
-
+    width: auto;
     background: ${({theme}) => theme.colors.white};
     border-radius: 0.5rem;
     margin-top: -2rem;
     padding: 1rem;
 
     .destination-header {
+      flex: 1;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
@@ -45,6 +54,10 @@ export const Container = styled.div`
         display:flex;
         align-items: center;
         justify-content: space-between;
+        gap: 0.5rem;
+        margin: auto;
+        height: 100%;
+        padding-bottom: 0;
       }
   }
 

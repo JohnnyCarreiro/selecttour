@@ -13,17 +13,15 @@ export const Container = styled.div`
   .img-container {
     overflow: hidden;
     width: 100%;
-    min-height: 290px;
-    max-height: 290px;
+    min-height: 312px;
+    max-height: 312px;
     img {
+      object-fit: cover;
       display: block;
-      margin: auto;
-
+      min-height: 312px;
+      max-height: 312px;
       height: 100%;
-      max-height: 100%;
-
       width: 100%;
-      max-width: 100%;
       border-radius: 1rem;
     }
   }
