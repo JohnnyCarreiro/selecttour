@@ -43,31 +43,72 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
   const [returns, setReturns] = useState('')
   const [adults, setAdults] = useState('')
   const [childs, setChilds] = useState('')
+  const [childrenAge, setChildrenAge] = useState('')
   const [flightClass, setFlightClass] = useState('')
   const [accomodation, setAccomodation] = useState('')
 
   const [observations, setObservations] = useState('')
 
-
+  console.log('length: ',childs.length)
   const handleSubmit = useCallback( async (data: SignInFormData) =>{
     try {
       formRef.current?.setErrors({})
 
       const schema = Yup.object().shape({
+        from:Yup.string()
+          .required(String('Local de partida é obrigatório')),
+        to:Yup.string()
+          .required(String('Destino é obrigatório')),
+        departure:Yup.string()
+          .required(String('Data de partida é obrigatória')),
+        returns:Yup.string()
+          .required(String('Data de retorno é obrigatória')),
+        adults:Yup.string()
+          .required(String('Quantidade de Adultos é obrigatória')),
+        // childrenAge: Yup.string()
+        //   .when('childs', {
+        //     is: (childs: string) => !childs || childs.length == 0,
+        //     then: Yup.string().notRequired(),
+        //     otherwise: Yup.string().required(String('Message'))
+        //   }),
+        // childrenAge: Yup.string()
+        //   .when('childs', (childs, schema) => childs
+        //   ? schema.required(String('message'))
+        //   : schema.required(String('No false'))
+        // ),
+        // childs: Yup.string()
+        //   .when('childrenAge', (childs) => childrenAge != ''
+        //     ? childs.required(String('Idade das Crianças é obrigatória'))
+        //     : childs.notRequired()
+        //   ),
+        childs: Yup.string().when('childrenAge', {
+          is: (childrenAge:string) => childrenAge === '',
+          then: Yup.string(),
+          otherwise: Yup.string().required(String('Informe a quantidade e crianças')),
+        }),
+        childrenAge: Yup.string().when('childs', {
+          is: (childs: string) => childs === '',
+          then: Yup.string(),
+          otherwise: Yup.string().required(String('Informe a idade das crianças')),
+        }),
+        flightClass:Yup.string()
+          .required(String('Classe obrigatória')),
+
         name:Yup.string()
           .min(3, String('O Nome deve ter mais que 3 caracteres.'))
           .required(String('Nome obrigatório')),
+        surname:Yup.string()
+          .min(3, String('O Sobrenome deve ter mais que 3 caracteres.'))
+          .required(String('Sobrenome obrigatório')),
         email:Yup.string()
           .required(String('E-mail obrigatório'))
           .email(String('Insira um e-mail válido')),
         phone:Yup.number()
           .required(String('Telefone obrigatório')),
-        subject:Yup.string()
-          .required(String('Assunto obrigatório')),
-        message:Yup.string()
+        observations:Yup.string()
           .required(String('Messagem obrigatório')),
 
-      })
+      }, [['childrenAge', 'childs']])
       await schema.validate(data, {
         abortEarly:false
       })
@@ -127,12 +168,12 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
               value={to}
             />
             <Input
-              name="class"
+              name="flightClass"
               type="text"
               icon={MdEventSeat}
               label={"Classe"}
               placeholder={"Selectione a classe"}
-              onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setName(event.target.value)}}
+              onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setFlightClass(event.target.value)}}
               value={flightClass}
             />
             <Input
@@ -141,7 +182,7 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
               icon={FaHotel}
               label={"Acomodações"}
               placeholder={"Acomodações da hospedagem"}
-              onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setName(event.target.value)}}
+              onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setAccomodation(event.target.value)}}
               value={accomodation}
             />
           </div>
@@ -152,11 +193,14 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
               icon={MdEvent}
               label={"Partida"}
               placeholder={"01/jan/2021"}
+              data-date-format="DD MM YYYY"
+              data-date="DD/MM/AAAA"
+              data-date-label="DD/MM/AAAA"
               onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setDeparture(event.target.value)}}
               value={departure}
             />
             <Input
-              name="retunrs"
+              name="returns"
               type="date"
               icon={MdEvent}
               label={"Retorno"}
@@ -170,7 +214,7 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
               icon={FaUser}
               label={"Adultos"}
               placeholder={"01"}
-              onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setName(event.target.value)}}
+              onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setAdults(event.target.value)}}
               value={adults}
             />
             <Input
@@ -179,17 +223,17 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
               icon={FaChild}
               label={"Crianças"}
               placeholder={"00"}
-              onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setName(event.target.value)}}
+              onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setChilds(String(event.target.value))}}
               value={childs}
             />
             <Input
-              name="childsAge"
+              name="childrenAge"
               type="text"
               icon={FaChild}
               label={"Idade das Crianças"}
               placeholder={"00"}
-              onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setName(event.target.value)}}
-              value={childs}
+              onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setChildrenAge(String(event.target.value))}}
+              value={childrenAge}
             />
           </div>
          </div>
@@ -241,7 +285,7 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
                 type="text"
                 icon={FaScroll}
                 label={"Message"}
-                placeholder={"Informe aqui mais informações"}
+                placeholder={"Descreva quais experiências você gostaria de incluir no seu pacote"}
                 onChange={(event:React.ChangeEvent<HTMLInputElement>) => {setObservations(event.target.value)}}
                 value={observations}
               />

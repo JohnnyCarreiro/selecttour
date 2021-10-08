@@ -42,6 +42,7 @@ export const InputContainer = styled.div<ContainerProps>`
   padding:1rem;
   max-width:100%;
   min-width:100px;
+  width: 100%;
   display:flex;
   align-items: center;
 
@@ -80,19 +81,27 @@ export const InputContainer = styled.div<ContainerProps>`
     color:${({theme})=>theme.colors.gray_400};
     font: ${({theme}) => theme.texts.main_text};
     line-height: 1.25rem;
+    width: 100%;
     &::placeholder{
       color:${({theme})=>theme.colors.gray_400};
       font: ${({theme}) => theme.texts.main_text};
     }
   }
   input[type="date"] {
-  position: relative;
-}
+    position: relative;
+    width: 100%;
+  }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
+  position: relative;
   color: ${({theme})=>theme.colors.primary};
-  width: 22px;
-  height: 22px;
+  width: 14px;
+  height: 14px;
+  top: 2px;
+  line-height: 0;
+}
+input::-webkit-calendar-picker-indicator {
+  color: ${({theme})=>theme.colors.primary};
 }
 `
 export const Error = styled(Tooltip)`
