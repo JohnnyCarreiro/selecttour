@@ -44,6 +44,7 @@ export const Container = styled.div`
     .destination-header {
       flex: 1;
       display: flex;
+      flex-direction: column;
       align-items: flex-start;
       justify-content: space-between;
       padding: 1rem 0;
