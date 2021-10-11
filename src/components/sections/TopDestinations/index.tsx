@@ -31,7 +31,7 @@ export const TopDestinations: React.FC<TopPackagesProps> = ({ children, content_
       </div>
       <div className="dest-container">
         {destinations.map(destination =>
-          <Destination content_data={destination} />
+          <Destination key={destination.destination} content_data={destination} />
         )}
       </div>
     </Container>
