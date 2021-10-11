@@ -44,8 +44,10 @@ export const Container = styled.div`
 
   @media screen and (max-width:1024px){
     > video {
-      object-fit: cover;
-      height: 100%
+
+      object-fit: fit;
+      object-position: 65% 40%;
+      top: 0.25rem;
     }
   }
 `
