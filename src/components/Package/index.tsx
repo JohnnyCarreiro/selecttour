@@ -3,6 +3,7 @@ import { Dispatch, ReactNode, SetStateAction, useState } from 'react'
 import { FaStar } from 'react-icons/fa'
 import Button from '../Button'
 import KnowMoreModal from '../modals/KnowMoreModal'
+import { RequestFormModal } from '../modals/RequestFormModal'
 
 import { Container } from './styles'
 
@@ -24,6 +25,7 @@ interface PackageProps {
 
 export const Package:React.FC<PackageProps> = ({ children, package_data, openModal }) => {
   const [isOpenModal, setModalState] = useState(false)
+  const [isOpenRequestModal, setRequestModalState] = useState(false)
   const {
     image,
     destination,
@@ -72,12 +74,18 @@ export const Package:React.FC<PackageProps> = ({ children, package_data, openMod
                 isPrimary={false}
                 onClick={() => setModalState(true)}
               />
-              <Button text="Reservar" primaryColor isPrimary />
+              <Button
+                text="Reservar"
+                primaryColor
+                isPrimary
+                onClick={() => setRequestModalState(true)}
+              />
             </div>
           </div>
         </div>
       </Container>
       {isOpenModal && <KnowMoreModal title={destination} isPackage={true} closeModal={setModalState} />}
+      {isOpenRequestModal && <RequestFormModal isPackage={true} closeModal={setRequestModalState} />}
     </>
   )
 }

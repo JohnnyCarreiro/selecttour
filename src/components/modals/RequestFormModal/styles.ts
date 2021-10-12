@@ -58,13 +58,6 @@ export const ModalBackground = styled.div<ContainerProps>`
     text-align: center;
     margin-top: 1rem;
   }
-
-  .modal-container .footer > div {
-    flex: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
   .registration-inputs {
     display: flex;
     flex-direction: column;

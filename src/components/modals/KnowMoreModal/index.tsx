@@ -100,12 +100,6 @@ function KnowMoreModal({ closeModal, title, isPackage }: KnowMoreModalProps) {
           </p>
         </div>
         <div className="footer">
-          {/* { isPackage &&
-            <div>
-              <button id="cancel-btn" onClick={() => {closeModal(false)}} >Cancelar</button>
-              <button onClick={() => {setOpenForm(!isOpenForm), closeModal(true) }} >Soicite um pacote</button>
-            </div>
-          } */}
           {!isPackage &&
             <Form ref={formRef} onSubmit={handleSubmit} >
               <div className="registration-inputs">
@@ -161,7 +155,7 @@ function KnowMoreModal({ closeModal, title, isPackage }: KnowMoreModalProps) {
                   />
                 </div>
               </div>
-              <Button text="Enviar" isPrimary primaryColor type="submit" />
+              <Button text="Solicitar" isPrimary primaryColor type="submit" />
             </Form>
           }
         </div>

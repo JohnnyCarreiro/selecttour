@@ -59,7 +59,6 @@ export const Container = styled.div`
       width:100%;
       color: ${({theme})=>theme.colors.gray_200};
       margin-bottom: 3rem;
-      padding: 0.5rem;
       p:nth-child(n) {
         padding-top: 1rem;
       }
