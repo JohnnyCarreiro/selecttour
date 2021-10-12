@@ -1,7 +1,8 @@
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react'
 import { Package } from '@/components/Package'
-import { ReactNode } from 'react'
 
 import { Container } from './styles'
+import KnowMoreModal from '@/components/modals/KnowMoreModal'
 
 interface TopPackagesProps {
   content_data: {
@@ -34,10 +35,12 @@ export const TopPackages: React.FC<TopPackagesProps> = ({ children, content_data
         <h3>{ subtitle }</h3>
       </div>
       <div className="container">
-        { packages.map(package_data => <Package
-          key={ package_data.destination}
-          package_data={package_data}
-        /> ) }
+        { packages.map((package_data, index) =>
+          <Package
+            key={ package_data.image+index}
+            package_data={package_data}
+          />
+        ) }
         {children}
       </div>
     </Container>

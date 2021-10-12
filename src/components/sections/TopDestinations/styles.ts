@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   padding: 5rem 0 2rem;
   color: ${({theme})=>theme.colors.gray_600};
+  z-index: 0;
 
   .destinations{
     display:flex;

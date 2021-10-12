@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   max-width: 360px;
@@ -13,6 +12,7 @@ export const Container = styled.div`
   background: ${({theme}) => theme.colors.white};
 
   margin-bottom: 0;
+  z-index: 0;
 
   .img-container {
     overflow: hidden;
@@ -54,7 +54,8 @@ export const Container = styled.div`
       .ctas {
         display:flex;
         align-items: center;
-        justify-content: space-between;
+        /* justify-content: space-between; */
+        justify-content: flex-end;
         gap: 0.5rem;
         height: 100%;
         padding-bottom: 0;

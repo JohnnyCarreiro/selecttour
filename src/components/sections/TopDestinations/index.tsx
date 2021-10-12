@@ -1,5 +1,7 @@
+import { ReactNode, useState } from 'react'
 import { Destination } from '@/components/Destination'
-import { ReactNode } from 'react'
+import KnowMoreModal from '@/components/modals/KnowMoreModal'
+
 
 import { Container } from './styles'
 
@@ -14,10 +16,10 @@ interface TopPackagesProps {
       places: string
     }>
   }
-  children?: ReactNode
 }
 
-export const TopDestinations: React.FC<TopPackagesProps> = ({ children, content_data }) => {
+export const TopDestinations: React.FC<TopPackagesProps> = ({ content_data }) => {
+  const [isOpenModal, setModalState] = useState(false)
   const {
     title,
     subtitle,
@@ -30,8 +32,8 @@ export const TopDestinations: React.FC<TopPackagesProps> = ({ children, content_
         <h3>{ subtitle }</h3>
       </div>
       <div className="dest-container">
-        {destinations.map(destination =>
-          <Destination key={destination.destination} content_data={destination} />
+        {destinations.map((destination, index) =>
+          <Destination key={destination.image+index} openModal={setModalState} content_data={destination} />
         )}
       </div>
     </Container>

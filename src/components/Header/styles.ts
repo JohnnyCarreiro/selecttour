@@ -7,7 +7,7 @@ left:0;
 top:0;
 width:100%;
 height:auto;
-z-index:100;
+z-index:1000;
 background-color: ${({theme}) => theme.colors.secondary};
 /* Top Nav Bar
 It needs to implemensts adaptative layout

@@ -1,6 +1,8 @@
-import { ReactNode } from 'react'
+import { set } from 'lodash'
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react'
 import { FaStar } from 'react-icons/fa'
 import Button from '../Button'
+import KnowMoreModal from '../modals/KnowMoreModal'
 
 import { Container } from './styles'
 
@@ -15,10 +17,13 @@ interface PackageProps {
     meal_options: string
     qualification: string
   }
+  openModal?: Dispatch<SetStateAction<boolean>>
+  requestTravel?: Dispatch<SetStateAction<boolean>>
   children?: ReactNode
 }
 
-export const Package:React.FC<PackageProps> = ({ children, package_data }) => {
+export const Package:React.FC<PackageProps> = ({ children, package_data, openModal }) => {
+  const [isOpenModal, setModalState] = useState(false)
   const {
     image,
     destination,
@@ -30,41 +35,49 @@ export const Package:React.FC<PackageProps> = ({ children, package_data }) => {
     qualification
   } = package_data
   return (
-    <Container className="elevation">
-      <div className="img-container">
-        <img src={image} alt="Destino" />
-      </div>
-      <div className="destination-info">
-        <div className="destination-header">
-          <h3>{ destination }</h3>
-          <h3>{ value }</h3>
+    <>
+      <Container className="elevation">
+        <div className="img-container">
+          <img src={image} alt="Destino" />
         </div>
-        <div className="divider"/>
-        <div className="characteristics">
-          <div>
-            <p>{ time_amount }</p>
-            <p>{ hotel_classification }</p>
+        <div className="destination-info">
+          <div className="destination-header">
+            <h3>{ destination }</h3>
+            <h3>{ value }</h3>
           </div>
-          <div>
-            <p>{transportations}</p>
-            <p>{meal_options}</p>
-          </div>
-          <div className="google-reviews">
-            <div className="reviews">
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
+          <div className="divider"/>
+          <div className="characteristics">
+            <div>
+              <p>{ time_amount }</p>
+              <p>{ hotel_classification }</p>
             </div>
-            <p>Reviews do Google</p>
-          </div>
-          <div className="ctas">
-            <Button text="Saiba mais" primaryColor isPrimary={false} />
-            <Button text="Reservar" primaryColor isPrimary />
+            <div>
+              <p>{transportations}</p>
+              <p>{meal_options}</p>
+            </div>
+            <div className="google-reviews">
+              <div className="reviews">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+              <p>Reviews do Google</p>
+            </div>
+            <div className="ctas">
+              <Button
+                text="Saiba mais"
+                primaryColor
+                isPrimary={false}
+                onClick={() => setModalState(true)}
+              />
+              <Button text="Reservar" primaryColor isPrimary />
+            </div>
           </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+      {isOpenModal && <KnowMoreModal title={destination} isPackage={true} closeModal={setModalState} />}
+    </>
   )
 }

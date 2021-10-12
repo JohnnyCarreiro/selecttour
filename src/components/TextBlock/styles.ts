@@ -60,20 +60,58 @@ export const Container = styled.div`
       color: ${({theme})=>theme.colors.gray_200};
       margin-bottom: 3rem;
       padding: 0.5rem;
-      >p{
+      p:nth-child(n) {
         padding-top: 1rem;
-        > :nth-child() {
-          padding-top: 1rem;
-        }
       }
-      /* div {
-        height:100%;
-        width:100%;
-      } */
+      p:first-child {
+        padding-top: 0;
+      }
     }
     @media screen and (max-width:1024px){
       .header {
         padding: 0 2rem;
+      }
+      .container{
+        /* display: flex;
+        flex-direction:column; */
+        flex-wrap: wrap;
+        gap: 1rem;
+        flex-shrink: initial;
+        align-items: flex-start;
+        justify-content: center;
+        padding:0 2rem;
+        & + div{
+          margin-top: 4rem;
+        }
+        .imageContainer{
+          display:flex;
+          flex-direction:column;
+          align-items: center;
+          padding: 0;
+          margin: 0 auto;
+          &+img {
+            object-fit: cover;
+          }
+          .team {
+            display:flex;
+            flex-direction:column;
+            align-items: center;
+            padding: 0;
+            margin: 0 auto;
+            border-radius: 50%;
+          }
+        }
+        .mainContent {
+          padding: 0;
+        }
+      }
+    }
+    @media screen and (max-width:720px){
+      width: 100%;
+      height: 100%;
+      .header {
+        padding: 0 2rem;
+        margin-bottom: 2rem;
       }
       .container{
         display: flex;
@@ -81,12 +119,18 @@ export const Container = styled.div`
         align-items: center;
         justify-content: center;
         padding:0 2rem;
-        max-width:1140px;
 
-        & + div{
-          margin-top: 2rem;
-        }
         .imageContainer{
+          /* display:flex;
+          justify-content: center;
+          align-items: center; */
+          width: 369px;
+          height: 212px;
+          &+img {
+            object-fit: cover;
+            width: 369px;
+            height: auto;
+          }
           .team {
             display:flex;
             flex-direction:column;
