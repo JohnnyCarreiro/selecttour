@@ -53,8 +53,7 @@ export class CreateRequestTopPackageUseCase {
           })
           return (newContact)
         } catch (error) {
-          console.log(error)
-            throw new Error('Unexpected error whiling Send new contact email')
+          throw new Error('Unexpected error whiling Send new contact email')
         }
     }
 }

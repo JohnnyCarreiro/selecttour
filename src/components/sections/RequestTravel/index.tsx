@@ -59,7 +59,6 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
 
   const requestSource = 'Solicite um Pacote'
 
-  console.log('length: ',childs.length)
   const handleSubmit = useCallback( async (data: SignInFormData) =>{
     try {
       formRef.current?.setErrors({})

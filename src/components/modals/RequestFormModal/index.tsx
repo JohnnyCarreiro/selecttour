@@ -66,7 +66,6 @@ export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, 
         abortEarly:false
       })
       const newData = {...data, destination:title, requestSource}
-      console.log('Request', newData)
       const response = await axios.post('/api/submit', newData)
       if(response.status === 200 ){
         setName('')

@@ -6,12 +6,10 @@ import { createRequestTopPackageController } from '../../services/mailer/useCase
 
 export default async (request:NextApiRequest, response:NextApiResponse) => {
 
-  console.log(request.body)
   const { requestSource } = request.body
   try {
     switch(requestSource){
       case 'Solicite um Pacote':
-        console.log(requestSource)
         await createRequestPackageController.handle(request,response)
         response.status(200).send({ok: true})
         // return
@@ -19,20 +17,17 @@ export default async (request:NextApiRequest, response:NextApiResponse) => {
 
 
       case 'Pacotes Especiais':
-        console.log(requestSource)
         await createRequestTopPackageController.handle(request,response)
         response.status(200).send({ok: true})
         break;
 
       case 'Destinos Tops':
-        console.log(requestSource)
         await createRequestTopDestinationController.handle(request,response)
         response.status(200).send({ok: true})
         // return
         break;
 
       case 'Contato':
-        console.log(requestSource)
         await createRequestContactController.handle(request,response)
         response.status(200).send({ok: true})
         // return
@@ -42,7 +37,7 @@ export default async (request:NextApiRequest, response:NextApiResponse) => {
         throw new Error('Unhandled event!')
       }
     } catch (error) {
-      response.status(500).send({error})
+      response.status(500).send(error)
   }
 
   // try {

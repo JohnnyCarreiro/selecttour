@@ -44,9 +44,6 @@ export class DomainMailProvider implements IMailProvider{
             },
             subject ,
             html: body
-        }, (err, info) => {
-          console.log(info.envelope);
-          console.log(info.messageId)
         })
     }
 }

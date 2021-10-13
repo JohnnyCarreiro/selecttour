@@ -21,7 +21,8 @@ export const ModalBackground = styled.div<ContainerProps>`
   .modal-container {
     position: absolute;
     width: 500px;
-    height: ${(props) => props.isPackage ? '500px' : '700px'};
+    /* height: ${(props) => props.isPackage ? '500px' : '700px'}; */
+    height: 700px;
     border-radius: 12px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -94,7 +95,8 @@ export const ModalBackground = styled.div<ContainerProps>`
       top: 0;
       left: 0;
       width: 90%;
-      height: ${(props) => props.isPackage ? '300px' : '80%'};
+      /* height: ${(props) => props.isPackage ? '300px' : '80%'}; */
+      height: 80%;
       padding: 25px;
       margin: 6rem 2rem;
     }
