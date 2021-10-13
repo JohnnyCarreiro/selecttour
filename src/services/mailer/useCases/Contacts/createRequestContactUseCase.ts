@@ -1,14 +1,14 @@
-import { RequestVisit } from "../entities/Contact"
-import { IMailProvider } from "../providers/IMailProvider"
-import { IRequestVisitDTO } from "./IRequestVisitDTO"
+import { Contact } from "../../entities/Contact"
+import { IMailProvider } from "../../providers/IMailProvider"
+import { IRequestContactDTO } from "./IRequestContactDTO"
 
-export class CreateRequestUseCase {
+export class CreateContactUseCase {
     constructor(
         private mailProvider: IMailProvider
     ){}
 
-    async execute(data:IRequestVisitDTO):Promise<RequestVisit>{
-      const newContact = new RequestVisit(data)
+    async execute(data:IRequestContactDTO):Promise<Contact>{
+      const newContact = new Contact(data)
         try {
           //Email to client
           await this.mailProvider.sendMail({
@@ -20,8 +20,8 @@ export class CreateRequestUseCase {
                 name:'Select Tour',
                 address:'contato@selecttourviagens.com.br'
               },
-              subject:`Select Tour - ${data.name}`,
-              body:`Recebemos sua Mensagem: ${data.observations}`
+              subject:`Select Tour - ${data.subject}`,
+              body:`Recebemos sua Mensagem: ${data.message}`,
           })
           //Email to system
           await this.mailProvider.sendMail({
@@ -33,9 +33,9 @@ export class CreateRequestUseCase {
                 name:'Johnny Carreiro',
                 address:'contact@johnnycarreiro.com'
               },
-              subject:`Contato do Site - ${data.name}`,
-              body:`Nome: ${data.name}, Sobrenome: ${data.surname}, telefone: ${data.phone}, Email:${data.email},
-              Observações: ${data.observations}`
+              subject:`Contato do Site - ${data.subject}`,
+              body:`Nome: ${data.name}, telefone: ${data.phone}, Email:${data.email},
+              Observações: ${data.message}`
           })
           return (newContact)
         } catch (error) {

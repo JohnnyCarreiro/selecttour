@@ -65,7 +65,7 @@ export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, 
       await schema.validate(data, {
         abortEarly:false
       })
-      const newData = {...data, package:title, requestSource}
+      const newData = {...data, destination:title, requestSource}
       console.log('Request', newData)
       const response = await axios.post('/api/submit', newData)
       if(response.status === 200 ){

@@ -1,5 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { createRequestController } from '../../services/mailer/useCase'
+import { createRequestContactController } from '../../services/mailer/useCases/Contacts'
+import { createRequestPackageController } from '../../services/mailer/useCases/RequestPackage'
+import { createRequestTopDestinationController } from '../../services/mailer/useCases/TopDestinations'
+import { createRequestTopPackageController } from '../../services/mailer/useCases/TopPackages'
 
 export default async (request:NextApiRequest, response:NextApiResponse) => {
 
@@ -9,29 +12,37 @@ export default async (request:NextApiRequest, response:NextApiResponse) => {
     switch(requestSource){
       case 'Solicite um Pacote':
         console.log(requestSource)
+        await createRequestPackageController.handle(request,response)
         response.status(200).send({ok: true})
-        break
+        return
+        break;
+
 
       case 'Pacotes Especiais':
         console.log(requestSource)
+        await createRequestTopPackageController.handle(request,response)
         response.status(200).send({ok: true})
-        break
+        break;
 
       case 'Destinos Tops':
         console.log(requestSource)
+        await createRequestTopDestinationController.handle(request,response)
         response.status(200).send({ok: true})
-        break
+        return
+        break;
 
       case 'Contato':
         console.log(requestSource)
+        await createRequestContactController.handle(request,response)
         response.status(200).send({ok: true})
-        break
+        return
+        break;
 
       default:
         throw new Error('Unhandled event!')
       }
     } catch (error) {
-      response.status(500).json({error})
+       response.status(500).json({error})
   }
 
   // try {

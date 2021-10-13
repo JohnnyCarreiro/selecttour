@@ -10,10 +10,10 @@ export class DomainMailProvider implements IMailProvider{
     private pass: string | undefined
 
     constructor() {
-        this.host = process.env.MT_HOST
-        this.port = Number(process.env.MT_PORT)
-        this.user = process.env.MT_USER
-        this.pass = process.env.MT_PASS
+        this.host = process.env.EMAIL_HOST
+        this.port = Number(process.env.EMAIL_PORT)
+        this.user = process.env.EMAIL_USER
+        this.pass = process.env.EMAIL_PASS
 
         this.transporter = nodemailer.createTransport({
             name:'johnnycarreiro.com',
