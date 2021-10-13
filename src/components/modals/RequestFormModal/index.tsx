@@ -17,24 +17,22 @@ import { ModalBackground } from './styles'
 
 interface RequestFormModalProps {
   closeModal: Dispatch<SetStateAction<boolean>>
-  // openForm: Dispatch<SetStateAction<boolean>>
   title?: string
   informations?: string
   isPackage: boolean
+  requestSource: string
 }
 
-interface SignInFormData {
+interface RequestFormData {
   name: string
+  surname: string
   email:string
-  phone:number
-  company:string
-  subject:string
-  message:string
+  phone:string
+  observations:string
+  requestSource: string
 }
 
-export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, title, isPackage }) => {
-  const [isOpenForm, setOpenForm] = useState(true)
-
+export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, title, isPackage, requestSource }) => {
   const formRef = useRef<FormHandles>(null)
   const history = useRouter()
 
@@ -44,7 +42,7 @@ export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, 
   const [phone, setPhone] = useState('')
   const [observations, setObservations] = useState('')
 
-  const handleSubmit = useCallback( async (data: SignInFormData) =>{
+  const handleSubmit = useCallback( async (data: RequestFormData) =>{
     try {
       formRef.current?.setErrors({})
 
@@ -63,15 +61,19 @@ export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, 
         observations:Yup.string()
           .required(String('Messagem obrigatório')),
 
-      }, [['childrenAge', 'childs']])
+      })
       await schema.validate(data, {
         abortEarly:false
       })
-      const response = await axios.post('/api/submit', data)
+      const newData = {...data, package:title, requestSource}
+      console.log('Request', newData)
+      const response = await axios.post('/api/submit', newData)
       if(response.status === 200 ){
         setName('')
+        setSurname('')
         setEmail('')
         setPhone('')
+        closeModal(false)
         history.push('/')
       }
 
@@ -86,8 +88,8 @@ export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, 
   },[history])
 
   return (
-    <ModalBackground  isPackage={isPackage} onClick={() => {closeModal(false)}} >
-      <div className={`modal-container`}>
+    <ModalBackground  isPackage={isPackage}  >
+      <div className={`modal-container`} onClick={() => {}} >
         <div className="close-btn">
           <button onClick={() => {closeModal(false)}} >X</button>
         </div>

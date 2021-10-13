@@ -15,11 +15,19 @@ import { TextArea } from 'components/TextArea'
 
 interface SignInFormData {
   name: string
-  email:string
-  phone:number
-  company:string
-  subject:string
-  message:string
+  surname: string
+  email: string
+  phone: string
+  observations: string
+  from: string
+  to: string
+  departure: string
+  returns: string
+  adults: string
+  childs: string
+  childrenAge: string
+  flightClass: string
+  accomodation: string
 }
 
 interface RequestFormData {
@@ -49,6 +57,8 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
 
   const [observations, setObservations] = useState('')
 
+  const requestSource = 'Solicite um Pacote'
+
   console.log('length: ',childs.length)
   const handleSubmit = useCallback( async (data: SignInFormData) =>{
     try {
@@ -65,22 +75,6 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
           .required(String('Data de retorno é obrigatória')),
         adults:Yup.string()
           .required(String('Quantidade de Adultos é obrigatória')),
-        // childrenAge: Yup.string()
-        //   .when('childs', {
-        //     is: (childs: string) => !childs || childs.length == 0,
-        //     then: Yup.string().notRequired(),
-        //     otherwise: Yup.string().required(String('Message'))
-        //   }),
-        // childrenAge: Yup.string()
-        //   .when('childs', (childs, schema) => childs
-        //   ? schema.required(String('message'))
-        //   : schema.required(String('No false'))
-        // ),
-        // childs: Yup.string()
-        //   .when('childrenAge', (childs) => childrenAge != ''
-        //     ? childs.required(String('Idade das Crianças é obrigatória'))
-        //     : childs.notRequired()
-        //   ),
         childs: Yup.string().when('childrenAge', {
           is: (childrenAge:string) => childrenAge === '',
           then: Yup.string(),
@@ -112,7 +106,8 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
       await schema.validate(data, {
         abortEarly:false
       })
-      const response = await axios.post('/api/submit', data)
+      const newData = {...data, requestSource}
+      const response = await axios.post('/api/submit', newData)
       if(response.status === 200 ){
         setName('')
         setEmail('')

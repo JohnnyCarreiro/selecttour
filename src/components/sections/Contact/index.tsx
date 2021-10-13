@@ -10,10 +10,9 @@ interface LatestsProps {
     email: string
     phone: string
   }
-  children?: ReactNode
 }
 
-export const  Contact: React.FC<LatestsProps> =({ children, content_data }) => {
+export const  Contact: React.FC<LatestsProps> =({ content_data }) => {
   const {
     title,
     subtitle,

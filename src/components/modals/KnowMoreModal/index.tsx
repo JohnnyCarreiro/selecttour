@@ -21,6 +21,7 @@ interface KnowMoreModalProps {
   title?: string
   informations?: string
   isPackage: boolean
+  requestSource?: string
 }
 
 interface SignInFormData {
@@ -32,8 +33,7 @@ interface SignInFormData {
   message:string
 }
 
-function KnowMoreModal({ closeModal, title, isPackage }: KnowMoreModalProps) {
-  const [isOpenForm, setOpenForm] = useState(true)
+function KnowMoreModal({ closeModal, title, isPackage, requestSource }: KnowMoreModalProps) {
 
   const formRef = useRef<FormHandles>(null)
   const history = useRouter()
@@ -67,11 +67,15 @@ function KnowMoreModal({ closeModal, title, isPackage }: KnowMoreModalProps) {
       await schema.validate(data, {
         abortEarly:false
       })
-      const response = await axios.post('/api/submit', data)
+      const newData = {...data, destination:title, requestSource}
+      const response = await axios.post('/api/submit', newData)
       if(response.status === 200 ){
         setName('')
+        setSurname('')
         setEmail('')
         setPhone('')
+        setObservations('')
+        closeModal(false)
         history.push('/')
       }
 
@@ -86,7 +90,7 @@ function KnowMoreModal({ closeModal, title, isPackage }: KnowMoreModalProps) {
   },[history])
 
   return (
-    <ModalBackground  isPackage={isPackage} onClick={() => {closeModal(false)}} >
+    <ModalBackground  isPackage={isPackage} onClick={() => {}} >
       <div className={`modal-container ${isPackage ? 'package' : 'destination'}`}>
         <div className="close-btn">
           <button onClick={() => {closeModal(false)}} >X</button>

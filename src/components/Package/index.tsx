@@ -85,7 +85,13 @@ export const Package:React.FC<PackageProps> = ({ children, package_data, openMod
         </div>
       </Container>
       {isOpenModal && <KnowMoreModal title={destination} isPackage={true} closeModal={setModalState} />}
-      {isOpenRequestModal && <RequestFormModal isPackage={true} closeModal={setRequestModalState} />}
+      {isOpenRequestModal
+        && <RequestFormModal
+              title={destination}
+              isPackage={true}
+              closeModal={setRequestModalState}
+              requestSource="Pacotes Especiais"
+            />}
     </>
   )
 }

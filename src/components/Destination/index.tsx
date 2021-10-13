@@ -52,7 +52,13 @@ export const Destination:React.FC<PackageProps> = ({ children, content_data, ope
           </div>
         </div>
       </Container>
-      {isOpenModal && <KnowMoreModal isPackage={false} title={destination} closeModal={setModalState} />}
+      {isOpenModal
+        && <KnowMoreModal
+              isPackage={false}
+              title={destination}
+              closeModal={setModalState}
+              requestSource="Destinos Tops"
+            />}
     </>
   )
 }
