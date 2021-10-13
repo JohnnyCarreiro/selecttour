@@ -38,11 +38,11 @@ export class CreateRequestPackageUseCase {
                 address:'contato@selecttourviagens.com.br'
               },
               subject:`Select Tour - ${data.requestSource}`,
-              body:`Recebemos sua Mensagem: <br/>
+              body:` Confira os dados, caso haja algum erro é só nos avisar! <br/>
                 Nome: ${name}, \n <br/>
                 Sobrenome: ${surname}, \n <br/>
-                telefone: ${phone},
-                Email:${email},
+                telefone: ${phone} \n <br/>,
+                Email:${email} \n <br/>,
                 Origem: ${from}, \n <br/>
                 Destino: ${to}, \n <br/>
                 Partida: ${departure}, \n <br/>
@@ -62,16 +62,20 @@ export class CreateRequestPackageUseCase {
                 name:'Select Tour',
                 address:'contato@selecttourviagens.com.br'
               },
+              // from:{
+              //   name: data.name ,
+              //   address: data.email
+              // },
               from:{
-                name:'Johnny Carreiro',
-                address:'contact@johnnycarreiro.com'
+                name:'Select Tour',
+                address:'contato@selecttourviagens.com.br'
               },
               subject:`Contato do Site - ${name}`,
               //Complete with requestPackage fields
               body:`Nome: ${name}, \n <br/>
                 Sobrenome: ${surname}, \n <br/>
-                telefone: ${phone},
-                Email:${email},
+                telefone: ${phone} \n <br/>,
+                Email:${email} \n <br/>,
                 Origem: ${from}, \n <br/>
                 Destino: ${to}, \n <br/>
                 Partida: ${departure}, \n <br/>
@@ -82,7 +86,8 @@ export class CreateRequestPackageUseCase {
                 Classe: ${flightClass}, \n <br/>
                 Acomodações: ${accomodation}, \n <br/>
 
-                Observações: ${observations}`
+                Observações: ${observations}
+              `
           })
           return (newContact)
         } catch (error) {

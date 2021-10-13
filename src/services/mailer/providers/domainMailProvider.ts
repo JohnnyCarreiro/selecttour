@@ -10,19 +10,24 @@ export class DomainMailProvider implements IMailProvider{
     private pass: string | undefined
 
     constructor() {
-        this.host = process.env.EMAIL_HOST
+        this.host = String(process.env.EMAIL_HOST)
         this.port = Number(process.env.EMAIL_PORT)
-        this.user = process.env.EMAIL_USER
-        this.pass = process.env.EMAIL_PASS
+        this.user = String(process.env.EMAIL_USER)
+        this.pass = String(process.env.EMAIL_PASS)
 
         this.transporter = nodemailer.createTransport({
-            name:'johnnycarreiro.com',
-            host:this.host,
-            port:this.port,
-            auth:{
-                user:this.user,
-                pass:this.pass,
-            }
+          name:'selecttourviagens.com.br',
+          service: 'Hostinger',
+          host:this.host,
+          port:this.port,
+          auth:{
+              user:this.user,
+              pass:this.pass,
+          },
+          secure:true,
+          tls: {rejectUnauthorized: false},
+          // sendmail: true,
+          // newline: 'unix',
         })
     }
     async sendMail(message:IMessage):Promise<void>{
@@ -39,6 +44,9 @@ export class DomainMailProvider implements IMailProvider{
             },
             subject ,
             html: body
+        }, (err, info) => {
+          console.log(info.envelope);
+          console.log(info.messageId)
         })
     }
 }

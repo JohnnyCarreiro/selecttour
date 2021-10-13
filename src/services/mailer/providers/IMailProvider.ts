@@ -3,10 +3,10 @@ interface IAddress {
   address:string
 }
 export interface IMessage {
-  to:IAddress
-  from:IAddress
-  subject:string
-  body:string
+  to: IAddress
+  from: IAddress
+  subject: string
+  body: string
 }
 
 export interface IMailProvider{

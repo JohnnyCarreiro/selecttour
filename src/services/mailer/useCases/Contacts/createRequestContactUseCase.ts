@@ -21,7 +21,7 @@ export class CreateContactUseCase {
                 address:'contato@selecttourviagens.com.br'
               },
               subject:`Select Tour - ${data.subject}`,
-              body:`Recebemos sua Mensagem: ${data.message}`,
+              body:`Recebemos sua Mensagem: <br/> ${data.message}`,
           })
           //Email to system
           await this.mailProvider.sendMail({
@@ -29,13 +29,21 @@ export class CreateContactUseCase {
                 name:'Select Tour',
                 address:'contato@selecttourviagens.com.br'
               },
+              // from:{
+              //   name: data.name ,
+              //   address: data.email
+              // },
               from:{
-                name:'Johnny Carreiro',
-                address:'contact@johnnycarreiro.com'
+                name:'Select Tour',
+                address:'contato@selecttourviagens.com.br'
               },
               subject:`Contato do Site - ${data.subject}`,
-              body:`Nome: ${data.name}, telefone: ${data.phone}, Email:${data.email},
-              Observações: ${data.message}`
+              body:`
+                Nome: ${data.name}, <br/>
+                telefone: ${data.phone}, <br/>
+                Email:${data.email}, <br/>
+                Observações: ${data.message}
+              `
           })
           return (newContact)
         } catch (error) {

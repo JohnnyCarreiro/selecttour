@@ -21,7 +21,10 @@ export class CreateRequestTopPackageUseCase {
                 address:'contato@selecttourviagens.com.br'
               },
               subject:`Select Tour - ${data.requestSource}`,
-              body:`Recebemos sua Mensagem: ${data.observations}`
+              body:`Recebemos sua Mensagem: <br/>
+                Destino: ${data.destination}, <br/>
+                Observações: ${data.observations}
+              `
           })
           //Email to system
           await this.mailProvider.sendMail({
@@ -29,18 +32,28 @@ export class CreateRequestTopPackageUseCase {
                 name:'Select Tour',
                 address:'contato@selecttourviagens.com.br'
               },
+              // from:{
+              //   name: data.name ,
+              //   address: data.email
+              // },
               from:{
-                name:'Johnny Carreiro',
-                address:'contact@johnnycarreiro.com'
+                name:'Select Tour',
+                address:'contato@selecttourviagens.com.br'
               },
               subject:`Contato do Site - ${data.requestSource}`,
               //Complete with requestPackage fields
-              body:`Nome: ${data.name}, Sobrenome: ${data.surname}, telefone: ${data.phone}, Email:${data.email},
-              Destino: ${data.destination} /n
-              Observações: ${data.observations}`
+              body:`
+                Nome: ${data.name}, <br/>
+                Sobrenome: ${data.surname}, <br/>
+                telefone: ${data.phone}, <br/>
+                Email:${data.email}, <br/>
+                Destino: ${data.destination}, <br/>
+                Observações: ${data.observations}
+              `
           })
           return (newContact)
         } catch (error) {
+          console.log(error)
             throw new Error('Unexpected error whiling Send new contact email')
         }
     }

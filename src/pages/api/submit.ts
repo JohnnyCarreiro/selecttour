@@ -14,7 +14,7 @@ export default async (request:NextApiRequest, response:NextApiResponse) => {
         console.log(requestSource)
         await createRequestPackageController.handle(request,response)
         response.status(200).send({ok: true})
-        return
+        // return
         break;
 
 
@@ -28,21 +28,21 @@ export default async (request:NextApiRequest, response:NextApiResponse) => {
         console.log(requestSource)
         await createRequestTopDestinationController.handle(request,response)
         response.status(200).send({ok: true})
-        return
+        // return
         break;
 
       case 'Contato':
         console.log(requestSource)
         await createRequestContactController.handle(request,response)
         response.status(200).send({ok: true})
-        return
+        // return
         break;
 
       default:
         throw new Error('Unhandled event!')
       }
     } catch (error) {
-       response.status(500).json({error})
+      response.status(500).send({error})
   }
 
   // try {
