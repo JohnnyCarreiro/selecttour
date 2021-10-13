@@ -35,7 +35,7 @@ export default function Home({content}: IContent) {
     site_contacts_section
   } = content[0]
   const [isVisible, currentElement] = useVisibility<HTMLDivElement>(100)
-  console.log(testimonials_section.testimonials)
+
   return (
     <Container ref={currentElement} id="home">
       <Head>

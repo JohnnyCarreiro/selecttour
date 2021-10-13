@@ -109,6 +109,7 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
       const response = await axios.post('/api/submit', newData)
       if(response.status === 200 ){
         setName('')
+        setSurname('')
         setEmail('')
         setPhone('')
         setFrom('')
@@ -117,6 +118,7 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
         setReturns('')
         setAdults('')
         setChilds('')
+        setChildrenAge('')
         setFlightClass('')
         setAccomodation('')
         setObservations('')
