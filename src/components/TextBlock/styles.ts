@@ -123,7 +123,7 @@ export const Container = styled.div`
           /* display:flex;
           justify-content: center;
           align-items: center; */
-          width: 369px;
+          /* width: 369px; */
           height: 212px;
           &+img {
             object-fit: cover;

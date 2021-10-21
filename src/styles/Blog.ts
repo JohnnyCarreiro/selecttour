@@ -2,6 +2,9 @@ import styled from 'styled-components'
 
 export const Container = styled.div `
   background: ${({theme}) => theme.colors.white};
+  margin: 0 auto;
+  width: 100%;
+  padding: 0;
   h1 {
     font: ${({theme}) => theme.texts.main_title};
     color: ${({theme}) => theme.colors.gray_500};
@@ -17,7 +20,9 @@ export const Container = styled.div `
   .wrapper {
     display: flex;
     flex-direction: column;
-    max-width: 73.125rem;
+    align-items: center;
+    justify-content: center;
+    max-width: 70rem;
     margin: 0 auto;
   }
   .hero-content {
@@ -38,11 +43,15 @@ export const Container = styled.div `
   }
 
   .main-section {
-    position: static;
+    /* position: static; */
     display: flex;
     align-items: flex-start;
     height: auto;
     flex-wrap: wrap;
+    flex-grow: 1;
+    flex-shrink: 0;
+    margin: 0 auto;
+    width: 100%;
     .posts {
       flex: 3;
       width: 100%;
@@ -71,6 +80,7 @@ export const Container = styled.div `
       top: 40px;
       flex: 1;
       padding-top: 4rem;
+      flex-grow: 1;
     }
   }
 
@@ -80,16 +90,51 @@ export const Container = styled.div `
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 12px 32px rgba(0, 0, 0, 0.25));
   }
   @media (max-width:1024px){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0;
+    .main-section {
+      display: inline-block;
+      flex-direction: column;
+      align-items: center;
+      justify-content:center;
+      margin: 0 auto;
+      padding: 0;
+      .posts {
+        min-width: 100%;
+      }
+    }
     .posts {
-      min-width: 425px;
+      /* min-width: 425px; */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
     .sidebar {
       padding: 1rem;
     }
   }
   @media (max-width:375px){
-    .posts {
-      min-width: 100%;
+    .main-section {
+      display: inline-block;
+      flex-direction: column;
+      align-items: center;
+      justify-content:center;
+      margin: 0 auto;
+      padding: 0;
+      .posts {
+        min-width: 100%;
+      }
+    }
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
     }
   }
 `
