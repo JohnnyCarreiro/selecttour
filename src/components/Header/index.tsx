@@ -14,7 +14,7 @@ interface NavProps {
     linkedin: string
   }
   // current:string
-  current:  React.RefObject<HTMLDivElement>
+  current?:  React.RefObject<HTMLDivElement>
 }
 export const Header: React.FC<NavProps> = ({current, contacts}) => {
   const {
