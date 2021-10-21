@@ -21,6 +21,7 @@ interface RequestFormModalProps {
   informations?: string
   isPackage: boolean
   requestSource: string
+  reservation: string
 }
 
 interface RequestFormData {
@@ -32,7 +33,7 @@ interface RequestFormData {
   requestSource: string
 }
 
-export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, title, isPackage, requestSource }) => {
+export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, title, isPackage, requestSource, reservation }) => {
   const formRef = useRef<FormHandles>(null)
   const history = useRouter()
 
@@ -93,12 +94,13 @@ export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, 
           <button onClick={() => {closeModal(false)}} >X</button>
         </div>
         <div className="title">
-          <h2>Garanta sua Viagem{title}</h2>
+          <h2>Garanta sua Viagem para: {title}</h2>
         </div>
         <div className="body">
           <p>
-            Preencha o formulário abaixo e garanta está viagem inc®eivel, lembre-se que os valores estão sujeitas a alterações
+            Preencha o formulário abaixo e garanta está viagem incrível, lembre-se que os valores estão sujeitas a alterações
           </p>
+          <div dangerouslySetInnerHTML={{__html: reservation}} ></div>
         </div>
         <Form ref={formRef} onSubmit={handleSubmit} >
           <div className="registration-inputs">

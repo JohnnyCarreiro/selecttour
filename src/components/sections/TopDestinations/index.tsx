@@ -12,8 +12,8 @@ interface TopPackagesProps {
     destinations: Array<{
       image: string
       destination: string
-      tours: string
-      places: string
+      highlights: string
+      know_more_infos: string
     }>
   }
 }

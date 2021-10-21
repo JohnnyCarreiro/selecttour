@@ -24,6 +24,8 @@ interface IHome {
       transportations: string
       meal_options: string
       qualification: string
+      know_more_infos: string
+      reservation: string
     }>
   },
   about_us_section: {
@@ -38,8 +40,8 @@ interface IHome {
     destinations: Array<{
       image: string
       destination: string
-      tours: string
-      places: string
+      highlights: string
+      know_more_infos: string
     }>
   },
   our_team_section: {

@@ -166,16 +166,14 @@ export const getStaticProps: GetStaticProps = async () => {
           return {
             image: travelPackage.package_img.url,
             destination: RichText.asText(travelPackage.destination),
-            // value: new Intl.NumberFormat('pt-BR', {
-            //   style:'currency',
-            //   currency:'BRL',
-            // }).format(Number(RichText.asText(travelPackage.value))),
             value: RichText.asText(travelPackage.value),
             time_amount: RichText.asText(travelPackage.time_amount),
             hotel_classification: RichText.asText(travelPackage.hotel_classification),
             transportations: RichText.asText(travelPackage.transportations),
             meal_options: RichText.asText(travelPackage.meal_options),
             qualification: travelPackage.qualification,
+            know_more_infos: RichText.asHtml(travelPackage.know_more),
+            reservation: RichText.asHtml(travelPackage.reservation),
           }
         })
       },
@@ -192,9 +190,8 @@ export const getStaticProps: GetStaticProps = async () => {
           return {
             image: destination.img.url,
             destination: RichText.asText(destination.country),
-            tours: RichText.asText(destination.tour),
-            places: RichText.asText(destination.places),
-
+            highlights: RichText.asText(destination.highlights),
+            know_more_infos: RichText.asHtml(destination.know_more),
           }
         })
       },
@@ -237,6 +234,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       content
     },
-    revalidate: 60 + 60 //24 hours
+    revalidate: 60 + 60 //24 hours 60 * 60 * 24
   }
 }

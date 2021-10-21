@@ -17,6 +17,8 @@ interface PackageProps {
     transportations: string
     meal_options: string
     qualification: string
+    know_more_infos: string
+    reservation: string
   }
   openModal?: Dispatch<SetStateAction<boolean>>
   requestTravel?: Dispatch<SetStateAction<boolean>>
@@ -34,8 +36,11 @@ export const Package:React.FC<PackageProps> = ({ children, package_data, openMod
     hotel_classification,
     transportations,
     meal_options,
-    qualification
+    qualification,
+    reservation,
+    know_more_infos
   } = package_data
+  const stars = [1,2,3,4,5]
   return (
     <>
       <Container className="elevation">
@@ -59,11 +64,18 @@ export const Package:React.FC<PackageProps> = ({ children, package_data, openMod
             </div>
             <div className="google-reviews">
               <div className="reviews">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
+                {
+                  stars.map((_, index) => {
+                    while (index <= Number(qualification)-1) {
+                      return (
+                        <FaStar
+                          className='active'
+                        />
+                      )
+                    }
+                    return <FaStar />
+                  })
+                }
               </div>
               <p>Reviews do Google</p>
             </div>
@@ -84,13 +96,21 @@ export const Package:React.FC<PackageProps> = ({ children, package_data, openMod
           </div>
         </div>
       </Container>
-      {isOpenModal && <KnowMoreModal title={destination} isPackage={true} closeModal={setModalState} />}
+      {isOpenModal
+        && <KnowMoreModal
+            title={destination}
+            isPackage={true}
+            closeModal={setModalState}
+            know_more_infos={know_more_infos}
+          />
+      }
       {isOpenRequestModal
         && <RequestFormModal
               title={destination}
               isPackage={true}
               closeModal={setRequestModalState}
               requestSource="Pacotes Especiais"
+              reservation={reservation}
             />}
     </>
   )

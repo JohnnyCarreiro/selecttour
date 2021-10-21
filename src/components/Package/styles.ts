@@ -77,10 +77,18 @@ export const Container = styled.div`
           display: flex;
           align-items: center;
           > svg {
+            opacity: 0.8;
             margin-left: 0.25rem;
           }
           & + :first-child {
             margin-left: 0;
+          }
+          .active {
+            opacity: 1;
+            color: ${({theme})=> theme.colors.primary};
+            > svg {
+              opacity: 1;
+            }
           }
         }
         > p {

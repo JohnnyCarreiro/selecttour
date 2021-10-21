@@ -22,6 +22,7 @@ interface KnowMoreModalProps {
   informations?: string
   isPackage: boolean
   requestSource?: string
+  know_more_infos: string
 }
 
 interface SignInFormData {
@@ -33,7 +34,7 @@ interface SignInFormData {
   message:string
 }
 
-function KnowMoreModal({ closeModal, title, isPackage, requestSource }: KnowMoreModalProps) {
+function KnowMoreModal({ closeModal, title, isPackage, requestSource, know_more_infos }: KnowMoreModalProps) {
 
   const formRef = useRef<FormHandles>(null)
   const history = useRouter()
@@ -96,12 +97,10 @@ function KnowMoreModal({ closeModal, title, isPackage, requestSource }: KnowMore
           <button onClick={() => {closeModal(false)}} >X</button>
         </div>
         <div className="title">
-          <h2>Mais Informações do Destino {title}</h2>
+          <h2>Mais Informações do Destino: {title}</h2>
         </div>
         <div className="body">
-          <p>
-            Mussum Ipsum, cacilds vidis litro abertis. Admodum accumsan disputationi eu sit. Vide electram sadipscing et per. Per aumento de cachacis, eu reclamis. Paisis, filhis, espiritis santis. Cevadis im ampola pa arma uma pindureta.
-          </p>
+          <div dangerouslySetInnerHTML={{__html: know_more_infos}} ></div>
         </div>
         <div className="footer">
           {!isPackage &&

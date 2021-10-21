@@ -52,13 +52,21 @@ export const ModalBackground = styled.div<ContainerProps>`
   }
 
   .modal-container .body {
-    flex: 50%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
     font-size: 1.7rem;
     text-align: center;
     margin-top: 1rem;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+    }
   }
   .registration-inputs {
     display: flex;

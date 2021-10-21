@@ -10,8 +10,8 @@ interface PackageProps {
   content_data: {
     image: string
     destination: string
-    tours: string
-    places: string
+    highlights: string
+    know_more_infos: string
   }
   openModal: Dispatch<SetStateAction<boolean>>
   children?: ReactNode
@@ -23,8 +23,8 @@ export const Destination:React.FC<PackageProps> = ({ children, content_data, ope
   const {
     image,
     destination,
-    tours,
-    places
+    highlights,
+    know_more_infos
    } = content_data
   return (
     <>
@@ -36,8 +36,7 @@ export const Destination:React.FC<PackageProps> = ({ children, content_data, ope
           <div className="destination-header">
             <h3>{destination}</h3>
             <div>
-              <p>{tours}</p>
-              <p>{places}</p>
+              <p>{highlights}</p>
             </div>
           </div>
           <div className="ctas">
@@ -58,6 +57,7 @@ export const Destination:React.FC<PackageProps> = ({ children, content_data, ope
               title={destination}
               closeModal={setModalState}
               requestSource="Destinos Tops"
+              know_more_infos={know_more_infos}
             />}
     </>
   )

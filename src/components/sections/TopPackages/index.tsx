@@ -17,6 +17,8 @@ interface TopPackagesProps {
       transportations: string
       meal_options: string
       qualification: string
+      know_more_infos: string
+      reservation: string
     }>
   }
   children?: ReactNode
