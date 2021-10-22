@@ -66,14 +66,16 @@ export const Package:React.FC<PackageProps> = ({ children, package_data, openMod
               <div className="reviews">
                 {
                   stars.map((_, index) => {
+                    const keyIndex = destination + (index++)
                     while (index <= Number(qualification)-1) {
                       return (
                         <FaStar
+                          key={keyIndex}
                           className='active'
                         />
                       )
                     }
-                    return <FaStar />
+                    return <FaStar key={keyIndex} />
                   })
                 }
               </div>
