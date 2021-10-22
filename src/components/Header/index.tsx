@@ -14,7 +14,7 @@ interface NavProps {
     linkedin: string
   }
   // current:string
-  current?:  React.RefObject<HTMLDivElement>
+  current?:  React.RefObject<HTMLElement>
 }
 export const Header: React.FC<NavProps> = ({current, contacts}) => {
   const {
@@ -28,7 +28,7 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
   } = contacts
   const phone = phone_number.replace('-', '').replace(' ', '')
   const [ display, setDisplay ] = useState(false)
-  console.log('Header', current)
+  // console.log('Header', current)
 
   const handleShowingMenu = () => {
     setDisplay(!display)

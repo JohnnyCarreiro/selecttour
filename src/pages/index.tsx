@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createRef, useRef } from 'react'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import Prismic from '@prismicio/client'
@@ -19,7 +19,6 @@ import { Container } from '../styles/Home'
 
 import { getPrismicClient } from '@/services/prismic'
 import { IContent } from '@/interfaces/IHome'
-import { useVisibility } from '@/utils/useVisibility'
 
 
 export default function Home({content}: IContent) {
@@ -34,15 +33,16 @@ export default function Home({content}: IContent) {
     contact_form_section,
     site_contacts_section
   } = content[0]
-  const [isVisible, currentElement] = useVisibility<HTMLDivElement>(100)
+  // const [isVisible, currentElement] = useVisibility<HTMLElement>(100)
+  const ref = useRef({} as HTMLElement);
 
   return (
-    <Container ref={currentElement} id="home">
+    <Container>
       <Head>
         <title>Select Tour - Mais que uma uma Viagem</title>
       </Head>
-      <Header contacts={site_contacts_section} current={currentElement}/>
-      <section>
+      <Header contacts={site_contacts_section} />
+      <section id="home" >
         <Showcase>
           <div className="wrapper">
             <div className="sowcase-content" >
@@ -59,7 +59,6 @@ export default function Home({content}: IContent) {
         <RequestTravel />
       </section>
       <section
-        ref={currentElement}
         style={{scrollMargin:"6.25rem 0 0 0"}}
         id="about"
         className="section-bg"
@@ -72,7 +71,6 @@ export default function Home({content}: IContent) {
         style={{scrollMargin:"6.25rem 0 0 0"}}
         id="top-packages"
         className="wrapper"
-        ref={currentElement}
       >
         <TopPackages content_data={ top_packages_section } />
       </section>
@@ -229,7 +227,6 @@ export const getStaticProps: GetStaticProps = async () => {
       }
     }
   })
-  console.log(content[0].about_us_section.content)
 
   return {
     props: {
