@@ -71,7 +71,6 @@ export const Container = styled.div`
       }
       .flat-button {
         display: inline-block;
-        /* height: 35px; */
         background-color: ${({theme}) => theme.colors.main};
         font-size: 14px;
         color: #ffffff;

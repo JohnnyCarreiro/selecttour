@@ -229,6 +229,7 @@ export const getStaticProps: GetStaticProps = async () => {
       }
     }
   })
+  console.log(content[0].about_us_section.content)
 
   return {
     props: {

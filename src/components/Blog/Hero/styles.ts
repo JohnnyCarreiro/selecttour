@@ -15,6 +15,7 @@ export const Container = styled.div<IBlogProps>`
   display: flex;
   justify-content:space-between;
   align-items: center;
+  justify-content:center;
 
   background-color: ${({theme}) => theme.colors.gray_900};
   color: ${({theme}) => theme.colors.gray_300};

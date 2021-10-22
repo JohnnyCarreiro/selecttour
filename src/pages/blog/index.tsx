@@ -7,6 +7,7 @@ import { Header } from '@/components/Header'
 import { MainPost } from '@/components/Blog/MainPost'
 import { Posts } from '@/components/Blog/Posts'
 import { Sidebar } from '@/components/Blog/Sidebar'
+import { Footer } from '@/components/Footer'
 
 export default function Blog() {
   const contacts = {
@@ -24,7 +25,7 @@ export default function Blog() {
         <title>Select Tour - Blog</title>
       </Head>
       <Header contacts={contacts} />
-      <Hero>
+      <Hero image={'https://images.prismic.io/selecttour/4a8c29d7-1559-4c96-8e2f-863c65040f39_foto-abre-pgalinhas011.jpg'} >
         <div className="wrapper">
           <div className="hero-content" >
             <img src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
@@ -55,6 +56,7 @@ export default function Blog() {
           </aside>
         </div>
       </section>
+      <Footer />
     </Container>
   )
 }

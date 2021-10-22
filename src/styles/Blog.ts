@@ -5,6 +5,7 @@ export const Container = styled.div `
   margin: 0 auto;
   width: 100%;
   padding: 0;
+  position: relative;
   h1 {
     font: ${({theme}) => theme.texts.main_title};
     color: ${({theme}) => theme.colors.gray_500};
@@ -43,13 +44,10 @@ export const Container = styled.div `
   }
 
   .main-section {
-    /* position: static; */
+    position: relative;
     display: flex;
     align-items: flex-start;
     height: auto;
-    flex-wrap: wrap;
-    flex-grow: 1;
-    flex-shrink: 0;
     margin: 0 auto;
     width: 100%;
     .posts {
@@ -68,15 +66,44 @@ export const Container = styled.div `
         }
       }
       .widget-content {
+        display: flex;
+        flex-direction: column;
         padding-top: 3rem;
         position: relative;
         float: left;
         width: 100%;
+        .post-content {
+          border-radius: 0.625rem;
+          background-color: #ffffff;
+          border: solid 1px ${({theme}) => theme.colors.white};
+          padding: 15px;
+          position: relative;
+          width: 100%;
+          margin-top: 0.5rem;
+          h2 {
+            margin: 2rem 0 1rem;
+          }
+          p {
+            color: ${({theme}) => theme.colors.gray_800};
+          }
+          /* > div > * {
+            padding-top: 1rem;
+          } */
+          > div {
+            *:nth-child(n) {
+                padding-top: 1rem;
+              }
+              *:first-child {
+                padding-top: 0;
+              }
+          }
+        }
       }
     }
     .sidebar {
-      display: flex;
       position: sticky;
+      flex: 1;
+      display: flex;
       top: 40px;
       flex: 1;
       padding-top: 4rem;
@@ -96,6 +123,7 @@ export const Container = styled.div `
     margin: 0 auto;
     padding: 0;
     .main-section {
+      position: relative;
       display: inline-block;
       flex-direction: column;
       align-items: center;
@@ -105,16 +133,17 @@ export const Container = styled.div `
       .posts {
         min-width: 100%;
       }
-    }
-    .posts {
-      /* min-width: 425px; */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-    }
-    .sidebar {
-      padding: 1rem;
+      .posts {
+        position: relative;
+        /* min-width: 425px; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+      .sidebar {
+        padding: 1rem;
+      }
     }
   }
   @media (max-width:375px){
