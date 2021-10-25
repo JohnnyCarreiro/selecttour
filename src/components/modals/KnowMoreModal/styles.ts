@@ -12,14 +12,13 @@ export const ModalBackground = styled.div<ContainerProps>`
   width: 100vw;
   height: 100vh;
   background-color: rgba(200, 200, 200, 0.7);
-  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 900;
+  padding: 120px 1rem 1rem 0;
 
   .modal-container {
-    position: absolute;
     width: 500px;
     height: ${(props) => props.isPackage ? '500px' : '700px'};
     border-radius: 12px;
@@ -29,6 +28,7 @@ export const ModalBackground = styled.div<ContainerProps>`
     flex-direction: column;
     padding: 25px;
     overflow-y:auto;
+    max-height: 90%;
   }
 
   .modal-container .title {
@@ -104,14 +104,15 @@ export const ModalBackground = styled.div<ContainerProps>`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 60px 0.5rem 0 0.5rem;
     .modal-container {
-      position: absolute;
+      position: relative;
       top: 0;
       left: 0;
       width: 90%;
-      height: ${(props) => props.isPackage ? '300px' : '80%'};
+      height: 90%;
+      /* height: ${(props) => props.isPackage ? '300px' : '80%'}; */
       padding: 25px;
-      margin: 6rem 2rem;
     }
   }
 `

@@ -7,20 +7,21 @@ interface ContainerProps extends ThemeProps<Theme> {
 
 export const ModalBackground = styled.div<ContainerProps>`
   position: fixed;
-  top: 100px;
+  top: 0;
   left: 0;
   width: 100vw;
   min-height: 100vh;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(200, 200, 200, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 900;
+  padding: 120px 1rem 1rem 0;
+
 
   .modal-container {
-    position: absolute;
-    top: 5%;
+    top: 0;
     width: 500px;
     /* height: ${(props) => props.isPackage ? '500px' : '700px'}; */
     height: 700px;
@@ -99,15 +100,15 @@ export const ModalBackground = styled.div<ContainerProps>`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 60px 0.5rem 0 0.5rem;
     .modal-container {
-      position: absolute;
+      position: relative;
       top: 0;
       left: 0;
       width: 90%;
+      height: 90%;
       /* height: ${(props) => props.isPackage ? '300px' : '80%'}; */
-      height: 80%;
       padding: 25px;
-      margin: 6rem 2rem;
     }
   }
 `
