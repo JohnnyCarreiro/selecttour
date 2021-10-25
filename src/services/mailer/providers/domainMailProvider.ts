@@ -17,21 +17,21 @@ export class DomainMailProvider implements IMailProvider{
 
         this.transporter = nodemailer.createTransport({
           name:'selecttourviagens.com.br',
-          service: 'Hostinger',
           host:this.host,
           port:this.port,
+          secure: true,
           auth:{
               user:this.user,
               pass:this.pass,
           },
-          secure:true,
           tls: {rejectUnauthorized: false},
           // sendmail: true,
           // newline: 'unix',
         })
     }
     async sendMail(message:IMessage):Promise<void>{
-        const { to, from, subject, body } = message
+      const { to, from, subject, body } = message
+      console.log(this.transporter)
 
         await this.transporter.sendMail({
             to:{

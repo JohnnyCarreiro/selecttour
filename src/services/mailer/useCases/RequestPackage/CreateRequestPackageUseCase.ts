@@ -91,7 +91,7 @@ export class CreateRequestPackageUseCase {
           })
           return (newContact)
         } catch (error) {
-            throw new Error('Unexpected error whiling Send new contact email')
+          throw new Error('Unexpected error whiling Send new contact email')
         }
     }
 }

@@ -129,9 +129,9 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
             <nav className={display ? 'showMenu' : ''}>
               <ul>
               {navLinks.map(
-                ({navLinkId, scrollToId, navLinkName}, index) =>
+                ({navLinkId, scrollToId, navLinkName}) =>
                   <NavLink
-                    key={index}
+                    key={navLinkId}
                     navLinkName={navLinkName}
                     navLinkId={navLinkId}
                     scrollToId={scrollToId}
