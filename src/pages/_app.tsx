@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components'
 
 import theme from 'styles/theme'
 import { GlobalStyle } from 'styles/GlobalStyle'
-import { NavProvider } from '@/Contexts/NewNavContext'
+import { NavProvider } from '@/Contexts/NavContext'
 
 interface MyAppProps extends AppProps {}
 

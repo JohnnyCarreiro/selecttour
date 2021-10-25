@@ -1,6 +1,6 @@
-import { useRef, useContext, useEffect } from 'react'
+import { useRef, useContext } from 'react'
 import { useOnScreen } from './useOnScreen'
-import { NavContext } from '../Contexts/NewNavContext'
+import { NavContext } from '../Contexts/NavContext'
 
 export const useNav = (navLinkId:string) => {
   const ref: any = useRef<HTMLElement>()

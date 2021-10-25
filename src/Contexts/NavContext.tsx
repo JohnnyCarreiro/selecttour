@@ -1,90 +1,37 @@
-import { useOnScreen } from '../Hooks/useOnScreen'
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState
-} from 'react'
+import React, { createContext, createRef, useCallback, useContext, useState } from 'react'
 
-
-interface IContextProps{
-  activeNavLinkId: string
-  // setActiveNavLinkId(value:string): void
-  // setActiveNavLinkId(): React.Dispatch<React.SetStateAction<string>>
-  addActiveLink(linkId: string): void
-  // useNav: (navLinkId: string) => any
-  useNavContex(navLinkId: string): void
+interface NavContextData{
+  activeLinkId: string
+  // addActiveLink(activeLink: string):void
+  setActiveLink(activeLink: string): void
+  // setActiveLink: any
 }
 
-export const NavContext = createContext<IContextProps>({} as IContextProps)
+export const NavContext = createContext<NavContextData>({} as NavContextData)
 
-const NavProvider:React.FC = ({ children }) => {
-	const [activeNavLinkId, setActiveNavLinkId] = useState<string>('')
-  const addActiveLink = useCallback((linkId: string)=>{
-    setActiveNavLinkId(linkId)
-  },[])
+const NavProvider: React.FC = ({ children }) => {
 
+  const [ activeLinkId, setActiveLink ] = useState('')
 
-	const providerValue = {
-		activeNavLinkId,
-    addActiveLink,
-    useNavContex
-	}
+  // const addActiveLink = (activeLink: string)=>{
 
-	return (
-		<NavContext.Provider value={providerValue}>{children}</NavContext.Provider>
-	)
+  //   setActiveLink(activeLink)
+  // }
 
+  return (
+    <NavContext.Provider value={{setActiveLink, activeLinkId}}>
+      { children }
+    </NavContext.Provider>
+  )
 }
-// function useNav(): IContextProps{
-//   const context = useContext(NavContext)
 
-//   if(! context){
-//     throw new Error('useToast must be used within an AuthProvider')
-//   }
-//   return context
-// }
-// const useNav = (navLinkId:string) => {
-//   const ref: any = useRef<HTMLDivElement>()
-
-// 	// const { addActiveLink } = useContext(NavContext)
-// 	// const context = useContext(NavContext)
-
-// 	const isOnScreen = useOnScreen(ref)
-//   console.log('Ref:', ref)
-//   console.log('ID:', navLinkId)
-
-// 	useEffect(() => {
-
-// 		// if (isOnScreen) {
-// 		// 	addActiveLink(navLinkId)
-// 		// }
-// 	}, [isOnScreen, activeNavLinkId, navLinkId])
-
-// 	return ref
-// };
-const useNavContex = (navLinkId:string) => {
-  const ref: any = useRef<HTMLDivElement>()
-
-  // const { addActiveLink } = useContext(NavContext)
+function useNavContex(): NavContextData{
   const context = useContext(NavContext)
 
-  const isOnScreen = useOnScreen(ref)
-  console.log('Ref:', ref)
-  console.log('ID:', navLinkId)
-
-  if(!context ){
-    throw new Error('DEu Ruim')
+  if(! context){
+    throw new Error('useToast must be used within an AuthProvider')
   }
-  // useEffect(() => {
-  //   if (isOnScreen) {
-  //     addActiveLink(navLinkId)
-  //   }
-  // }, [isOnScreen, activeNavLinkId, navLinkId])
-
   return context
 }
 
-export { NavProvider, useNavContex }
+export  { NavProvider, useNavContex }

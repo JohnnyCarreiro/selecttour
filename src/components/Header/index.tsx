@@ -2,8 +2,7 @@ import React, { HTMLAttributes, useCallback, useContext, useEffect, useState } f
 import Router from 'next/router'
 import { FaFacebookSquare, FaInstagramSquare, FaLinkedinIn, FaTimes, FaBars } from 'react-icons/fa'
 import Logo from '../../assets/imgs/LOGO.svg'
-// import { NavContext } from '../../Contexts/NavContext'
-import { NavContext } from '../../Contexts/NewNavContext'
+import { NavContext } from '../../Contexts/NavContext'
 
 import { BottomNavBar, Container, NavContainer } from './styles'
 interface NavProps {
