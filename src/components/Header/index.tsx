@@ -21,7 +21,10 @@ interface NavProps {
 export const Header: React.FC<NavProps> = ({current, contacts}) => {
 
   const { asPath } = useRouter()
-  const currentPage = asPath.replace('/', '')
+  const currentPage = asPath.replace('/', '').split('/')[0]
+
+  console.log(asPath.replace('/', '').split('/')[0])
+  console.log()
 
   const {
     whatsapp_number,
@@ -77,7 +80,7 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
           id={navLinkId}
           className={activeLinkId === navLinkId ? 'active' : ''}
           href={
-            currentPage === 'blog' ?
+            currentPage?.toString() === 'blog' ?
             `/#${scrollToId}` :
             `#${scrollToId}`
           }
