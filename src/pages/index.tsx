@@ -42,7 +42,6 @@ export default function Home({content}: IContent) {
   const workRef = useNav('How-we-work')
   const destiantionsRef = useNav('Top-destinations')
   const contactsRef = useNav('Contacts')
-  // console.log(homeRef)
 
   return (
     <Container>
@@ -50,94 +49,96 @@ export default function Home({content}: IContent) {
         <title>Select Tour - Mais que uma uma Viagem</title>
       </Head>
       <Header contacts={site_contacts_section} />
-      <section
-        id="home"
-        ref={homeRef}
-      >
-        <Showcase>
-          <div className="wrapper">
-            <div className="sowcase-content" >
-              <img src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
-              <h1>{show_case_section?.main_title}</h1>
-              { show_case_section?.sub_title && (
-                <h2>{show_case_section?.sub_title}</h2>
-              ) }
+      <main>
+        <section
+          id="home"
+          ref={homeRef}
+        >
+          <Showcase>
+            <div className="wrapper">
+              <div className="sowcase-content" >
+                <img src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
+                <h1>{show_case_section?.main_title}</h1>
+                { show_case_section?.sub_title && (
+                  <h2>{show_case_section?.sub_title}</h2>
+                ) }
+              </div>
             </div>
+          </Showcase>
+        </section>
+        <section id="travel-request" className="wrapper" >
+          <RequestTravel />
+        </section>
+        <section
+          style={{scrollMargin:"6.25rem 0 0 0"}}
+          id="about"
+          ref={aboutRef}
+          className="section-bg"
+        >
+          <div className="wrapper">
+            <TextBlock content_data={ about_us_section }/>
           </div>
-        </Showcase>
-      </section>
-      <section id="travel-request" className="wrapper" >
-        <RequestTravel />
-      </section>
-      <section
-        style={{scrollMargin:"6.25rem 0 0 0"}}
-        id="about"
-        ref={aboutRef}
-        className="section-bg"
-      >
-        <div className="wrapper">
-          <TextBlock content_data={ about_us_section }/>
-        </div>
-      </section>
-      <section
-        style={{scrollMargin:"6.25rem 0 0 0"}}
-        className="wrapper"
-        id="top-packages"
-        ref={packagesRef}
-      >
-        <TopPackages content_data={ top_packages_section } />
-      </section>
-      <section
-        style={{scrollMargin:"6.25rem 0 0 0"}}
-        className="section-bg"
-        id="how-we-work"
-        ref={workRef}
-      >
-        <div className="wrapper">
-          <TextBlock content_data={ how_we_work_section }/>
-        </div>
-      </section>
-      <section
-        style={{scrollMargin:"6.25rem 0 0 0"}}
-        id="top-destinations"
-        className="wrapper"
-        ref={destiantionsRef}
-      >
-        <TopDestinations content_data={top_destinations_section} />
-      </section>
-      <section
-        style={{scrollMargin:"6.25rem 0 0 0"}}
-        id="Team"
-        className="section-bg"
-      >
-        <div className="wrapper">
-          <TextBlock slice_label="our_team" content_data={ our_team_section }/>
-        </div>
-      </section>
-      { testimonials_section.testimonials.length > 0
-          && (
-            <section
-              style={{scrollMargin:"6.25rem 0 0 0"}}
-              id="testimonials"
-              className="wrapper"
-            >
-              <Testimonials content_data={testimonials_section} />
-            </section>
-          )
-      }
-      {/* <section id="latests" className="wrapper">
-        <Latests />
-      </section> */}
-      <section
-        style={{scrollMargin:"6.25rem 0 0 0"}}
-        className="section-bg"
-        id="contacts"
-        ref={contactsRef}
-      >
-        <div className="wrapper">
-          <Contact content_data={contact_form_section} />
-        </div>
-      </section>
+        </section>
+        <section
+          style={{scrollMargin:"6.25rem 0 0 0"}}
+          className="wrapper"
+          id="top-packages"
+          ref={packagesRef}
+        >
+          <TopPackages content_data={ top_packages_section } />
+        </section>
+        <section
+          style={{scrollMargin:"6.25rem 0 0 0"}}
+          className="section-bg"
+          id="how-we-work"
+          ref={workRef}
+        >
+          <div className="wrapper">
+            <TextBlock content_data={ how_we_work_section }/>
+          </div>
+        </section>
+        <section
+          style={{scrollMargin:"6.25rem 0 0 0"}}
+          id="top-destinations"
+          className="wrapper"
+          ref={destiantionsRef}
+        >
+          <TopDestinations content_data={top_destinations_section} />
+        </section>
+        <section
+          style={{scrollMargin:"6.25rem 0 0 0"}}
+          id="Team"
+          className="section-bg"
+        >
+          <div className="wrapper">
+            <TextBlock slice_label="our_team" content_data={ our_team_section }/>
+          </div>
+        </section>
+        { testimonials_section.testimonials.length > 0
+            && (
+              <section
+                style={{scrollMargin:"6.25rem 0 0 0"}}
+                id="testimonials"
+                className="wrapper"
+              >
+                <Testimonials content_data={testimonials_section} />
+              </section>
+            )
+        }
+        {/* <section id="latests" className="wrapper">
+          <Latests />
+        </section> */}
+        <section
+          style={{scrollMargin:"6.25rem 0 0 0"}}
+          className="section-bg"
+          id="contacts"
+          ref={contactsRef}
+        >
+          <div className="wrapper">
+            <Contact content_data={contact_form_section} />
+          </div>
+        </section>
+      </main>
       <Footer/>
     </Container>
   )
