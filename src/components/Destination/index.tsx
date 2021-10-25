@@ -1,5 +1,4 @@
-import { ReactNode, useState } from 'react'
-import { Dispatch, SetStateAction } from 'hoist-non-react-statics/node_modules/@types/react'
+import { Dispatch, SetStateAction, ReactNode, useState } from 'react'
 
 import KnowMoreModal from '../modals/KnowMoreModal'
 
