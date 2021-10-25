@@ -1,9 +1,7 @@
 import React, { useRef } from 'react'
 import { ReactNode, HTMLAttributes } from 'react'
-import { useOnScreen } from '@/utils/useOnScreen'
 
 import { Container } from './styles'
-import { useNav } from '@/Hooks/useNav'
 
 interface ShowcaseProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode

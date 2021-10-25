@@ -2,8 +2,6 @@ import { Dispatch, ReactNode, SetStateAction, useState } from 'react'
 import { Package } from '@/components/Package'
 
 import { Container } from './styles'
-import KnowMoreModal from '@/components/modals/KnowMoreModal'
-import { useNav } from '@/Hooks/useNav'
 
 interface TopPackagesProps {
   content_data: {
@@ -26,7 +24,6 @@ interface TopPackagesProps {
 }
 
 export const TopPackages: React.FC<TopPackagesProps> = ({ children, content_data }) => {
-  // const packagesRef = useNav('Top-packages')
 
   const {
     title,
@@ -35,8 +32,6 @@ export const TopPackages: React.FC<TopPackagesProps> = ({ children, content_data
    } = content_data;
   return (
     <Container
-      // id="top-packages"
-      // ref={packagesRef}
     >
       <div className="packages">
         <h2>{ title }</h2>
@@ -45,7 +40,7 @@ export const TopPackages: React.FC<TopPackagesProps> = ({ children, content_data
       <div className="container">
         { packages.map((package_data, index) =>
           <Package
-            key={ package_data.image+index}
+            key={`${package_data.image}-${index}`}
             package_data={package_data}
           />
         ) }
