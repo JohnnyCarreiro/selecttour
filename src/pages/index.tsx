@@ -1,4 +1,4 @@
-import React, { createRef, useRef } from 'react'
+import React from 'react'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import Prismic from '@prismicio/client'
@@ -14,6 +14,8 @@ import Testimonials from '@/components/sections/Testimonials'
 import { Latests } from '@/components/sections/Latests'
 import { Contact } from '@/components/sections/Contact'
 import { Footer } from '@/components/Footer'
+import { useNav } from '../Hooks/useNav'
+// import { NavContext, NavProvider } from '../Contexts/NavContext'
 
 import { Container } from '../styles/Home'
 
@@ -33,8 +35,14 @@ export default function Home({content}: IContent) {
     contact_form_section,
     site_contacts_section
   } = content[0]
-  // const [isVisible, currentElement] = useVisibility<HTMLElement>(100)
-  const ref = useRef({} as HTMLElement);
+
+  const homeRef = useNav('Home')
+  const aboutRef = useNav('About')
+  const packagesRef = useNav('Top-packages')
+  const workRef = useNav('How-we-work')
+  const destiantionsRef = useNav('Top-destinations')
+  const contactsRef = useNav('Contacts')
+  // console.log(homeRef)
 
   return (
     <Container>
@@ -42,7 +50,10 @@ export default function Home({content}: IContent) {
         <title>Select Tour - Mais que uma uma Viagem</title>
       </Head>
       <Header contacts={site_contacts_section} />
-      <section id="home" >
+      <section
+        id="home"
+        ref={homeRef}
+      >
         <Showcase>
           <div className="wrapper">
             <div className="sowcase-content" >
@@ -61,6 +72,7 @@ export default function Home({content}: IContent) {
       <section
         style={{scrollMargin:"6.25rem 0 0 0"}}
         id="about"
+        ref={aboutRef}
         className="section-bg"
       >
         <div className="wrapper">
@@ -69,15 +81,17 @@ export default function Home({content}: IContent) {
       </section>
       <section
         style={{scrollMargin:"6.25rem 0 0 0"}}
-        id="top-packages"
         className="wrapper"
+        id="top-packages"
+        ref={packagesRef}
       >
         <TopPackages content_data={ top_packages_section } />
       </section>
       <section
         style={{scrollMargin:"6.25rem 0 0 0"}}
-        id="how-we-work"
         className="section-bg"
+        id="how-we-work"
+        ref={workRef}
       >
         <div className="wrapper">
           <TextBlock content_data={ how_we_work_section }/>
@@ -87,12 +101,13 @@ export default function Home({content}: IContent) {
         style={{scrollMargin:"6.25rem 0 0 0"}}
         id="top-destinations"
         className="wrapper"
+        ref={destiantionsRef}
       >
         <TopDestinations content_data={top_destinations_section} />
       </section>
       <section
         style={{scrollMargin:"6.25rem 0 0 0"}}
-        id="team"
+        id="Team"
         className="section-bg"
       >
         <div className="wrapper">
@@ -115,8 +130,9 @@ export default function Home({content}: IContent) {
       </section> */}
       <section
         style={{scrollMargin:"6.25rem 0 0 0"}}
-        id="contact"
         className="section-bg"
+        id="contacts"
+        ref={contactsRef}
       >
         <div className="wrapper">
           <Contact content_data={contact_form_section} />

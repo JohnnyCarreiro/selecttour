@@ -7,7 +7,8 @@ import throttle from "lodash.throttle"
  * @param {number} offset - Number of pixels up to the observable element from the top
  * @param {number} throttleMilliseconds - Throttle observable listener, in ms
  */
-export function useVisibility<Element extends HTMLElement>(
+export function useVisibility< T extends Element>(
+  ref: React.MutableRefObject<T>,
   offset: number = 0,
   throttleMilliseconds: number = 100
 ): [Boolean, React.RefObject<Element>] {
@@ -19,13 +20,23 @@ export function useVisibility<Element extends HTMLElement>(
       setIsVisible(false)
       return
     }
+    const viewHeight = window.innerHeight
+    offset = (viewHeight/4)
     // const top = currentElement.current.getBoundingClientRect().top
     // setIsVisible(top + offset >= 0 && top - offset <= window.innerHeight)
     // const top = currentElement.current.getBoundingClientRect()
     // setIsVisible(top && true)
-    const top = currentElement.current.getBoundingClientRect().top
-    const bottom = currentElement.current.getBoundingClientRect().bottom
-    setIsVisible(top + offset >= 0 && top - offset <= window.innerHeight || bottom - offset >= 0 && top + offset <= window.innerHeight)
+    // const top = ref.current.getBoundingClientRect().top
+    // const bottom = ref.current.getBoundingClientRect().bottom
+    // setIsVisible(top + offset >= 0 && top - offset <= window.innerHeight || bottom - offset >= 0 && top + offset <= window.innerHeight)
+    const rect = currentElement.current.getBoundingClientRect()
+    console.log(offset, rect.top)
+    // setIsVisible(rect.top - offset >= window.innerHeight )
+    setIsVisible(rect.top >= 200 && rect.top <= window.innerHeight)
+    return (
+      rect.top + offset >= offset &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+  );
   }, throttleMilliseconds)
 
   useEffect(() => {

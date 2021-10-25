@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { HTMLAttributes, useCallback, useContext, useEffect, useState } from 'react'
+import Router from 'next/router'
 import { FaFacebookSquare, FaInstagramSquare, FaLinkedinIn, FaTimes, FaBars } from 'react-icons/fa'
 import Logo from '../../assets/imgs/LOGO.svg'
+// import { NavContext } from '../../Contexts/NavContext'
+import { NavContext } from '../../Contexts/NewNavContext'
 
 import { BottomNavBar, Container, NavContainer } from './styles'
 interface NavProps {
@@ -28,14 +31,58 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
   } = contacts
   const phone = phone_number.replace('-', '').replace(' ', '')
   const [ display, setDisplay ] = useState(false)
-  // console.log('Header', current)
-
   const handleShowingMenu = () => {
     setDisplay(!display)
   }
   const closeMobileMenu = () => {
     setDisplay(false)
   }
+  const navLinks = [
+    {navLinkName: 'Inicio', navLinkId: 'Home', scrollToId: 'home'},
+    {navLinkName: 'Sobre', navLinkId: 'About', scrollToId: 'about'},
+    {navLinkName: 'Pacote', navLinkId: 'Top-packages', scrollToId: 'top-packages'},
+    {navLinkName: 'Como Atuamos', navLinkId: 'How-we-work', scrollToId: 'how-we-work'},
+    {navLinkName: 'Destinos', navLinkId: 'Top-destinations', scrollToId: 'top-destinations'},
+    {navLinkName: 'Contatos', navLinkId: 'Contacts', scrollToId: 'contacts'},
+  ]
+
+  interface NavLinkProps extends HTMLAttributes<HTMLElement> {
+    navLinkName: string
+    navLinkId: string
+    scrollToId: string
+  }
+  const [_document, setDocument] = useState<Document>({} as Document)
+
+  useEffect(() => {
+    setDocument(document)
+  },[])
+
+  const NavLink = ({navLinkName, navLinkId, scrollToId, ...rest}: NavLinkProps) => {
+    const { activeLinkId, setActiveLink } = useContext(NavContext)
+    const handleClick = useCallback(() => {
+      setActiveLink(navLinkId)
+      Router.events.on('routeChangeComplete', () => {
+        // setDocument(document)
+        _document.getElementById(scrollToId)!.scrollIntoView({behavior: 'smooth'})
+      })
+      closeMobileMenu()
+    },[])
+
+    return (
+      <li className={activeLinkId === navLinkId ? 'menuItem active' : 'menuItem'} >
+        <a
+          id={navLinkId}
+          className={activeLinkId === navLinkId ? 'active' : ''}
+          href={`#${scrollToId}`}
+          onClick={handleClick}
+          {...rest}
+        >
+          {navLinkName}
+        </a>
+      </li>
+    );
+  }
+
 
   return (
       <Container>
@@ -64,6 +111,17 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
             </div>
             <nav className={display ? 'showMenu' : ''}>
               <ul>
+              {navLinks.map(
+                ({navLinkId, scrollToId, navLinkName}, index) =>
+                  <NavLink
+                    key={index}
+                    navLinkName={navLinkName}
+                    navLinkId={navLinkId}
+                    scrollToId={scrollToId}
+                  />
+              )}
+              </ul>
+              {/* <ul>
                 <li className={current?.current?.id === 'home' ? 'menuItem active' : 'menuItem'} >
                   <a className={current?.current?.id === 'home' ? 'active' : ''} onClick={closeMobileMenu} href="#home">Inicio</a>
                 </li>
@@ -82,10 +140,10 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
                 <li className={current?.current?.id === 'Contato' ? 'menuItem active' : 'menuItem'} >
                   <a className={current?.current?.id === 'Contato' ? 'active' : ''} onClick={closeMobileMenu} href="#contact">Contato</a>
                 </li>
-                {/* <li className={current?.current?.id === 'blog' ? 'menuItem active' : 'menuItem'} >
+                 <li className={current?.current?.id === 'blog' ? 'menuItem active' : 'menuItem'} >
                   <a className={current?.current?.id === 'blog' ? 'active' : ''} onClick={closeMobileMenu} href="/blog">Blog</a>
-                </li> */}
-              </ul>
+                </li>
+              </ul> */}
             </nav>
             <div className="menuIcon" onClick={handleShowingMenu}>
               { display ? <FaTimes /> : <FaBars /> }

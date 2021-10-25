@@ -155,6 +155,7 @@ export const NavContainer = styled.div`
             display:flex;
             flex-direction:column;
             position:relative;
+            cursor: pointer;
         }
         nav .menuItem a{
             height:50px;
@@ -163,6 +164,7 @@ export const NavContainer = styled.div`
             width:100%;
             transition:all 0.2s ease-out;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+            cursor: pointer;
         }
         nav .menuItem a svg{
             height:16px;
@@ -222,6 +224,7 @@ export const NavContainer = styled.div`
             display:flex;
             position:relative;
             align-items:center;
+            cursor: pointer;
         }
         nav .menuItem a{
             height:60px;
@@ -231,6 +234,7 @@ export const NavContainer = styled.div`
             transition:all .3s ease-out;
             align-items:center;
             text-align:center;
+            cursor: pointer;
         }
 
         nav .menuItem a:hover{

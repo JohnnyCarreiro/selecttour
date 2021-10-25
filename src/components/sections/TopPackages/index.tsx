@@ -3,6 +3,7 @@ import { Package } from '@/components/Package'
 
 import { Container } from './styles'
 import KnowMoreModal from '@/components/modals/KnowMoreModal'
+import { useNav } from '@/Hooks/useNav'
 
 interface TopPackagesProps {
   content_data: {
@@ -25,13 +26,18 @@ interface TopPackagesProps {
 }
 
 export const TopPackages: React.FC<TopPackagesProps> = ({ children, content_data }) => {
+  // const packagesRef = useNav('Top-packages')
+
   const {
     title,
     subtitle,
     packages
    } = content_data;
   return (
-    <Container>
+    <Container
+      // id="top-packages"
+      // ref={packagesRef}
+    >
       <div className="packages">
         <h2>{ title }</h2>
         <h3>{ subtitle }</h3>

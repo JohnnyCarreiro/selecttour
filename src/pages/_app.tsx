@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components'
 
 import theme from 'styles/theme'
 import { GlobalStyle } from 'styles/GlobalStyle'
+import { NavProvider } from '@/Contexts/NewNavContext'
 
 interface MyAppProps extends AppProps {}
 
@@ -11,8 +12,10 @@ export default function MyApp({Component, pageProps}:MyAppProps){
 
     return(
         <ThemeProvider theme={theme} >
+          <NavProvider>
             <Component { ...pageProps }/>
             <GlobalStyle />
+          </NavProvider>
         </ThemeProvider>
     )
 }

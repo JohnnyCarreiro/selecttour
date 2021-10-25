@@ -1,5 +1,3 @@
-import { ReactNode } from 'hoist-non-react-statics/node_modules/@types/react'
-import { useVisibility } from '../../utils/useVisibility'
 import { Container } from './styles'
 
 interface AboutProps {
@@ -13,7 +11,6 @@ interface AboutProps {
 }
 
 export const TextBlock:React.FC<AboutProps> = ({slice_label, content_data}) => {
-  const [isVisible, currentElement] = useVisibility<HTMLDivElement>(100)
 
   const {
     title,
@@ -23,7 +20,7 @@ export const TextBlock:React.FC<AboutProps> = ({slice_label, content_data}) => {
    } = content_data
 
   return (
-    <Container ref={currentElement} >
+    <Container>
       <div className="header">
         <h2>{title}</h2>
         <h3>{subtitle}</h3>
