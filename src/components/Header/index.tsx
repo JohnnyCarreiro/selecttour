@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useCallback, useContext, useEffect, useState } from 'react'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { FaFacebookSquare, FaInstagramSquare, FaLinkedinIn, FaTimes, FaBars } from 'react-icons/fa'
 import Logo from '../../assets/imgs/LOGO.svg'
 import { NavContext } from '../../Contexts/NavContext'
@@ -19,6 +19,10 @@ interface NavProps {
   current?:  React.RefObject<HTMLElement>
 }
 export const Header: React.FC<NavProps> = ({current, contacts}) => {
+
+  const { asPath } = useRouter()
+  const currentPage = asPath.replace('/', '')
+
   const {
     whatsapp_number,
     whatsapp_message,
@@ -72,7 +76,11 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
         <a
           id={navLinkId}
           className={activeLinkId === navLinkId ? 'active' : ''}
-          href={`#${scrollToId}`}
+          href={
+            currentPage === 'blog' ?
+            `/#${scrollToId}` :
+            `#${scrollToId}`
+          }
           onClick={handleClick}
           {...rest}
         >
