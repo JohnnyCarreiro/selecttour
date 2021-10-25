@@ -23,9 +23,6 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
   const { asPath } = useRouter()
   const currentPage = asPath.replace('/', '').split('/')[0]
 
-  console.log(asPath.replace('/', '').split('/')[0])
-  console.log()
-
   const {
     whatsapp_number,
     whatsapp_message,
@@ -71,24 +68,35 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
         // setDocument(document)
         _document.getElementById(scrollToId)!.scrollIntoView({behavior: 'smooth'})
       })
+      _document.getElementById(scrollToId)!.scrollIntoView({behavior: 'smooth'})
       closeMobileMenu()
     },[])
 
     return (
       <li className={activeLinkId === navLinkId ? 'menuItem active' : 'menuItem'} >
-        <a
-          id={navLinkId}
-          className={activeLinkId === navLinkId ? 'active' : ''}
-          href={
-            currentPage?.toString() === 'blog' ?
-            `/#${scrollToId}` :
-            `#${scrollToId}`
-          }
-          onClick={handleClick}
-          {...rest}
-        >
-          {navLinkName}
-        </a>
+        {
+          currentPage?.toString() === 'blog' ?
+          (
+            <a
+              id={navLinkId}
+              className={activeLinkId === navLinkId ? 'active' : ''}
+              href={`/#${scrollToId}`}
+              {...rest}
+            >
+              {navLinkName}
+            </a>
+          ) :
+          (
+            <a
+              id={navLinkId}
+              className={activeLinkId === navLinkId ? 'active' : ''}
+              onClick={handleClick}
+              {...rest}
+            >
+              {navLinkName}
+            </a>
+          )
+        }
       </li>
     );
   }
@@ -103,7 +111,6 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
                 <li><a href={facebook ? facebook : "#"}><FaFacebookSquare/></a></li>
                 <li><a href={instagram ? instagram : "#"}><FaInstagramSquare/></a></li>
                 <li><a href={linkedin ? linkedin : "#"}><FaLinkedinIn/></a></li>
-                <a href=""></a>
               </ul>
             </div>
             <div className="mainContacts">

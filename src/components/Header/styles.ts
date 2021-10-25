@@ -239,11 +239,13 @@ export const NavContainer = styled.div`
 
         nav .menuItem a:hover{
             border-bottom:2px solid ${({theme})=>theme.colors.gray_1000};
-            background:${({theme})=>theme.colors.blue_primary};
+            background:${({theme})=>theme.colors.primary};
+            font-weight: 700;
         }
         nav .menuItem a.active{
             cursor:default;
             border-bottom:3px solid ${({theme})=>theme.colors.gray_1000};
+            font-weight: 900;
         }
         nav .menuItem a.active:hover{
             cursor:default;
