@@ -72,6 +72,11 @@ export const Container = styled.div`
         margin: 10px 0 15px;
         font: ${({theme}) => theme.texts.main_text};
         color: ${({theme}) => theme.colors.gray_600};
+
+        background: linear-gradient(${({theme})=> theme.colors.gray_100}, transparent);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
       .flat-button {
         display: inline-block;
