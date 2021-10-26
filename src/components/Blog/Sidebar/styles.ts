@@ -27,6 +27,7 @@ export const Container = styled.div`
     .filter-content {
       position: relative;
       display: flex;
+      flex-direction: column;
       gap: 2rem;
       flex-wrap: wrap;
       width: 100%;
@@ -40,10 +41,29 @@ export const Container = styled.div`
       .filter-title {
         font: ${({theme}) => theme.texts.sub_title};
       }
-      > p {
-        font: ${({theme}) => theme.texts.main_text};
-        color: ${({theme}) => theme.colors.gray_800};
-        text-align: left;
+      .filters {
+        display:flex;
+        gap: 0.5em;
+        flex-wrap: wrap;
+        div {
+          display: inline-block;
+          padding: 0.5em;
+          border-radius: 0.25rem;
+          background-color: ${({theme}) => theme.colors.gray_900};
+          transition: background-color 0.2s;
+          cursor: pointer;
+          > a {
+            font: ${({theme}) => theme.texts.main_text};
+            color: ${({theme}) => theme.colors.white};
+            text-align: left;
+          }
+          :hover {
+            background-color: ${({theme}) => theme.colors.gray_800};
+          }
+        }
+        .active-filter {
+          background-color: ${({theme}) => theme.colors.gray_800};
+        }
       }
       &+div {
         margin-top: 2rem;
