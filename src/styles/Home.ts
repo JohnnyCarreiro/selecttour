@@ -1,19 +1,7 @@
 import styled, { keyframes } from 'styled-components'
 
-const appearFromLeft = keyframes`
-  from{
-    opacity:0;
-    transform: translateX(-50px);
-  }
-  to{
-    opacity:1;
-    transform: translateX(0);
-  }
-`
-
 export const Container = styled.div `
   background: ${({theme}) => theme.colors.gray_1000};
-  animation: ${appearFromLeft} 1s;
   .wrapper {
     display: flex;
     flex-direction: column;
