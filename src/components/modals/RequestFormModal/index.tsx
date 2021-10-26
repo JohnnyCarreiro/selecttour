@@ -14,6 +14,7 @@ import getValidationErrors from 'utils/getValidationErrors'
 
 
 import { ModalBackground } from './styles'
+import { useToast } from '@/Hooks/Toast'
 
 interface RequestFormModalProps {
   closeModal: Dispatch<SetStateAction<boolean>>
@@ -43,7 +44,10 @@ export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, 
   const [phone, setPhone] = useState('')
   const [observations, setObservations] = useState('')
 
+  const { addToast } = useToast()
+
   const handleSubmit = useCallback( async (data: RequestFormData) =>{
+  // const { addToast } = useToast()
     try {
       formRef.current?.setErrors({})
 
@@ -67,6 +71,13 @@ export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, 
         abortEarly:false
       })
       const newData = {...data, destination:title, requestSource}
+
+      addToast({
+        type:'info',
+        title:'Aguarde! 🤩 ',
+        description: ' 📦 estamos enviando sua mensagem '
+      })
+
       const response = await axios.post('/api/submit', newData)
       if(response.status === 200 ){
         setName('')
@@ -74,7 +85,12 @@ export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, 
         setEmail('')
         setPhone('')
         closeModal(false)
-        history.push('/')
+        // history.push('/')
+        addToast({
+          type:'success',
+          title:'Uhull!! 🛫',
+          description: ' 🤗 Aguarde que entraremos em contato'
+        })
       }
 
     } catch (err){
@@ -84,8 +100,13 @@ export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, 
 
         return
       }
+      addToast({
+        type:'error',
+        title: ' 😱 Não foi possível enviar sua mensagem',
+        description: 'Verifique seu e-mail ou tente mais tarde'
+      })
     }
-  },[history])
+  },[addToast])
 
   return (
     <ModalBackground  isPackage={isPackage}  >
