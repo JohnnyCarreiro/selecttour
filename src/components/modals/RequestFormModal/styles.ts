@@ -24,7 +24,7 @@ export const ModalBackground = styled.div<ContainerProps>`
     top: 0;
     width: 500px;
     /* height: ${(props) => props.isPackage ? '500px' : '700px'}; */
-    height: 700px;
+    height: 90%;
     border-radius: 12px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -32,6 +32,11 @@ export const ModalBackground = styled.div<ContainerProps>`
     flex-direction: column;
     padding: 25px;
     overflow-y:auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .modal-container::-webkit-scrollbar {
+    display: none;
   }
 
   .modal-container .title {
