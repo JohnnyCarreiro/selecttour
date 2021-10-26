@@ -31,7 +31,6 @@ export class DomainMailProvider implements IMailProvider{
     }
     async sendMail(message:IMessage):Promise<void>{
       const { to, from, subject, body } = message
-      console.log(this.transporter)
 
         await this.transporter.sendMail({
             to:{

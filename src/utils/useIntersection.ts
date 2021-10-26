@@ -6,8 +6,6 @@ export function useIntersection<Element extends HTMLElement>(element:MutableRefO
   const [isVisible, setIsVisible] = useState(false)
   const currentElement = createRef<MutableRefObject<Element>>()
 
-  console.log('useIntersection:',element.current)
-
   // useEffect(() => {
   //     const observer = new IntersectionObserver(
   //         ([entry]) => {
@@ -26,7 +24,6 @@ export function useIntersection<Element extends HTMLElement>(element:MutableRefO
   //               setIsVisible(entry.isIntersecting);
   //           }, {  }
   //       )
-  //       console.log(observer)
 
   //       // element && observer.observe(element.current);
 

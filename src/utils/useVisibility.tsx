@@ -30,7 +30,6 @@ export function useVisibility< T extends Element>(
     // const bottom = ref.current.getBoundingClientRect().bottom
     // setIsVisible(top + offset >= 0 && top - offset <= window.innerHeight || bottom - offset >= 0 && top + offset <= window.innerHeight)
     const rect = currentElement.current.getBoundingClientRect()
-    console.log(offset, rect.top)
     // setIsVisible(rect.top - offset >= window.innerHeight )
     setIsVisible(rect.top >= 200 && rect.top <= window.innerHeight)
     return (
