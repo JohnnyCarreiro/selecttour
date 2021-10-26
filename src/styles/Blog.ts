@@ -51,12 +51,14 @@ export const Container = styled.div `
     margin: 0 auto;
     width: 100%;
     .posts {
+      position: relative;
       flex: 3;
       width: 100%;
       height: 100%;
       margin-bottom: 2.5rem;
       padding: 1rem;
       .header {
+        padding: 0 1rem;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -90,6 +92,19 @@ export const Container = styled.div `
             padding-top: 1rem;
           } */
           > div {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+
+            text-align: left;
+            img {
+              margin-top: 1em;
+              padding: 0 1em;
+              max-width: inherit;
+              width: 100%;
+              height: auto;
+              border-radius: 5%;
+            }
             *:nth-child(n) {
                 padding-top: 1rem;
               }
