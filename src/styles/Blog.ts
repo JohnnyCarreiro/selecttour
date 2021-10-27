@@ -18,6 +18,9 @@ export const Container = styled.div `
     font: ${({theme}) => theme.texts.sub_title};
     color: ${({theme}) => theme.colors.gray_500};
   }
+  strong {
+    font-weight: 700;
+  }
   .wrapper {
     display: flex;
     flex-direction: column;

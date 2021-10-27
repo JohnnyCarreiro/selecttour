@@ -1,5 +1,6 @@
-import { useBlogPost } from '@/Contexts/BlogPostContext'
-import React, { HTMLAttributes, useEffect, useState } from 'react'
+import React, { HTMLAttributes } from 'react'
+
+import { BlogPostProvider, useBlogPost } from '@/Contexts/BlogPostContext'
 
 import { Container } from './styles'
 
@@ -10,14 +11,11 @@ interface SidebarProps extends HTMLAttributes<HTMLElement>{
   tags?: Array<string>
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({...rest}) => {
+export function Sidebar({...rest}: SidebarProps) {
+  const activeCategory = 'Dicas'
   const activeTag = 'Dicas'
   const { tags, categories } = useBlogPost()
-  const [ newCategories,setCategories ] = useState([] as Array<{category:string}>)
-  useEffect(() => {
-    // setCategories(JSON.parse(JSON.stringify(categories)).map((content: {category:string}) => content.category))
-    setCategories(categories)
-  })
+
   return (
     <Container {...rest}>
       <div className="sidebar-wrapper">
@@ -26,8 +24,8 @@ export const Sidebar: React.FC<SidebarProps> = ({...rest}) => {
           <h3  className="filter-title" >Principais Categorias</h3>
           <div className="filters">
             {categories && categories.map((content) => (
-              <div className={activeTag === content.category ? 'active-filter': ''}>
-                <a>{content.category}</a>
+              <div key={content} className={activeCategory === content ? 'active-filter': ''}>
+                <a>{content}</a>
               </div>
             ))
             }
@@ -36,8 +34,8 @@ export const Sidebar: React.FC<SidebarProps> = ({...rest}) => {
         <div className="filter-content">
           <h3  className="filter-title" >Outras Categorias</h3>
           <div className="filters">
-            {tags && tags.map((content) => (
-              <div className={activeTag === content ? 'active-filter': ''}>
+            {tags && tags.map((content: string) => (
+              <div key={content} className={activeTag === content ? 'active-filter': ''}>
                 <a>{content}</a>
               </div>
             ))
@@ -48,3 +46,5 @@ export const Sidebar: React.FC<SidebarProps> = ({...rest}) => {
     </Container>
   )
 }
+
+Sidebar.Provider = BlogPostProvider

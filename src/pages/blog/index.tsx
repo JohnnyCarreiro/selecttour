@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import {  GetServerSideProps } from 'next'
 import Head from 'next/head'
 
 import Prismic from '@prismicio/client'
@@ -12,15 +13,31 @@ import { Posts } from '@/components/Blog/Posts'
 import { Sidebar } from '@/components/Blog/Sidebar'
 import { Footer } from '@/components/Footer'
 import { getPrismicClient } from '@/services/prismic'
-import { GetServerSideProps, GetStaticProps } from 'next'
-import { useBlogPost, BlogPostProvider } from '@/Contexts/BlogPostContext'
+import { BlogPostProvider } from '@/Contexts/BlogPostContext'
+import { setCookie } from 'nookies'
 
-interface IContentProps {
-  tags:Array<string>
-  categories: Array<{category:string}>
+type PostData = {
+  slug: string
+  image: {
+    url: string
+    alt: string
+  }
+  categories: Array<string>
+  tags: Array<string>
+  author: string
+  title: string
+  snippet: string
+  updatedAt: string
 }
 
-export default function Blog({contents}: any) {
+
+interface IContentProps {
+  contents:{
+    posts: Array<PostData>
+  }
+}
+
+export default function Blog({contents}: IContentProps) {
   const contacts = {
     whatsapp_number: '',
     whatsapp_message: '',
@@ -30,23 +47,27 @@ export default function Blog({contents}: any) {
     instagram: '',
     linkedin: '',
   }
-  console.log(contents)
 
-  const { tags , categories, posts:apiPost } = contents
+  const { posts } = contents
 
-  const { setTags, setCategories } = useBlogPost()
+  const [mainImage, setMainImage] = useState<PostData["image"]>({} as PostData["image"])
+
   useEffect(() => {
-    setTags(tags)
-    setCategories(categories)
-  },[])
-  console.log('Categorias', categories)
+    const image = posts[Math.floor(Math.random() * (posts.length - 0)) + 0]?.image
+
+    setMainImage(image)
+  },[posts])
+
+
+  console.log(mainImage?.url)
+
   return (
     <Container>
       <Head>
         <title>Select Tour - Blog</title>
       </Head>
       <Header contacts={contacts} />
-      <Hero image={'https://images.prismic.io/selecttour/4a8c29d7-1559-4c96-8e2f-863c65040f39_foto-abre-pgalinhas011.jpg'} >
+      <Hero image={mainImage?.url} >
         <div className="wrapper">
           <div className="hero-content" >
             <img src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
@@ -68,15 +89,13 @@ export default function Blog({contents}: any) {
               </h3>
             </div>
             <div className="widget-content">
-              <MainPost className="elevation" />
-              <Posts className="elevation"/>
+              <MainPost contentData={posts[0]} className="elevation" />
+              <Posts contentData={posts} className="elevation"/>
             </div>
           </section>
           <aside className="sidebar">
             <Sidebar
               className="elevation"
-              categories={categories}
-              tags={tags}
             />
           </aside>
         </div>
@@ -85,15 +104,13 @@ export default function Blog({contents}: any) {
     </Container>
   )
 }
-// Blog.provider = BlogPostProvider
-export const getStaticProps: GetStaticProps = async () => {
+Blog.provider = BlogPostProvider
+export const getServerSideProps: GetServerSideProps = async (context) => {
+
+  const { query } = context
 
   const prismic = getPrismicClient()
 
-  //Fetching all posts to main blog page
-  const response = await prismic.query([
-    Prismic.predicates.at('document.type', 'post')
-  ])
   //Fetch all categories
   const fetchCategories = await prismic.query([
     Prismic.predicates.at('document.type', 'category')
@@ -101,20 +118,30 @@ export const getStaticProps: GetStaticProps = async () => {
   //Fetching all Tags
   const tags = await prismic.getTags()
 
-  // const response2 = await prismic.query([
-  //   Prismic.predicates.at('document.type', 'post'),
-  //   Prismic.Predicates.at('my.post.related_category', 'YXcMShIAACwAyMWh')
-  // ])
-  // const response3 = await prismic.query([
-  //   Prismic.predicates.at('document.type', 'post'),
-  //   Prismic.Predicates.at('my.post.related_category', 'YXcMShIAACwAyMWh'),
-  //   Prismic.predicates.any('document.tags',[])
-  // ])
   const categories = fetchCategories.results.map(category => {
-    return {
-      category: RichText.asText(category.data.category)
-    }
+    return RichText.asText(category.data.category)
   })
+
+
+  setCookie(context, 'selecttour.blog.tags', String(tags), {
+    maxAge: 60 * 60 * 24 * 7 ,// One week
+    path: "/"
+  })
+  setCookie(context, 'selecttour.blog.categories', String(categories), {
+    maxAge: 60 * 60 * 24 * 7 ,// One week
+    path: "/"
+  })
+
+  //Fetching all posts to main blog page
+  const page = query ? Number(query) : 1
+  const response = await prismic.query([
+    Prismic.predicates.at('document.type', 'post')
+  ],
+    {
+      orderings : '[document.last_publication_date desc]' ,
+      pageSize : 10, page
+    },
+  )
 
   const posts = response.results.map(post => {
     return {
@@ -137,22 +164,13 @@ export const getStaticProps: GetStaticProps = async () => {
   } )
 
   const contents = {
-    categories,
-    tags,
-    posts
+    posts,
   }
-
-
-
-  // console.log('Conteúdo',JSON.stringify(content, null , 2))
-  // console.log('o resto:',JSON.stringify(content.splice(-1,1), null , 2))
-  // console.log('Tags:',JSON.stringify(tags, null , 2))
-
 
   return {
     props: {
       contents
     },
-    revalidate: 60 + 60 //24 hours 60 * 60 * 24
+    // revalidate: 60 + 60 //24 hours 60 * 60 * 24
   }
 }
