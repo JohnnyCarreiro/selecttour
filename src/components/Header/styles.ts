@@ -144,6 +144,7 @@ export const NavContainer = styled.div`
         }
         nav.showMenu{
             left:0;
+            display: inline-block;
         }
         nav ul{
             display:block;

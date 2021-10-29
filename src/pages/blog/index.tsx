@@ -58,9 +58,6 @@ export default function Blog({contents}: IContentProps) {
     setMainImage(image)
   },[posts])
 
-
-  console.log(mainImage?.url)
-
   return (
     <Container>
       <Head>
@@ -104,7 +101,7 @@ export default function Blog({contents}: IContentProps) {
     </Container>
   )
 }
-Blog.provider = BlogPostProvider
+// Blog.provider = BlogPostProvider
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const { query } = context

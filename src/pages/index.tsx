@@ -23,7 +23,7 @@ import { getPrismicClient } from '@/services/prismic'
 import { IContent } from '@/interfaces/IHome'
 
 
-export default function Home({content}: IContent) {
+export const Home:React.FC<IContent> = ({content}) => {
   const {
     show_case_section,
     how_we_work_section,
@@ -143,6 +143,8 @@ export default function Home({content}: IContent) {
     </Container>
   )
 }
+
+export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
 

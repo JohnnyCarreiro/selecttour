@@ -81,6 +81,7 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
               id={navLinkId}
               className={activeLinkId === navLinkId ? 'active' : ''}
               href={`/#${scrollToId}`}
+              onClick={handleClick}
               {...rest}
             >
               {navLinkName}

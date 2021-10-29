@@ -3,9 +3,9 @@ import styled from 'styled-components'
 export const Container = styled.div`
 
   position:fixed;
-  top:0;
+  top:100px;
   right:0;
   padding:30px;
   overflow:hidden;
-  z-index:2000;
+  z-index:1000;
 `

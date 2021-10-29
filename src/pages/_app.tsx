@@ -15,14 +15,14 @@ export default function MyApp({Component, pageProps}:MyAppProps){
   // const ContextProvider = Component.getInitialProps || Component
     return(
         <ThemeProvider theme={theme} >
-          <ToastProvider>
-            <NavProvider>
+          <NavProvider>
+            <ToastProvider>
               <BlogPostProvider>
                 <Component { ...pageProps }/>
               </BlogPostProvider>
               <GlobalStyle />
-            </NavProvider>
-          </ToastProvider>
+            </ToastProvider>
+          </NavProvider>
         </ThemeProvider>
     )
 }

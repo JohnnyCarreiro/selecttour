@@ -29,8 +29,6 @@ export const Posts: React.FC<MainPostProps> = ({contentData, ...rest}) => {
   const [posts, setPosts] =useState<Array<ContentData>>([] as Array<ContentData>)
 
   useEffect(() => {
-    console.log(contentData, posts)
-    // console.log(contentData.splice(0))
     if(contentData.length > 1) {
       setPosts(contentData.slice(1, contentData.length) as Array<ContentData>)
     }

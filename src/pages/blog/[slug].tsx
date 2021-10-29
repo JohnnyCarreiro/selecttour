@@ -31,12 +31,6 @@ interface IPostProps {
 
 export default function Post({ post, error }: IPostProps) {
 
-  // const [post, setPost] = useState()
-
-  const { 'test.cookie':test } = parseCookies()
-
-  console.log('Teste: ', test)
-
   const { locale } = useRouter()
   const contacts = {
     whatsapp_number: '',
@@ -162,8 +156,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const prismic = getPrismicClient(req)
   const response = await prismic.getByUID('post', String(slug),{})
 
-  console.log(response)
-
   try {
 
     //Fetch all categories
@@ -216,23 +208,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   }
 
-  const post = {
-    slug,
-    image: 'https://images.prismic.io/selecttour/b64d11a8-0407-470a-b9e2-7cc6b16bc7dd_La+Torre.jpg',
-    title: 'Título foda',
-    content: '<p>A Select Tour Viagens é uma agência de viagens focada no atendimento ao cliente. Nossa missão é proporcionar uma experiência diferenciada às <strong>pessoas que buscam viagens</strong> tanto a lazer quanto a trabalho, oferecendo atendimento personalizado. </p><p>Seja uma simples passagem aérea, ou um roteiro personalizado, estamos aqui para ajudá-lo a realizar o seu sonho de viajar! Nossos principais produtos são: passagens aéreas nacionais e internacionais, hotéis nacionais e internacionais, seguro viagem, locação de carro, passeios, transfers, ingressos, pacotes promocionais, roteiros completos com guia, roteiros personalizados, assessoria para vistos. Tudo isso aliado a um atendimento rápido e assessoria completa, que acompanhará você desde o orçamento, fechamento da viagem, embarque e retorno.</p><p>A Select Tour Viagens é uma agência de viagens focada no atendimento ao cliente. Nossa missão é proporcionar uma experiência diferenciada às pessoas que buscam viagens tanto a lazer quanto a trabalho, oferecendo atendimento personalizado. </p><p>Seja uma simples passagem aérea, ou um roteiro personalizado, estamos aqui para ajudá-lo a realizar o seu sonho de viajar! Nossos principais produtos são: passagens aéreas nacionais e internacionais, hotéis nacionais e internacionais, seguro viagem, locação de carro, passeios, transfers, ingressos, pacotes promocionais, roteiros completos com guia, roteiros personalizados, assessoria para vistos. Tudo isso aliado a um atendimento rápido e assessoria completa, que acompanhará você desde o orçamento, fechamento da viagem, embarque e retorno.</p><p>A Select Tour Viagens é uma agência de viagens focada no atendimento ao cliente. Nossa missão é proporcionar uma experiência diferenciada às pessoas que buscam viagens tanto a lazer quanto a trabalho, oferecendo atendimento personalizado. </p><p>Seja uma simples passagem aérea, ou um roteiro personalizado, estamos aqui para ajudá-lo a realizar o seu sonho de viajar! Nossos principais produtos são: passagens aéreas nacionais e internacionais, hotéis nacionais e internacionais, seguro viagem, locação de carro, passeios, transfers, ingressos, pacotes promocionais, roteiros completos com guia, roteiros personalizados, assessoria para vistos. Tudo isso aliado a um atendimento rápido e assessoria completa, que acompanhará você desde o orçamento, fechamento da viagem, embarque e retorno.<img src="https://images.prismic.io/selecttour/b64d11a8-0407-470a-b9e2-7cc6b16bc7dd_La+Torre.jpg"></img></p><p>A Select Tour Viagens é uma agência de viagens focada no atendimento ao cliente. Nossa missão é proporcionar uma experiência diferenciada às pessoas que buscam viagens tanto a lazer quanto a trabalho, oferecendo atendimento personalizado. </p><p>Seja uma simples passagem aérea, ou um roteiro personalizado, estamos aqui para ajudá-lo a realizar o seu sonho de viajar! Nossos principais produtos são: passagens aéreas nacionais e internacionais, hotéis nacionais e internacionais, seguro viagem, locação de carro, passeios, transfers, ingressos, pacotes promocionais, roteiros completos com guia, roteiros personalizados, assessoria para vistos. Tudo isso aliado a um atendimento rápido e assessoria completa, que acompanhará você desde o orçamento, fechamento da viagem, embarque e retorno.</p><p>A Select Tour Viagens é uma agência de viagens focada no atendimento ao cliente. Nossa missão é proporcionar uma experiência diferenciada às pessoas que buscam viagens tanto a lazer quanto a trabalho, oferecendo atendimento personalizado. </p><p>Seja uma simples passagem aérea, ou um roteiro personalizado, estamos aqui para ajudá-lo a realizar o seu sonho de viajar! Nossos principais produtos são: passagens aéreas nacionais e internacionais, hotéis nacionais e internacionais, seguro viagem, locação de carro, passeios, transfers, ingressos, pacotes promocionais, roteiros completos com guia, roteiros personalizados, assessoria para vistos. Tudo isso aliado a um atendimento rápido e assessoria completa, que acompanhará você desde o orçamento, fechamento da viagem, embarque e retorno.</p><p>A Select Tour Viagens é uma agência de viagens focada no atendimento ao cliente. Nossa missão é proporcionar uma experiência diferenciada às pessoas que buscam viagens tanto a lazer quanto a trabalho, oferecendo atendimento personalizado. </p><p>Seja uma simples passagem aérea, ou um roteiro personalizado, estamos aqui para ajudá-lo a realizar o seu sonho de viajar! Nossos principais produtos são: passagens aéreas nacionais e internacionais, hotéis nacionais e internacionais, seguro viagem, locação de carro, passeios, transfers, ingressos, pacotes promocionais, roteiros completos com guia, roteiros personalizados, assessoria para vistos. Tudo isso aliado a um atendimento rápido e assessoria completa, que acompanhará você desde o orçamento, fechamento da viagem, embarque e retorno.</p><p>A Select Tour Viagens é uma agência de viagens focada no atendimento ao cliente. Nossa missão é proporcionar uma experiência diferenciada às pessoas que buscam viagens tanto a lazer quanto a trabalho, oferecendo atendimento personalizado. </p><p>Seja uma simples passagem aérea, ou um roteiro personalizado, estamos aqui para ajudá-lo a realizar o seu sonho de viajar! Nossos principais produtos são: passagens aéreas nacionais e internacionais, hotéis nacionais e internacionais, seguro viagem, locação de carro, passeios, transfers, ingressos, pacotes promocionais, roteiros completos com guia, roteiros personalizados, assessoria para vistos. Tudo isso aliado a um atendimento rápido e assessoria completa, que acompanhará você desde o orçamento, fechamento da viagem, embarque e retorno.</p><p>A Select Tour Viagens é uma agência de viagens focada no atendimento ao cliente. Nossa missão é proporcionar uma experiência diferenciada às pessoas que buscam viagens tanto a lazer quanto a trabalho, oferecendo atendimento personalizado. </p><p>Seja uma simples passagem aérea, ou um roteiro personalizado, estamos aqui para ajudá-lo a realizar o seu sonho de viajar! Nossos principais produtos são: passagens aéreas nacionais e internacionais, hotéis nacionais e internacionais, seguro viagem, locação de carro, passeios, transfers, ingressos, pacotes promocionais, roteiros completos com guia, roteiros personalizados, assessoria para vistos. Tudo isso aliado a um atendimento rápido e assessoria completa, que acompanhará você desde o orçamento, fechamento da viagem, embarque e retorno.</p>',
-    updatedAt: new Date().toLocaleDateString('pt-BR',{
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric'
-    })
-  }
 
-  return {
-    props:{
-      post,
-    }
-  }
   // return {
   //   props: {
   //     post,

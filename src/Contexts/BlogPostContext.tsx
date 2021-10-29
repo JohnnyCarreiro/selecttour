@@ -18,7 +18,6 @@ export const BlogPostContext = createContext<IBlogPostContextData>({} as IBlogPo
 
 const BlogPostProvider:React.FC<BlogPostProps> = ({props, children}) => {
 // function BlogPostProvider({props, children}: BlogPostProps) {
-  console.log('Porvider:', props)
   const [ categories, setCategories ] = useState<Array<string>>([] as Array<string>)
   const [ tags, setTags ] = useState<Array<string>>([] as Array<string>)
 
