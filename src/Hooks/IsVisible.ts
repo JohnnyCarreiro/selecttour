@@ -22,7 +22,7 @@ function useIntersectionObserver(
   }
 
   useEffect(() => {
-    const node = elementRef?.current
+    const node = elementRef?.current // DOM Ref
     const hasIOSupport = !!window.IntersectionObserver
 
     if (!hasIOSupport || frozen || !node) return

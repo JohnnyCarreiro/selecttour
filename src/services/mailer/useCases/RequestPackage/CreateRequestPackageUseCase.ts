@@ -62,6 +62,10 @@ export class CreateRequestPackageUseCase {
                 name:'Select Tour',
                 address:'contato@selecttourviagens.com.br'
               },
+              // from:{
+              //   name: data.name ,
+              //   address: data.email
+              // },
               from:{
                 name:'Select Tour',
                 address:'contato@selecttourviagens.com.br'

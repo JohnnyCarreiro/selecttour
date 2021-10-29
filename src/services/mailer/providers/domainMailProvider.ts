@@ -25,6 +25,8 @@ export class DomainMailProvider implements IMailProvider{
               pass:this.pass,
           },
           tls: {rejectUnauthorized: false},
+          // sendmail: true,
+          // newline: 'unix',
         })
     }
     async sendMail(message:IMessage):Promise<void>{

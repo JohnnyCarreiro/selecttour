@@ -44,6 +44,7 @@ export const Destination:React.FC<PackageProps> = ({ children, content_data, ope
               text="Saiba mais"
               primaryColor
               isPrimary={false}
+              // onClick={() => openModal(true)}
               onClick={() => setModalState(true)}
             />
           </div>

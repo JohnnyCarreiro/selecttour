@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+// const height = window.innerHeight.toString()
 
 export const Container = styled.header`
 position:fixed;

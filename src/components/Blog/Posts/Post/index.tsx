@@ -47,6 +47,11 @@ export const Post: React.FC<PostProps> = ({post}) => {
           <div className="jump-link flat-button">
             <Button text="Contiue Lendo" isPrimary={false} primaryColor link={`/blog/${slug}`} />
           </div>
+          {/* <div className="jump-link flat-button">
+            < a href="https://polar-way2themes.blogspot.com/2016/03/easiest-ice-cream-youll-ever-make-no.html#more" title="Easiest Ice Cream You’ll Ever Make. No Ice-cream Maker">
+              Continue Reading
+            </a>
+          </div> */}
         </div>
       </div>
     </Container>

@@ -1,8 +1,10 @@
 import { GetServerSideProps } from "next"
+import { useRouter } from "next/router"
 import Head from "next/head"
+import Link from "next/link"
 import Prismic from '@prismicio/client'
 import { RichText } from "prismic-dom"
-import { setCookie } from "nookies"
+import { parseCookies, setCookie } from "nookies"
 
 import { Hero } from "@/components/Blog/Hero"
 import { Header } from "@/components/Header"
@@ -29,6 +31,7 @@ interface IPostProps {
 
 export default function Post({ post, error }: IPostProps) {
 
+  const { locale } = useRouter()
   const contacts = {
     whatsapp_number: '',
     whatsapp_message: '',
@@ -39,6 +42,13 @@ export default function Post({ post, error }: IPostProps) {
     linkedin: '',
   }
 
+  // const {
+  //   slug,
+  //   title,
+  //   image,
+  //   content,
+  //   updatedAt,
+  // } = post
 
   return (
     <Container>
@@ -63,6 +73,13 @@ export default function Post({ post, error }: IPostProps) {
             <section className="wrapper">
               <div className="main-section">
                 <article className="posts">
+                  {/* <div className="header">
+                    <h2>Confira nossas últimas postagens</h2>
+                    <h3>
+                      Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá.
+                      Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.
+                    </h3>
+                  </div> */}
                   <div className="widget-content">
                    <div className="post-content elevation">
                     <h2>{post.title}</h2>
@@ -76,8 +93,16 @@ export default function Post({ post, error }: IPostProps) {
                 </aside>
               </div>
             </section>
+            <Footer />
+            {/* <article className={''} >
+              <h1>{post.title}</h1>
+              <time>{post.updatedAt}</time>
+              <div
+                className={''}
+                dangerouslySetInnerHTML={{ __html:post.content }}
+              />
+            </article> */}
           </main>
-          <Footer />
         </>
       )}
       {error && (
@@ -100,6 +125,13 @@ export default function Post({ post, error }: IPostProps) {
           <section className="wrapper">
             <div className="main-section">
               <article className="posts">
+                {/* <div className="header">
+                  <h2>Confira nossas últimas postagens</h2>
+                  <h3>
+                    Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá.
+                    Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.
+                  </h3>
+                </div> */}
                 <div className="widget-content">
                   <div className="post-content elevation">
                   <h2>Post não encontrado</h2>
@@ -126,10 +158,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   try {
 
+    //Fetch all categories
     const fetchCategories = await prismic.query([
       Prismic.predicates.at('document.type', 'category')
     ])
-
+    //Fetching all Tags
     const tags = await prismic.getTags()
 
     const categories = fetchCategories.results.map(category => {
@@ -174,4 +207,47 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       }
     }
   }
+
+
+  // return {
+  //   props: {
+  //     post,
+  //     error: {
+  //       slug
+  //     }
+  //   }
+  // }
+
+
+  // try {
+  //   const prismic = getPrismicClient(req)
+  //   const response = await prismic.getByUID('posts', String(slug),{
+  //   lang: String(locale)
+  // })
+
+  // const post = {
+  //   slug,
+  //   title: RichText.asText(response.data.title),
+  //   content: RichText.asHtml(response.data.content),
+  //   updatedAt: new Date(String(response.last_publication_date)).toLocaleDateString('en-US',{
+  //     day: '2-digit',
+  //     month: 'long',
+  //     year: 'numeric'
+  //   })
+  // }
+
+  // return {
+  //   props:{
+  //     post,
+  //   }
+  // }
+  // } catch (error) {
+  //   return {
+  //     props: {
+  //       error: {
+  //         slug
+  //       }
+  //     }
+  //   }
+  // }
 }

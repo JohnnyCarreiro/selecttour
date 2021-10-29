@@ -14,11 +14,14 @@ import Testimonials from '@/components/sections/Testimonials'
 import { Latests } from '@/components/sections/Latests'
 import { Contact } from '@/components/sections/Contact'
 import { Footer } from '@/components/Footer'
-import { getPrismicClient } from '@/services/prismic'
-import { IContent } from '@/interfaces/IHome'
-import { useNav } from '@/Hooks/useNav'
+import { useNav } from '../Hooks/useNav'
+// import { NavContext, NavProvider } from '../Contexts/NavContext'
 
 import { Container } from '../styles/Home'
+
+import { getPrismicClient } from '@/services/prismic'
+import { IContent } from '@/interfaces/IHome'
+
 
 export const Home:React.FC<IContent> = ({content}) => {
   const {

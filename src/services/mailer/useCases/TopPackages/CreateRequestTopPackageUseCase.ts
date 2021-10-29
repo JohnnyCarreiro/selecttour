@@ -32,11 +32,16 @@ export class CreateRequestTopPackageUseCase {
                 name:'Select Tour',
                 address:'contato@selecttourviagens.com.br'
               },
+              // from:{
+              //   name: data.name ,
+              //   address: data.email
+              // },
               from:{
                 name:'Select Tour',
                 address:'contato@selecttourviagens.com.br'
               },
               subject:`Contato do Site - ${data.requestSource}`,
+              //Complete with requestPackage fields
               body:`
                 Nome: ${data.name}, <br/>
                 Sobrenome: ${data.surname}, <br/>

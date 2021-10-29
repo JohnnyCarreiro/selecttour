@@ -17,6 +17,7 @@ import { ModalBackground } from './styles'
 
 interface KnowMoreModalProps {
   closeModal: Dispatch<SetStateAction<boolean>>
+  // openForm: Dispatch<SetStateAction<boolean>>
   title?: string
   informations?: string
   isPackage: boolean

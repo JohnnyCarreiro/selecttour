@@ -12,6 +12,7 @@ interface MyAppProps extends AppProps {}
 
 
 export default function MyApp({Component, pageProps}:MyAppProps){
+  // const ContextProvider = Component.getInitialProps || Component
     return(
         <ThemeProvider theme={theme} >
           <NavProvider>
