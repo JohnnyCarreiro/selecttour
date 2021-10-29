@@ -9,7 +9,6 @@ export function useOnScreen<T extends HTMLElement> (ref: React.MutableRefObject<
       {
         // threshold: [0.25, 0.5, 0.75],
         threshold: [0.75],
-        // rootMargin: '-20px 0px'
       }
     )
 
@@ -17,7 +16,7 @@ export function useOnScreen<T extends HTMLElement> (ref: React.MutableRefObject<
       return () => {
         observer.disconnect();
       }
-    },[])
+    })
 
     return isOnScreen;
   };
