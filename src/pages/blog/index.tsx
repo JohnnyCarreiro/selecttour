@@ -35,9 +35,10 @@ interface IContentProps {
   contents:{
     posts: Array<PostData>
   }
+  error?: { message: string }
 }
 
-export default function Blog({contents}: IContentProps) {
+export default function Blog({contents, error}: IContentProps) {
   const contacts = {
     whatsapp_number: '',
     whatsapp_message: '',
@@ -86,8 +87,17 @@ export default function Blog({contents}: IContentProps) {
               </h3>
             </div>
             <div className="widget-content">
-              <MainPost contentData={posts[0]} className="elevation" />
-              <Posts contentData={posts} className="elevation"/>
+              {posts
+                ? (
+                  <>
+                    <MainPost contentData={posts[0]} className="elevation" />
+                    <Posts contentData={posts} className="elevation"/>
+                  </>
+                )
+                : (
+                  <p>{error?.message}</p>
+                )
+              }
             </div>
           </section>
           <aside className="sidebar">
@@ -108,66 +118,77 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const prismic = getPrismicClient()
 
-  //Fetch all categories
-  const fetchCategories = await prismic.query([
-    Prismic.predicates.at('document.type', 'category')
-  ])
-  //Fetching all Tags
-  const tags = await prismic.getTags()
+  try {
+    //Fetch all categories
+    const fetchCategories = await prismic.query([
+      Prismic.predicates.at('document.type', 'category')
+    ])
+    //Fetching all Tags
+    const tags = await prismic.getTags()
 
-  const categories = fetchCategories.results.map(category => {
-    return RichText.asText(category.data.category)
-  })
+    const categories = fetchCategories.results.map(category => {
+      return RichText.asText(category.data.category)
+    })
 
 
-  setCookie(context, 'selecttour.blog.tags', String(tags), {
-    maxAge: 60 * 60 * 24 * 7 ,// One week
-    path: "/"
-  })
-  setCookie(context, 'selecttour.blog.categories', String(categories), {
-    maxAge: 60 * 60 * 24 * 7 ,// One week
-    path: "/"
-  })
+    setCookie(context, 'selecttour.blog.tags', String(tags), {
+      maxAge: 60 * 60 * 24 * 7 ,// One week
+      path: "/"
+    })
+    setCookie(context, 'selecttour.blog.categories', String(categories), {
+      maxAge: 60 * 60 * 24 * 7 ,// One week
+      path: "/"
+    })
 
-  //Fetching all posts to main blog page
-  const page = query ? Number(query) : 1
-  const response = await prismic.query([
-    Prismic.predicates.at('document.type', 'post')
-  ],
-    {
-      orderings : '[document.last_publication_date desc]' ,
-      pageSize : 10, page
-    },
-  )
-
-  const posts = response.results.map(post => {
-    return {
-      slug: post.uid,
-      image: {
-        url: post.data.image.url,
-        alt: post.data.image.alt
+    //Fetching all posts to main blog page
+    const page = query ? Number(query) : 1
+    const response = await prismic.query([
+      Prismic.predicates.at('document.type', 'post')
+    ],
+      {
+        orderings : '[document.last_publication_date desc]' ,
+        pageSize : 10, page
       },
-      categories: post.data.related_category.slug,
-      tags: post.tags,
-      author: post.data.autohr.slug,
-      title: RichText.asText(post.data.title),
-      snippet: post.data.content.find((content:any) => content.type === 'paragraph')?.text ?? '',
-      updatedAt: new Date(String(post.last_publication_date)).toLocaleDateString('pt-BR',{
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-      }),
+    )
+
+    const posts = response.results.map(post => {
+      return {
+        slug: post.uid,
+        image: {
+          url: post.data.image.url,
+          alt: post.data.image.alt
+        },
+        categories: post.data.related_category.slug,
+        tags: post.tags,
+        author: post.data.autohr.slug,
+        title: RichText.asText(post.data.title),
+        snippet: post.data.content.find((content:any) => content.type === 'paragraph')?.text ?? '',
+        updatedAt: new Date(String(post.last_publication_date)).toLocaleDateString('pt-BR',{
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric'
+        }),
+      }
+    } )
+
+    const contents = {
+      posts,
     }
-  } )
 
-  const contents = {
-    posts,
-  }
+    return {
+      props: {
+        contents
+      },
+      // revalidate: 60 + 60 //24 hours 60 * 60 * 24
+    }
 
-  return {
-    props: {
-      contents
-    },
-    // revalidate: 60 + 60 //24 hours 60 * 60 * 24
+  } catch (error) {
+    return {
+      props: {
+        error: {
+          message: 'Algum erro acontenceu em nosso Servidor, volte mais tarde ou entre em contato para nos comunicar do erro'
+        }
+      }
+    }
   }
 }
