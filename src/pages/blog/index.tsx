@@ -101,18 +101,16 @@ export default function Blog({contents}: IContentProps) {
     </Container>
   )
 }
-// Blog.provider = BlogPostProvider
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const { query } = context
 
   const prismic = getPrismicClient()
 
-  //Fetch all categories
   const fetchCategories = await prismic.query([
     Prismic.predicates.at('document.type', 'category')
   ])
-  //Fetching all Tags
+
   const tags = await prismic.getTags()
 
   const categories = fetchCategories.results.map(category => {
@@ -129,7 +127,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     path: "/"
   })
 
-  //Fetching all posts to main blog page
   const page = query ? Number(query) : 1
   const response = await prismic.query([
     Prismic.predicates.at('document.type', 'post')
@@ -168,6 +165,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       contents
     },
-    // revalidate: 60 + 60 //24 hours 60 * 60 * 24
   }
 }

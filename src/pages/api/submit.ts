@@ -12,7 +12,6 @@ export default async (request:NextApiRequest, response:NextApiResponse) => {
       case 'Solicite um Pacote':
         await createRequestPackageController.handle(request,response)
         response.status(200).send({ok: true})
-        // return
         break;
 
 
@@ -24,13 +23,11 @@ export default async (request:NextApiRequest, response:NextApiResponse) => {
       case 'Destinos Tops':
         await createRequestTopDestinationController.handle(request,response)
         response.status(200).send({ok: true})
-        // return
         break;
 
       case 'Contato':
         await createRequestContactController.handle(request,response)
         response.status(200).send({ok: true})
-        // return
         break;
 
       default:
@@ -40,10 +37,4 @@ export default async (request:NextApiRequest, response:NextApiResponse) => {
       response.status(500).send(error)
   }
 
-  // try {
-  //    await createRequestController.handle(request,response)
-  //    response.json({ok: 'mensagem enviada'})
-  // } catch (error) {
-  //   response.status(500).json({error})
-  // }
 }

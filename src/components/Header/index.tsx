@@ -15,7 +15,6 @@ interface NavProps {
     instagram: string
     linkedin: string
   }
-  // current:string
   current?:  React.RefObject<HTMLElement>
 }
 export const Header: React.FC<NavProps> = ({current, contacts}) => {
@@ -64,10 +63,9 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
     const { activeLinkId, setActiveLink } = useContext(NavContext)
     const handleClick = useCallback(() => {
       setActiveLink(navLinkId)
-      Router.events.on('routeChangeComplete', () => {
-        // setDocument(document)
-        _document.getElementById(scrollToId)!.scrollIntoView({behavior: 'smooth'})
-      })
+      // Router.events.on('routeChangeComplete', () => {
+      //   _document.getElementById(scrollToId)!.scrollIntoView({behavior: 'smooth'})
+      // })
       _document.getElementById(scrollToId)!.scrollIntoView({behavior: 'smooth'})
       closeMobileMenu()
     },[])

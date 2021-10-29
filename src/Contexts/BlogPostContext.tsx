@@ -17,7 +17,6 @@ interface BlogPostProps extends HTMLAttributes<HTMLElement> {
 export const BlogPostContext = createContext<IBlogPostContextData>({} as IBlogPostContextData)
 
 const BlogPostProvider:React.FC<BlogPostProps> = ({props, children}) => {
-// function BlogPostProvider({props, children}: BlogPostProps) {
   const [ categories, setCategories ] = useState<Array<string>>([] as Array<string>)
   const [ tags, setTags ] = useState<Array<string>>([] as Array<string>)
 

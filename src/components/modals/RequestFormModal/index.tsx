@@ -47,7 +47,6 @@ export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, 
   const { addToast } = useToast()
 
   const handleSubmit = useCallback( async (data: RequestFormData) =>{
-  // const { addToast } = useToast()
     try {
       formRef.current?.setErrors({})
 
@@ -85,7 +84,6 @@ export const RequestFormModal: React.FC<RequestFormModalProps> = ({ closeModal, 
         setEmail('')
         setPhone('')
         closeModal(false)
-        // history.push('/')
         addToast({
           type:'success',
           title:'Uhull!! 🛫',

@@ -38,10 +38,6 @@ export const Posts: React.FC<MainPostProps> = ({contentData, ...rest}) => {
       {posts && posts.map(post => (
         <Post key={post.slug} post={post} />
       ))}
-      {/* <Post />
-      <Post />
-      <Post />
-      <Post /> */}
     </Container>
   )
 }
