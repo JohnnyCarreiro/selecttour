@@ -8,10 +8,12 @@ interface SidebarProps extends HTMLAttributes<HTMLElement>{
   categories?: Array<{
     category: string
   }>
+  filteredCategory?: string
+  filteredTag?: string
   tags?: Array<string>
 }
 
-export function Sidebar({...rest}: SidebarProps) {
+export function Sidebar({filteredCategory, filteredTag,  ...rest}: SidebarProps) {
   const activeCategory = 'Dicas'
   const activeTag = 'Dicas'
   const { tags, categories } = useBlogPost()
@@ -24,7 +26,7 @@ export function Sidebar({...rest}: SidebarProps) {
           <h3  className="filter-title" >Principais Categorias</h3>
           <div className="filters">
             {categories && categories.map((content) => (
-              <div key={content} className={activeCategory === content ? 'active-filter': ''}>
+              <div key={content} className={filteredCategory === String(content.toLocaleLowerCase()) ? 'active-filter': ''}>
                 <a>{content}</a>
               </div>
             ))
@@ -35,7 +37,7 @@ export function Sidebar({...rest}: SidebarProps) {
           <h3  className="filter-title" >Outras Categorias</h3>
           <div className="filters">
             {tags && tags.map((content: string) => (
-              <div key={content} className={activeTag === content ? 'active-filter': ''}>
+              <div key={content} className={filteredTag == String(content.toLocaleLowerCase()) ? 'active-filter': ''}>
                 <a>{content}</a>
               </div>
             ))

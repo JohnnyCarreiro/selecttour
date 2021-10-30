@@ -1,6 +1,21 @@
 import styled from 'styled-components'
 
 export const Container = styled.div<{primaryColor:boolean}>`
+  /* button:disabled,
+  button[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  } */
+  /* button:disabled,
+  button[disabled]{
+    opacity: 0.6;
+    cursor: default;
+
+    :hover {
+      opacity: 0.6;
+    }
+  } */
   .primary{
     background-color:${({primaryColor})=> primaryColor ? ({theme})=> theme.colors.primary :({theme})=> theme.colors.secondary };
     display:flex;
@@ -52,6 +67,20 @@ export const Container = styled.div<{primaryColor:boolean}>`
     opacity:0.7;
     a{
       color:${({primaryColor})=> primaryColor ? ({theme})=> theme.colors.white :({theme})=> theme.colors.white };
+    }
+  }
+  button:disabled,
+  button[disabled]{
+    opacity: 0.6;
+    cursor: default;
+
+    :hover {
+      background: transparent;
+      color:${({theme})=> theme.colors.primary};
+      opacity: 0.6;
+      > * {
+        color:${({theme})=> theme.colors.primary};
+      }
     }
   }
 `

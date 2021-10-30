@@ -15,6 +15,8 @@ import { Footer } from '@/components/Footer'
 import { getPrismicClient } from '@/services/prismic'
 import { BlogPostProvider } from '@/Contexts/BlogPostContext'
 import { setCookie } from 'nookies'
+import { useRouter } from 'next/router'
+import Button from '@/components/Button'
 
 type PostData = {
   slug: string
@@ -35,10 +37,16 @@ interface IContentProps {
   contents:{
     posts: Array<PostData>
   }
+  pages: {
+    currentPage: number
+    totalPages: number
+  },
+  filteredCategory?:string
   error?: { message: string }
 }
 
-export default function Blog({contents, error}: IContentProps) {
+export default function Blog({contents, pages, filteredCategory, error}: IContentProps) {
+
   const contacts = {
     whatsapp_number: '',
     whatsapp_message: '',
@@ -50,6 +58,30 @@ export default function Blog({contents, error}: IContentProps) {
   }
 
   const { posts } = contents
+
+  const router = useRouter()
+
+  const { pathname, query } = router
+  console.log('Path:', pathname)
+  console.log('route:', router)
+
+  const loadPosts = (pageNumber: number) => {
+    router.push(`${pathname}?page=${pageNumber}`)
+  }
+
+  const prevPage = () => {
+
+    if(pages.currentPage === 1) return
+    const pageNumber = pages.currentPage -1
+
+    loadPosts(pageNumber)
+  }
+  const nextPage = () => {
+    if(pages.currentPage === pages.totalPages) return
+    const pageNumber = pages.currentPage +1
+
+    loadPosts(pageNumber)
+  }
 
   const [mainImage, setMainImage] = useState<PostData["image"]>({} as PostData["image"])
 
@@ -91,18 +123,55 @@ export default function Blog({contents, error}: IContentProps) {
                 ? (
                   <>
                     <MainPost contentData={posts[0]} className="elevation" />
-                    <Posts contentData={posts} className="elevation"/>
+                    {posts.length > 1 && (
+                      <Posts contentData={posts} className="elevation"/>
+                    )}
                   </>
                 )
                 : (
                   <p>{error?.message}</p>
                 )
               }
+              <div className="pagination">
+                <div>
+                <Button
+                  text={"Primeira Página"}
+                  isPrimary={false}
+                  primaryColor={true}
+                  onClick={() => router.push(`/blog?page=1`)}
+                />
+                </div>
+                <div>
+                  <Button
+                    disabled={pages.currentPage === 1}
+                    text={"Anterior"} isPrimary={false}
+                    primaryColor={true}
+                    onClick={prevPage}
+                  />
+                  <div className="current-page">{pages.currentPage}</div>
+                  <Button
+                    disabled={pages.currentPage === pages.totalPages}
+                    text={"Próxima"}
+                    isPrimary={false}
+                    primaryColor={true}
+                    onClick={nextPage}
+                  />
+                </div>
+                <div>
+                  <Button
+                    text={"Última Página"}
+                    isPrimary={false}
+                    primaryColor={true}
+                    onClick={() => {router.push(`/blog?page=${pages.totalPages}`)}}
+                  />
+                </div>
+              </div>
             </div>
           </section>
           <aside className="sidebar">
             <Sidebar
               className="elevation"
+              filteredCategory={filteredCategory && filteredCategory}
             />
           </aside>
         </div>
@@ -139,17 +208,85 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       maxAge: 60 * 60 * 24 * 7 ,// One week
       path: "/"
     })
+    const page = query ? Number(query?.page) : 1
 
-    //Fetching all posts to main blog page
-    const page = query ? Number(query) : 1
+    if(query.category_filter){
+      const { category_filter } = query
+      const category = await prismic.query([
+        Prismic.predicates.at('document.type', 'category'),
+        Prismic.predicates.fulltext('my.category.uid', String(category_filter))// .toLowerCase().replace(' ', '-')Do this on the function wich will call this method
+      ])
+      console.log(category.results.filter(category => category.uid === String(category_filter))[0].id)
+     const filteredCategoryId = category.results.filter(category => category.uid === String(category_filter))[0].id
+     const filteredCategory = category.results.filter(category => category.uid === String(category_filter))[0].uid
+
+      const response = await prismic.query([
+        Prismic.predicates.at('document.type', 'post'),
+        Prismic.predicates.at('my.post.related_category', filteredCategoryId )
+      ],
+        {
+          orderings : '[document.last_publication_date desc]' ,
+          pageSize : 2,
+          page,
+          fetchLinks : ['author.author', 'category.category']
+        },
+      )
+
+      const pages = {
+        currentPage: Number(response.page),
+        totalPages: Number(response.total_pages)
+      }
+
+      const posts = response.results.map(post => {
+        return {
+          slug: post.uid,
+          image: {
+            url: post.data.image.url,
+            alt: post.data.image.alt
+          },
+          categories: RichText.asText(post.data.related_category.data.category),
+          tags: post.tags,
+          author: RichText.asText(post.data.autohr.data.author),
+          title: RichText.asText(post.data.title),
+          snippet: post.data.content.find((content:any) => content.type === 'paragraph')?.text ?? '',
+          updatedAt: new Date(String(post.last_publication_date)).toLocaleDateString('pt-BR',{
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric'
+          }),
+        }
+      } )
+
+      const contents = {
+        posts,
+      }
+
+      return {
+        props: {
+          contents,
+          pages,
+          filteredCategory
+        },
+        // revalidate: 60 + 60 //24 hours 60 * 60 * 24  YXcMShIAACwAyMWh
+      }
+
+    }
     const response = await prismic.query([
-      Prismic.predicates.at('document.type', 'post')
+      Prismic.predicates.at('document.type', 'post'),
     ],
       {
         orderings : '[document.last_publication_date desc]' ,
-        pageSize : 10, page
+        pageSize : 2,
+        page,
+        fetchLinks : ['author.author', 'category.category']
       },
     )
+    console.log(JSON.stringify(response, null, 1))
+
+    const pages = {
+      currentPage: Number(response.page),
+      totalPages: Number(response.total_pages)
+    }
 
     const posts = response.results.map(post => {
       return {
@@ -158,9 +295,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           url: post.data.image.url,
           alt: post.data.image.alt
         },
-        categories: post.data.related_category.slug,
+        categories: RichText.asText(post.data.related_category.data.category),
         tags: post.tags,
-        author: post.data.autohr.slug,
+        author: RichText.asText(post.data.autohr.data.author),
         title: RichText.asText(post.data.title),
         snippet: post.data.content.find((content:any) => content.type === 'paragraph')?.text ?? '',
         updatedAt: new Date(String(post.last_publication_date)).toLocaleDateString('pt-BR',{
@@ -177,7 +314,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
       props: {
-        contents
+        contents,
+        pages
       },
       // revalidate: 60 + 60 //24 hours 60 * 60 * 24
     }

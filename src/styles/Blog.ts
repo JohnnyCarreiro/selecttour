@@ -77,6 +77,7 @@ export const Container = styled.div `
         position: relative;
         float: left;
         width: 100%;
+        align-items: center;
         .post-content {
           border-radius: 0.625rem;
           background-color: #ffffff;
@@ -114,6 +115,30 @@ export const Container = styled.div `
               *:first-child {
                 padding-top: 0;
               }
+          }
+        }
+        .pagination {
+          display: flex;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+
+          >div{
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+          }
+
+          .current-page {
+            display:flex;
+            flex-direction:row;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            border-radius:0.25rem;
+            border: 2px solid ${({theme}) => theme.colors.primary};
+            margin-top:2.5rem;
+            padding:0.5rem 2rem;
+            color:${({theme})=> theme.colors.primary};
           }
         }
       }

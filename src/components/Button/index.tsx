@@ -7,12 +7,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLElement> {
   link?:string
   isPrimary:boolean
   primaryColor?:boolean
+  disabled?: boolean
 }
 
-const Button: React.FC<ButtonProps> = ({text, link, isPrimary, primaryColor, ...rest}) => {
+const Button: React.FC<ButtonProps> = ({text, link, isPrimary, primaryColor, disabled, ...rest}) => {
   return (
     <Container primaryColor={primaryColor ? primaryColor : false}>
-      <button {...isPrimary ? {className:'primary'} : {className:'secondary'}} >
+      <button disabled={disabled} {...isPrimary ? {className:'primary'} : {className:'secondary'}} >
         <a href={link} {...rest} > {text} </a>
       </button>
     </Container>
