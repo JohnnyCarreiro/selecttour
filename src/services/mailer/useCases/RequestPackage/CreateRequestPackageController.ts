@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { CreateRequestPackageUseCase } from "./CreateRequestPackageUseCase";
+import { NextApiRequest, NextApiResponse } from "next"
+import { CreateRequestPackageUseCase } from "./CreateRequestPackageUseCase"
 
 export class CreateRequestPackageController{
     constructor(

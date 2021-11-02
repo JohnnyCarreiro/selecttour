@@ -217,8 +217,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         Prismic.predicates.fulltext('my.category.uid', String(category_filter))// .toLowerCase().replace(' ', '-')Do this on the function wich will call this method
       ])
       console.log(category.results.filter(category => category.uid === String(category_filter))[0].id)
-     const filteredCategoryId = category.results.filter(category => category.uid === String(category_filter))[0].id
-     const filteredCategory = category.results.filter(category => category.uid === String(category_filter))[0].uid
+      const filteredCategoryId = category.results.filter(category => category.uid === String(category_filter))[0].id
+      const filteredCategory = category.results.filter(category => category.uid === String(category_filter))[0].uid
 
       const response = await prismic.query([
         Prismic.predicates.at('document.type', 'post'),
