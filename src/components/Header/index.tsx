@@ -20,8 +20,8 @@ interface NavProps {
 }
 export const Header: React.FC<NavProps> = ({current, contacts}) => {
 
-  const { asPath } = useRouter()
-  const currentPage = asPath.replace('/', '').split('/')[0]
+  const { pathname } = useRouter()
+  const currentPage = pathname.replace('/', '').split('/')[0]
 
   const {
     whatsapp_number,
@@ -81,7 +81,7 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
               id={navLinkId}
               className={activeLinkId === navLinkId ? 'active' : ''}
               href={`/#${scrollToId}`}
-              onClick={handleClick}
+              onClick={closeMobileMenu}
               {...rest}
             >
               {navLinkName}
