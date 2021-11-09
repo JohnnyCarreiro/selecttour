@@ -4,10 +4,10 @@ import { NextPage } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { useQuery } from "react-query"
 
-export async function getPosts(query?: ParsedUrlQuery): Promise<IContentProps>{
+export async function getPosts(query?: ParsedUrlQuery, page?: number): Promise<IContentProps>{
   const category_filter = query?.filter
   const tag_filter = query?.tag
-  const page = query?.page
+  // const page = query?.page
 
   const { data } = await api.post(`fetchingdata`,{
     category_filter,
@@ -18,9 +18,11 @@ export async function getPosts(query?: ParsedUrlQuery): Promise<IContentProps>{
   return data
 }
 
-export function usePosts(query?:ParsedUrlQuery, STALE_TIME?: number){
-  return useQuery(["posts", query?.page ? query.page : 1], async () => {
-    return await getPosts(query)
+export function usePosts(query?:ParsedUrlQuery, STALE_TIME?: number, page?: number){
+  const tag = ''
+  const category = ''
+  return useQuery(["posts",tag, category, page ? page : 1], async () => {
+    return await getPosts(query, page ? page : 1)
   }, {
     staleTime: STALE_TIME ? STALE_TIME : 10000,
   })

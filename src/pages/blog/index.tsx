@@ -47,7 +47,10 @@ export interface IContentProps {
     currentPage: number
     totalPages: number
   },
-  filteredCategory?:string
+  filteredCategory:string
+  filteredTag: string
+  categories: Array<string>
+  tags: Array<string>
   error?: { message: string }
 }
 
@@ -66,13 +69,24 @@ export default function Blog<NextPage>(props: IContentProps) {
 
   const router = useRouter()
 
-  const { pathname, query } = router
+  const { query } = router
   const STALE_TIME = 10 * 1000
+  const [page, setPage] =useState<number>()
+  const [tag, setTag] =useState<string>('')
+  const [category, setCategory] =useState<string>('')
 
-  const { data, isLoading, isFetching, error } = usePosts(query, STALE_TIME)
+  const { data, isLoading, isFetching, error } = usePosts(query, STALE_TIME, page)
+
+  useEffect(() => {
+    if(data){
+      setPage(data.pages.currentPage)
+      // setTag(data.filteredTag)
+      // setCategory(data.filteredCategory)
+    }
+  }, [data])
 
   const loadPosts = (pageNumber: number) => {
-    router.push(`${pathname}?page=${pageNumber}`)
+    setPage(pageNumber)
   }
 
   const prevPage = () => {
@@ -179,10 +193,9 @@ export default function Blog<NextPage>(props: IContentProps) {
             </div>
           </section>
           <aside className="sidebar">
-            {/* <Sidebar
+            <Sidebar
               className="elevation"
-              filteredCategory={filteredCategory && filteredCategory}
-            /> */}
+            />
           </aside>
         </div>
       </section>
@@ -204,7 +217,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // const data = await getPosts(query)
 
   try {
-    await queryClient.prefetchQuery(["posts", query.page ? query.page : 1], async () => {
+    //Pass tags and categories here, before page
+    const tag = ''
+    const category = ''
+    const page = 1
+    await queryClient.prefetchQuery(["posts",tag, category, page], async () => {
       return await getPosts(query)
     }, { staleTime: STALE_TIME})
 
