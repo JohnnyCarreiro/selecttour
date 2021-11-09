@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react'
 
-import { BlogPostProvider, useBlogPost } from '@/Contexts/BlogPostContext'
+import { BlogPostProvider } from '@/Contexts/BlogPostContext'
 
 import { Container } from './styles'
 import { usePosts } from '@/Hooks/usePosts'
