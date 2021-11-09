@@ -1,0 +1,21 @@
+import { ICMSData } from "../../entities/CMSData"
+import { ICMSProvider, IQueryParams } from "../../providers/ICMSProvider"
+
+export class CMSRequestCategoriesUseCase {
+
+  constructor(
+    private cmsProvider: ICMSProvider
+  ){}//Create a CMS provider to handle with the request
+
+  async execute(queryParams: IQueryParams): Promise<ICMSData>{
+    //Receive query params to handle with the request
+    //connect to CMS provider and passing paramenters to paginate and filter
+    try {
+      const cmsData = await this.cmsProvider.fetchingByCategory(queryParams)
+      return cmsData
+    } catch (error: any) {
+      console.log('USecase', error)
+      throw new Error('Deu ruim no prismic')
+    }
+  }
+}
