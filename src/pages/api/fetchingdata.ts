@@ -9,6 +9,7 @@ export default async (request:NextApiRequest, response:NextApiResponse) => {
   try {
     switch(true) {
       case !!body.tag_filter :
+        console.log('Caiu no tag')
         const cmsDataTags = await cmsRequestTagsController.handle(request,response)
         response.status(200).send(cmsDataTags)
         break

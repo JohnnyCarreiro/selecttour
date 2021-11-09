@@ -4,6 +4,7 @@ import { BlogPostProvider, useBlogPost } from '@/Contexts/BlogPostContext'
 
 import { Container } from './styles'
 import { usePosts } from '@/Hooks/usePosts'
+import { useFilters } from '@/Hooks/useFilters'
 
 interface SidebarProps extends HTMLAttributes<HTMLElement>{
   categories?: Array<{
@@ -14,11 +15,13 @@ interface SidebarProps extends HTMLAttributes<HTMLElement>{
   tags?: Array<string>
 }
 
-export function Sidebar({filteredCategory, filteredTag,  ...rest}: SidebarProps) {
+export function Sidebar({filteredCategory, filteredTag, ...rest}: SidebarProps) {
   const { data, isLoading, isFetching, error } = usePosts()
 
   const [tags, setTags] = useState([''])
   const [categories, setCategories] = useState([''])
+
+  const { setCategory, setTag } = useFilters()
 
   useEffect(() => {
     if(data) {
@@ -26,7 +29,7 @@ export function Sidebar({filteredCategory, filteredTag,  ...rest}: SidebarProps)
       setCategories(data.categories)
       return
     }
-  }, [data])
+  }, [])
   console.log('Sidebar: ', data)
   return (
     <Container {...rest}>
@@ -45,7 +48,7 @@ export function Sidebar({filteredCategory, filteredTag,  ...rest}: SidebarProps)
               <div
                 key={content}
                 className={filteredCategory === String(content.toLocaleLowerCase()) ? 'active-filter': ''}
-                onClick={() => console.warn('Click')}
+                onClick={() => setCategory(String(content).toLocaleLowerCase())}
               >
                 <a>{content}</a>
               </div>
@@ -66,7 +69,11 @@ export function Sidebar({filteredCategory, filteredTag,  ...rest}: SidebarProps)
               <p>Carregando Lista de categorias...</p>
             )}
             {data && tags.map((content: string) => (
-              <div key={content} className={filteredTag == String(content.toLocaleLowerCase()) ? 'active-filter': ''}>
+              <div
+                key={content}
+                className={filteredTag == String(content) ? 'active-filter': ''}
+                onClick={() => setTag(String(content))}
+              >
                 <a>{content}</a>
               </div>
             ))
@@ -74,6 +81,15 @@ export function Sidebar({filteredCategory, filteredTag,  ...rest}: SidebarProps)
             {error && (
               <p>Algum erro acontenceu em nosso Servidor, volte mais tarde ou entre em contato para nos notificar sobre o erro</p>
             )}
+          </div>
+        </div>
+        <div className="filter-content">
+          <div className="filters">
+            <div
+              onClick={() => {setTag(''), setCategory('')}}
+            >
+              <a>Limpar filtros</a>
+            </div>
           </div>
         </div>
       </div>

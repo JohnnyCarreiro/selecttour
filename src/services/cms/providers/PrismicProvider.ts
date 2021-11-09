@@ -91,8 +91,8 @@ export class PrismicProvider implements ICMSProvider {
         pages,
         categories,
         tags,
-        filteredCategory: undefined,
-        filteredTag: undefined,
+        filteredCategory: '',
+        filteredTag: '',
       }
 
     } catch (error: any) {
@@ -126,6 +126,7 @@ export class PrismicProvider implements ICMSProvider {
       const filteredCategoryId = category.results.filter(category => category.uid === String(category_filter))[0].id
       const filteredCategory = category.results.filter(category => category.uid === String(category_filter))[0].uid
 
+      console.log('Category: ', filteredCategory)
       const response = await prismic.query([
         Prismic.predicates.at('document.type', 'post'),
         Prismic.predicates.at('my.post.related_category', filteredCategoryId )
@@ -173,7 +174,7 @@ export class PrismicProvider implements ICMSProvider {
         tags,
         categories,
         filteredCategory,
-        filteredTag: undefined
+        filteredTag: ''
       })
 
       return data
@@ -257,7 +258,7 @@ export class PrismicProvider implements ICMSProvider {
         pages,
         tags,
         categories,
-        filteredCategory: undefined,
+        filteredCategory: '',
         filteredTag: tag_filter
       })
 

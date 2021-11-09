@@ -23,6 +23,7 @@ import Button from '@/components/Button'
 import { api } from '@/utils/api'
 import { AxiosResponse } from "axios"
 import { getPosts, usePosts } from "@/Hooks/usePosts"
+import { useFilters } from "@/Hooks/useFilters"
 
 type PostData = {
   slug: string
@@ -72,10 +73,10 @@ export default function Blog<NextPage>(props: IContentProps) {
   const { query } = router
   const STALE_TIME = 10 * 1000
   const [page, setPage] =useState<number>()
-  const [tag, setTag] =useState<string>('')
-  const [category, setCategory] =useState<string>('')
 
-  const { data, isLoading, isFetching, error } = usePosts(query, STALE_TIME, page)
+  const { filteredTag, filteredCategory } = useFilters()
+
+  const { data, isLoading, isFetching, error } = usePosts(STALE_TIME, page, filteredTag, filteredCategory)
 
   useEffect(() => {
     if(data){
@@ -110,6 +111,8 @@ export default function Blog<NextPage>(props: IContentProps) {
 
     setMainImage(image)
   },[data?.contents.posts])
+
+  console.log('Main blog post: ', data)
 
   return (
     <Container>
@@ -156,13 +159,15 @@ export default function Blog<NextPage>(props: IContentProps) {
                   <p>Algum erro acontenceu em nosso Servidor, volte mais tarde ou entre em contato para nos notificar sobre o erro</p>
                 )
               }
-              <div className="pagination">
+              {data?.pages.totalPages && data?.pages.totalPages > 1 && (
+                <div className="pagination">
                 <div>
                 <Button
+                  disabled={data?.pages.currentPage === 1}
                   text={"Primeira Página"}
                   isPrimary={false}
                   primaryColor={true}
-                  onClick={() => router.push(`/blog?page=1`)}
+                  onClick={() => {loadPosts(Number(1))}}
                 />
                 </div>
                 <div>
@@ -183,18 +188,23 @@ export default function Blog<NextPage>(props: IContentProps) {
                 </div>
                 <div>
                   <Button
+                    disabled={data?.pages.currentPage === data?.pages.totalPages}
                     text={"Última Página"}
                     isPrimary={false}
                     primaryColor={true}
-                    onClick={() => {router.push(`/blog?page=${data?.pages.totalPages}`)}}
+                    onClick={() => {loadPosts(Number(data?.pages.totalPages))}}
                   />
                 </div>
               </div>
+              )
+            }
             </div>
           </section>
           <aside className="sidebar">
             <Sidebar
               className="elevation"
+              filteredCategory={data?.filteredCategory}
+              filteredTag={data?.filteredTag}
             />
           </aside>
         </div>
@@ -222,7 +232,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const category = ''
     const page = 1
     await queryClient.prefetchQuery(["posts",tag, category, page], async () => {
-      return await getPosts(query)
+      return await getPosts()
     }, { staleTime: STALE_TIME})
 
     return {

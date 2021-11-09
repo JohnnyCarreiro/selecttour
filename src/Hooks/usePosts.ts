@@ -4,25 +4,21 @@ import { NextPage } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { useQuery } from "react-query"
 
-export async function getPosts(query?: ParsedUrlQuery, page?: number): Promise<IContentProps>{
-  const category_filter = query?.filter
-  const tag_filter = 'França'
-  // const page = query?.page
+export async function getPosts( page?: number, tag_filter?: string, category_filter?: string): Promise<IContentProps>{
 
   const { data } = await api.post(`fetchingdata`,{
     category_filter,
     tag_filter,
     page
   })
-  // console.log('Data: ', data, "\n", 'Query: ', query)
   return data
 }
 
-export function usePosts(query?:ParsedUrlQuery, STALE_TIME?: number, page?: number){
-  const tag = ''
-  const category = ''
+export function usePosts( STALE_TIME?: number, page?: number, tag_filter?: string, category_filter?: string ){
+  const tag = tag_filter ? tag_filter : ''
+  const category = category_filter ? category_filter : ''
   return useQuery(["posts",tag, category, page ? page : 1], async () => {
-    return await getPosts(query, page ? page : 1)
+    return await getPosts(page ? page : 1, tag, category)
   }, {
     staleTime: STALE_TIME ? STALE_TIME : 10000,
   })
