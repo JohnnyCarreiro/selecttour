@@ -1,13 +1,13 @@
 import { PrismicProvider } from "../../providers/PrismicProvider"
-import { CMSRequestController } from "./CMSRequestController"
-import { CMSRequestUseCase } from "./CMSRequestUseCase"
+import { CMSRequestPostsController } from "./CMSRequestPostsController"
+import { CMSRequestPostsUseCase } from "./CMSRequestPostsUseCase"
 
 const cmsProvider = new PrismicProvider()
 
-const cmsRequestuseCase = new CMSRequestUseCase(
+const cmsRequestuseCase = new CMSRequestPostsUseCase(
   cmsProvider
 )
 
-const cmsRequestController = new CMSRequestController(cmsRequestuseCase)
+const cmsRequestPostsController = new CMSRequestPostsController(cmsRequestuseCase)
 
-export { cmsRequestuseCase, cmsRequestController}
+export { cmsRequestuseCase, cmsRequestPostsController}

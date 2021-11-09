@@ -1,4 +1,4 @@
-type PostData = {
+export type PostData = {
   slug: string
   image: {
     url: string
@@ -14,13 +14,16 @@ type PostData = {
 
 export class ICMSData {
 
-  public contents?:{
-    posts?: Array<PostData>
+  public contents!:{
+    // posts?: Array<PostData>
+    posts?: Array<any>
   }
-  public pages?: {
+  public pages!: {
     currentPage: number
     totalPages: number
   }
+  public tags!: Array<string>
+  public categories!: Array<string>
   public filteredCategory?:string
   public filteredTags?:string
   public error?: { message: string }
