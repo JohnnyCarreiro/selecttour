@@ -5,6 +5,7 @@ import { BlogPostProvider, useBlogPost } from '@/Contexts/BlogPostContext'
 import { Container } from './styles'
 import { usePosts } from '@/Hooks/usePosts'
 import { useFilters } from '@/Hooks/useFilters'
+import { useRouter } from 'next/router'
 
 interface SidebarProps extends HTMLAttributes<HTMLElement>{
   categories?: Array<{
@@ -13,10 +14,14 @@ interface SidebarProps extends HTMLAttributes<HTMLElement>{
   filteredCategory?: string
   filteredTag?: string
   tags?: Array<string>
+  ifNotHome?: boolean
 }
 
-export function Sidebar({filteredCategory, filteredTag, ...rest}: SidebarProps) {
-  const { data, isLoading, isFetching, error } = usePosts()
+export function Sidebar({filteredCategory, filteredTag, ifNotHome, ...rest}: SidebarProps) {
+  const [page, setPage] =useState<number>(1)
+  const STALE_TIME = 10 * 1000
+  const { data, isLoading, isFetching, error } = usePosts(STALE_TIME, page, filteredTag, filteredCategory)
+  const router = useRouter()
 
   const [tags, setTags] = useState([''])
   const [categories, setCategories] = useState([''])
@@ -29,7 +34,7 @@ export function Sidebar({filteredCategory, filteredTag, ...rest}: SidebarProps) 
       setCategories(data.categories)
       return
     }
-  }, [])
+  }, [data])
   return (
     <Container {...rest}>
       <div className="sidebar-wrapper">
@@ -47,7 +52,12 @@ export function Sidebar({filteredCategory, filteredTag, ...rest}: SidebarProps) 
               <div
                 key={content}
                 className={filteredCategory === String(content.toLocaleLowerCase()) ? 'active-filter': ''}
-                onClick={() => setCategory(String(content).toLocaleLowerCase())}
+                onClick={() => {
+                  setCategory(String(content).toLocaleLowerCase())
+                  if(ifNotHome){
+                    router.push('/blog')
+                  }
+                }}
               >
                 <a>{content}</a>
               </div>
@@ -71,7 +81,12 @@ export function Sidebar({filteredCategory, filteredTag, ...rest}: SidebarProps) 
               <div
                 key={content}
                 className={filteredTag == String(content) ? 'active-filter': ''}
-                onClick={() => setTag(String(content))}
+                onClick={() => {
+                  setTag(String(content))
+                  if(ifNotHome){
+                    router.push('/blog')
+                  }
+                }}
               >
                 <a>{content}</a>
               </div>

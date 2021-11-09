@@ -1,4 +1,4 @@
-import { GetServerSideProps } from "next"
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next"
 import { useRouter } from "next/router"
 import Head from "next/head"
 import Link from "next/link"
@@ -12,6 +12,10 @@ import { Container } from '@/styles/Blog'
 import { Sidebar } from "@/components/Blog/Sidebar"
 import { Footer } from "@/components/Footer"
 import { getPrismicClient } from "@/services/prismic"
+import { useEffect, useState } from "react"
+import { useFilters } from "@/Hooks/useFilters"
+import { getPosts, usePosts } from "@/Hooks/usePosts"
+import { QueryClient } from "react-query"
 
 interface IPostProps {
   post: {
@@ -42,13 +46,10 @@ export default function Post({ post, error }: IPostProps) {
     linkedin: '',
   }
 
-  // const {
-  //   slug,
-  //   title,
-  //   image,
-  //   content,
-  //   updatedAt,
-  // } = post
+  const STALE_TIME = 10 * 1000
+  const page = 1
+  const { filteredTag, filteredCategory } = useFilters()
+  const { data, isLoading, isFetching } = usePosts(STALE_TIME, page, filteredTag, filteredCategory)
 
   return (
     <Container>
@@ -73,13 +74,6 @@ export default function Post({ post, error }: IPostProps) {
             <section className="wrapper">
               <div className="main-section">
                 <article className="posts">
-                  {/* <div className="header">
-                    <h2>Confira nossas últimas postagens</h2>
-                    <h3>
-                      Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá.
-                      Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.
-                    </h3>
-                  </div> */}
                   <div className="widget-content">
                    <div className="post-content elevation">
                     <h2>{post.title}</h2>
@@ -89,19 +83,16 @@ export default function Post({ post, error }: IPostProps) {
                   </div>
                 </article>
                 <aside className="sidebar">
-                  <Sidebar className="elevation" />
+                <Sidebar
+                  className="elevation"
+                  filteredCategory={data?.filteredCategory}
+                  filteredTag={data?.filteredTag}
+                  ifNotHome={true}
+                />
                 </aside>
               </div>
             </section>
             <Footer />
-            {/* <article className={''} >
-              <h1>{post.title}</h1>
-              <time>{post.updatedAt}</time>
-              <div
-                className={''}
-                dangerouslySetInnerHTML={{ __html:post.content }}
-              />
-            </article> */}
           </main>
         </>
       )}
@@ -115,9 +106,6 @@ export default function Post({ post, error }: IPostProps) {
               <div className="hero-content" >
                 <img src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
                 <h1>{'Blog muitcho loko'}</h1>
-                {/* { show_case_section?.sub_title && (
-                  <h2>{show_case_section?.sub_title}</h2>
-                ) } */}
               </div>
             </div>
           </Hero>
@@ -125,13 +113,6 @@ export default function Post({ post, error }: IPostProps) {
           <section className="wrapper">
             <div className="main-section">
               <article className="posts">
-                {/* <div className="header">
-                  <h2>Confira nossas últimas postagens</h2>
-                  <h3>
-                    Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá.
-                    Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.
-                  </h3>
-                </div> */}
                 <div className="widget-content">
                   <div className="post-content elevation">
                   <h2>Post não encontrado</h2>
@@ -149,34 +130,50 @@ export default function Post({ post, error }: IPostProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { query, params, req } = context
+export const getStaticPaths: GetStaticPaths = async  () => {
+
+  const prismic = getPrismicClient()
+
+  const response = await prismic.query([
+    Prismic.predicates.at('document.type', 'post'),
+  ],
+    {
+      orderings : '[document.last_publication_date desc]' ,
+      pageSize : 2,
+      page: 1,
+      fetchLinks : ['author.author', 'category.category']
+    },
+  )
+
+  const posts = response.results
+
+  const paths = posts.map((post) => ({
+    params: { slug: post.uid, },
+  }))
+  return {
+    paths,
+    fallback: "blocking"
+  }
+}
+const queryClient = new QueryClient()
+const STALE_TIME = 10 * 1000
+
+
+export const getStaticProps: GetStaticProps = async (context) => {
+
+  const { params } = context
   const { slug } = params!
 
-  const prismic = getPrismicClient(req)
+  const prismic = getPrismicClient()
   const response = await prismic.getByUID('post', String(slug),{})
 
   try {
-
-    //Fetch all categories
-    const fetchCategories = await prismic.query([
-      Prismic.predicates.at('document.type', 'category')
-    ])
-    //Fetching all Tags
-    const tags = await prismic.getTags()
-
-    const categories = fetchCategories.results.map(category => {
-      return RichText.asText(category.data.category)
-    })
-
-    setCookie(context, 'selecttour.blog.tags', String(tags), {
-      maxAge: 60 * 60 * 24 * 7 ,// One week
-      path: "/"
-    })
-    setCookie(context, 'selecttour.blog.categories', String(categories), {
-      maxAge: 60 * 60 * 24 * 7 ,// One week
-      path: "/"
-    })
+    const tag = ''
+    const category = ''
+    const page = 1
+    await queryClient.prefetchQuery(["posts",tag, category, page], async () => {
+      return await getPosts()
+    }, { staleTime: STALE_TIME})
 
     const post = {
       slug,
@@ -196,7 +193,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props:{
         post,
-      }
+      },
+      revalidate: 60 * 60 // 60 * 60 * 24 * 7
     }
   } catch (error) {
     return {
@@ -207,47 +205,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       }
     }
   }
-
-
-  // return {
-  //   props: {
-  //     post,
-  //     error: {
-  //       slug
-  //     }
-  //   }
-  // }
-
-
-  // try {
-  //   const prismic = getPrismicClient(req)
-  //   const response = await prismic.getByUID('posts', String(slug),{
-  //   lang: String(locale)
-  // })
-
-  // const post = {
-  //   slug,
-  //   title: RichText.asText(response.data.title),
-  //   content: RichText.asHtml(response.data.content),
-  //   updatedAt: new Date(String(response.last_publication_date)).toLocaleDateString('en-US',{
-  //     day: '2-digit',
-  //     month: 'long',
-  //     year: 'numeric'
-  //   })
-  // }
-
-  // return {
-  //   props:{
-  //     post,
-  //   }
-  // }
-  // } catch (error) {
-  //   return {
-  //     props: {
-  //       error: {
-  //         slug
-  //       }
-  //     }
-  //   }
-  // }
 }
