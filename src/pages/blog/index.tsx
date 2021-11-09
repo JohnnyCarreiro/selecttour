@@ -123,9 +123,12 @@ export default function Blog<NextPage>(props: IContentProps) {
                 Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá.
                 Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.
               </h3>
+              {isFetching && (
+                <p>Atualizando Postagens...</p>
+              )}
             </div>
             <div className="widget-content">
-              {isLoading && <p>Loading data...</p>}
+              {isLoading && <p>Carregando Postagens...</p>}
               {!!data
                 ? (
                   <>
@@ -135,9 +138,8 @@ export default function Blog<NextPage>(props: IContentProps) {
                     )}
                   </>
                 )
-                : (
-                  <p>Deu erro</p>
-                  // <p>{data.error.message}</p>
+                : error && (
+                  <p>Algum erro acontenceu em nosso Servidor, volte mais tarde ou entre em contato para nos notificar sobre o erro</p>
                 )
               }
               <div className="pagination">
