@@ -24,7 +24,7 @@ export class PrismicProvider implements ICMSProvider {
       const categories = fetchCategories.results.map(category => {
         return RichText.asText(category.data.category)
       })
-      const response = await prismic.query([
+      const postResponse = await prismic.query([
         Prismic.predicates.at('document.type', 'post'),
       ],
         {
@@ -36,11 +36,11 @@ export class PrismicProvider implements ICMSProvider {
       )
 
       const pages = {
-        currentPage: Number(response.page),
-        totalPages: Number(response.total_pages)
+        currentPage: Number(postResponse.page),
+        totalPages: Number(postResponse.total_pages)
       }
 
-      const posts = response.results.map(post => {
+      const posts = postResponse.results.map(post => {
         return {
           slug: post.uid,
           image: {
@@ -59,6 +59,17 @@ export class PrismicProvider implements ICMSProvider {
           }),
         }
       } )
+      const blogHomeResponse = await prismic.query([
+        Prismic.predicates.at('document.type', 'blog_page'),
+      ])
+      const blogHome = blogHomeResponse.results.map(content => {
+        return {
+          id: String(content.uid),
+          hero_title: RichText.asText(content.data.title),
+          title: RichText.asText(content.data.subtitle),
+          content: RichText.asHtml(content.data.texts)
+        }
+      })[0]
       // const post = response.results.map(post => {
       //   return {
       //     slug: post.uid,
@@ -84,6 +95,7 @@ export class PrismicProvider implements ICMSProvider {
       }
 
       return {
+        blogHome,
         contents,
         pages,
         categories,
@@ -157,12 +169,24 @@ export class PrismicProvider implements ICMSProvider {
           }),
         }
       } )
+      const blogHomeResponse = await prismic.query([
+        Prismic.predicates.at('document.type', 'blog_page'),
+      ])
+      const blogHome = blogHomeResponse.results.map(content => {
+        return {
+          id: String(content.uid),
+          hero_title: RichText.asText(content.data.title),
+          title: RichText.asText(content.data.subtitle),
+          content: RichText.asHtml(content.data.texts)
+        }
+      })[0]
 
       const contents = {
         posts,
       }
 
       const data = new ICMSData({
+        blogHome,
         contents,
         pages,
         tags,
@@ -237,12 +261,24 @@ export class PrismicProvider implements ICMSProvider {
           }),
         }
       } )
+      const blogHomeResponse = await prismic.query([
+        Prismic.predicates.at('document.type', 'blog_page'),
+      ])
+      const blogHome = blogHomeResponse.results.map(content => {
+        return {
+          id: String(content.uid),
+          hero_title: RichText.asText(content.data.title),
+          title: RichText.asText(content.data.subtitle),
+          content: RichText.asHtml(content.data.texts)
+        }
+      })[0]
 
       const contents = {
         posts,
       }
 
       const data = new ICMSData({
+        blogHome,
         contents,
         pages,
         tags,

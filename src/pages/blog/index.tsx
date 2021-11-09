@@ -19,6 +19,7 @@ import { BlogPostProvider } from '@/Contexts/BlogPostContext'
 import Button from '@/components/Button'
 import { getPosts, usePosts } from "@/Hooks/usePosts"
 import { useFilters } from "@/Hooks/useFilters"
+import { getBlogHomeContent, useBlogHomeContent } from '@/Hooks/useBlogHome'
 
 type PostData = {
   slug: string
@@ -36,6 +37,12 @@ type PostData = {
 
 
 export interface IContentProps {
+  blogHome: {
+    id: string
+    hero_title:string
+    title: string
+    content: string
+  }
   contents:{
     posts: Array<PostData>
   }
@@ -63,11 +70,20 @@ export default function Blog<NextPage>(props: IContentProps) {
   }
 
   const STALE_TIME = 10 * 1000
+  const STALE_TIME_BLOG = 10 * 1000
   const [page, setPage] =useState<number>()
 
   const { filteredTag, filteredCategory } = useFilters()
 
   const { data, isLoading, isFetching, error } = usePosts(STALE_TIME, page, filteredTag, filteredCategory)
+  const {
+    data: blogData,
+    isLoading: blogIsLoading,
+    isFetching: blogIsFetching,
+    error: blogError
+  } = useBlogHomeContent(STALE_TIME_BLOG)
+
+  console.log(blogData)
 
   useEffect(() => {
     if(data){
@@ -111,10 +127,7 @@ export default function Blog<NextPage>(props: IContentProps) {
         <div className="wrapper">
           <div className="hero-content" >
             <img src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
-            <h1>{'Blog muitcho loko'}</h1>
-            {/* { show_case_section?.sub_title && (
-              <h2>{show_case_section?.sub_title}</h2>
-            ) } */}
+            <h1>{blogData && blogData.hero_title}</h1>
           </div>
         </div>
       </Hero>
@@ -122,11 +135,12 @@ export default function Blog<NextPage>(props: IContentProps) {
         <div className="main-section">
           <section className="posts">
             <div className="header">
-              <h2>Confira nossas últimas postagens</h2>
-              <h3>
-                Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá.
-                Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.
-              </h3>
+              {blogData && (
+                <>
+                  <h2>{blogData.title}</h2>
+                  <h3 dangerouslySetInnerHTML={{__html: blogData.content}} />
+                </>
+              )}
               {isFetching && (
                 <p>Atualizando Postagens...</p>
               )}
@@ -204,6 +218,7 @@ Blog.provider = BlogPostProvider
 
 const queryClient = new QueryClient()
 const STALE_TIME = 10 * 1000 // 10 sec // 60 * 60 * 24 * 1000 //24 hours
+const STALE_TIME_BLOG = 10 * 1000 // 10 sec // 60 * 60 * 24 * 1000 //24 hours
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
@@ -214,6 +229,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     await queryClient.prefetchQuery(["posts",tag, category, page], async () => {
       return await getPosts()
     }, { staleTime: STALE_TIME})
+    await queryClient.prefetchQuery(["home_blog"], async () => {
+      return await getBlogHomeContent()
+    }, {
+      staleTime: STALE_TIME_BLOG ? STALE_TIME : 10000,
+    })
 
     return {
       props: {

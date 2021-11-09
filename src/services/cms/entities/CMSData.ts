@@ -14,6 +14,13 @@ export type PostData = {
 
 export class ICMSData {
 
+  public blogHome!: {
+    id: string
+    hero_title:string
+    title: string
+    content: string
+  }
+
   public contents!:{
     // posts?: Array<PostData>
     posts?: Array<any>
