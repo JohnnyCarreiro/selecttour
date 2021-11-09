@@ -6,7 +6,7 @@ import { useQuery } from "react-query"
 
 export async function getPosts(query?: ParsedUrlQuery, page?: number): Promise<IContentProps>{
   const category_filter = query?.filter
-  const tag_filter = query?.tag
+  const tag_filter = 'França'
   // const page = query?.page
 
   const { data } = await api.post(`fetchingdata`,{

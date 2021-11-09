@@ -25,7 +25,7 @@ export class ICMSData {
   public tags!: Array<string>
   public categories!: Array<string>
   public filteredCategory?:string
-  public filteredTags?:string
+  public filteredTag?:string
   public error?: { message: string }
 
   constructor(props: ICMSData) {

@@ -34,7 +34,8 @@ export class PrismicProvider implements ICMSProvider {
           fetchLinks : ['author.author', 'category.category']
         },
       )
-      // console.log(JSON.stringify(response, null, 1))
+      // console.log('Complete Response: ', JSON.stringify(response, null, 1))
+      // console.log('tags: ', JSON.stringify(tags, null, 1))
 
       const pages = {
         currentPage: Number(response.page),
@@ -91,7 +92,7 @@ export class PrismicProvider implements ICMSProvider {
         categories,
         tags,
         filteredCategory: undefined,
-        filteredTags: undefined,
+        filteredTag: undefined,
       }
 
     } catch (error: any) {
@@ -172,7 +173,7 @@ export class PrismicProvider implements ICMSProvider {
         tags,
         categories,
         filteredCategory,
-        filteredTags: undefined
+        filteredTag: undefined
       })
 
       return data
@@ -184,7 +185,7 @@ export class PrismicProvider implements ICMSProvider {
 
     const prismic = getPrismicClient()
 
-    const { category_filter, page = 1 } = queryParams
+    const { category_filter, tag_filter, page = 1 } = queryParams
     // Fetch all categories
     const fetchCategories = await prismic.query([
       Prismic.predicates.at('document.type', 'category')
@@ -197,17 +198,21 @@ export class PrismicProvider implements ICMSProvider {
     })
 
     try {
-      const category = await prismic.query([
+      const tag = await prismic.query([
         Prismic.predicates.at('document.type', 'category'),
-        Prismic.predicates.fulltext('my.category.uid', String(category_filter))// .toLowerCase().replace(' ', '-')Do this on the function wich will call this method
+        Prismic.predicates.fulltext('my.category.uid', String(tag_filter))// .toLowerCase().replace(' ', '-')Do this on the function wich will call this method
       ])
-      console.log(category.results.filter(category => category.uid === String(category_filter))[0].id)
-      const filteredCategoryId = category.results.filter(category => category.uid === String(category_filter))[0].id
-      const filteredCategory = category.results.filter(category => category.uid === String(category_filter))[0].uid
+      // console.log(tag.results.filter(tag => tag.uid === String(tag_filter))[0].id)
+      // // const filteredCategoryId = category.results.filter(category => category.uid === String(category_filter))[0].id
+      // const filteredCategory = category.results.filter(category => category.uid === String(category_filter))[0].uid
+
+      // const filteredTagId = tag.results.filter(tag => tag.uid === String(tag_filter))[0].id
+      const filteredTag = tags.filter(tag => tag === String(tag_filter))
 
       const response = await prismic.query([
-        Prismic.predicates.at('document.type', 'post'),
-        Prismic.predicates.at('my.post.related_category', filteredCategoryId )
+        // Prismic.predicates.at('document.type', 'post'),
+        // Prismic.predicates.at('my.post.tags', filteredTag )
+        Prismic.Predicates.at("document.tags", filteredTag)
       ],
         {
           orderings : '[document.last_publication_date desc]' ,
@@ -216,6 +221,7 @@ export class PrismicProvider implements ICMSProvider {
           fetchLinks : ['author.author', 'category.category']
         },
       )
+      console.log('Tags: ', JSON.stringify(response, null, 2))
 
       const pages = {
         currentPage: Number(response.page),
@@ -251,8 +257,8 @@ export class PrismicProvider implements ICMSProvider {
         pages,
         tags,
         categories,
-        filteredCategory,
-        filteredTags: undefined
+        filteredCategory: undefined,
+        filteredTag: tag_filter
       })
 
       return data
