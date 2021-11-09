@@ -1,8 +1,7 @@
-import type { NextPage } from "next"
 import React, { useEffect, useState } from 'react'
-import {  GetServerSideProps, GetStaticProps } from 'next'
+import {  GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { useQuery, QueryClient, QueryFunctionContext, QueryFunction } from "react-query"
+import { QueryClient, } from "react-query"
 import { dehydrate } from "react-query/hydration"
 
 import Prismic from '@prismicio/client'
@@ -17,11 +16,7 @@ import { Sidebar } from '@/components/Blog/Sidebar'
 import { Footer } from '@/components/Footer'
 import { getPrismicClient } from '@/services/prismic'
 import { BlogPostProvider } from '@/Contexts/BlogPostContext'
-import { setCookie } from 'nookies'
-import { useRouter } from 'next/router'
 import Button from '@/components/Button'
-import { api } from '@/utils/api'
-import { AxiosResponse } from "axios"
 import { getPosts, usePosts } from "@/Hooks/usePosts"
 import { useFilters } from "@/Hooks/useFilters"
 
@@ -57,7 +52,6 @@ export interface IContentProps {
 
 export default function Blog<NextPage>(props: IContentProps) {
 
-  console.log(props)
   const contacts = {
     whatsapp_number: '',
     whatsapp_message: '',
@@ -68,9 +62,6 @@ export default function Blog<NextPage>(props: IContentProps) {
     linkedin: '',
   }
 
-  const router = useRouter()
-
-  const { query } = router
   const STALE_TIME = 10 * 1000
   const [page, setPage] =useState<number>()
 
@@ -81,8 +72,6 @@ export default function Blog<NextPage>(props: IContentProps) {
   useEffect(() => {
     if(data){
       setPage(data.pages.currentPage)
-      // setTag(data.filteredTag)
-      // setCategory(data.filteredCategory)
     }
   }, [data])
 
@@ -111,8 +100,6 @@ export default function Blog<NextPage>(props: IContentProps) {
 
     setMainImage(image)
   },[data?.contents.posts])
-
-  console.log('Main blog post: ', data)
 
   return (
     <Container>
@@ -220,14 +207,7 @@ const STALE_TIME = 10 * 1000 // 10 sec // 60 * 60 * 24 * 1000 //24 hours
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
-  console.log(context.query)
-
-  const { query } = context
-
-  // const data = await getPosts(query)
-
   try {
-    //Pass tags and categories here, before page
     const tag = ''
     const category = ''
     const page = 1
@@ -250,158 +230,3 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   }
 }
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-
-//   // const { query } = context
-
-//   // const prismic = getPrismicClient()
-
-//   // try {
-//   //   //Fetch all categories
-//   //   const fetchCategories = await prismic.query([
-//   //     Prismic.predicates.at('document.type', 'category')
-//   //   ])
-//   //   //Fetching all Tags
-//   //   const tags = await prismic.getTags()
-
-//   //   const categories = fetchCategories.results.map(category => {
-//   //     return RichText.asText(category.data.category)
-//   //   })
-
-
-//   //   setCookie(context, 'selecttour.blog.tags', String(tags), {
-//   //     maxAge: 60 * 60 * 24 * 7 ,// One week
-//   //     path: "/"
-//   //   })
-//   //   setCookie(context, 'selecttour.blog.categories', String(categories), {
-//   //     maxAge: 60 * 60 * 24 * 7 ,// One week
-//   //     path: "/"
-//   //   })
-//   //   const page = query ? Number(query?.page) : 1
-
-//   //   if(query.category_filter){
-//   //     const { category_filter } = query
-//   //     const category = await prismic.query([
-//   //       Prismic.predicates.at('document.type', 'category'),
-//   //       Prismic.predicates.fulltext('my.category.uid', String(category_filter))// .toLowerCase().replace(' ', '-')Do this on the function wich will call this method
-//   //     ])
-//   //     console.log(category.results.filter(category => category.uid === String(category_filter))[0].id)
-//   //     const filteredCategoryId = category.results.filter(category => category.uid === String(category_filter))[0].id
-//   //     const filteredCategory = category.results.filter(category => category.uid === String(category_filter))[0].uid
-
-//   //     const response = await prismic.query([
-//   //       Prismic.predicates.at('document.type', 'post'),
-//   //       Prismic.predicates.at('my.post.related_category', filteredCategoryId )
-//   //     ],
-//   //       {
-//   //         orderings : '[document.last_publication_date desc]' ,
-//   //         pageSize : 2,
-//   //         page,
-//   //         fetchLinks : ['author.author', 'category.category']
-//   //       },
-//   //     )
-
-//   //     const pages = {
-//   //       currentPage: Number(response.page),
-//   //       totalPages: Number(response.total_pages)
-//   //     }
-
-//   //     const posts = response.results.map(post => {
-//   //       return {
-//   //         slug: post.uid,
-//   //         image: {
-//   //           url: post.data.image.url,
-//   //           alt: post.data.image.alt
-//   //         },
-//   //         categories: RichText.asText(post.data.related_category.data.category),
-//   //         tags: post.tags,
-//   //         author: RichText.asText(post.data.autohr.data.author),
-//   //         title: RichText.asText(post.data.title),
-//   //         snippet: post.data.content.find((content:any) => content.type === 'paragraph')?.text ?? '',
-//   //         updatedAt: new Date(String(post.last_publication_date)).toLocaleDateString('pt-BR',{
-//   //           day: '2-digit',
-//   //           month: 'long',
-//   //           year: 'numeric'
-//   //         }),
-//   //       }
-//   //     } )
-
-//   //     const contents = {
-//   //       posts,
-//   //     }
-
-//   //     return {
-//   //       props: {
-//   //         contents,
-//   //         pages,
-//   //         filteredCategory
-//   //       },
-//   //       // revalidate: 60 + 60 //24 hours 60 * 60 * 24  YXcMShIAACwAyMWh
-//   //     }
-
-//   //   }
-//   //   const response = await prismic.query([
-//   //     Prismic.predicates.at('document.type', 'post'),
-//   //   ],
-//   //     {
-//   //       orderings : '[document.last_publication_date desc]' ,
-//   //       pageSize : 2,
-//   //       page,
-//   //       fetchLinks : ['author.author', 'category.category']
-//   //     },
-//   //   )
-//   //   console.log(JSON.stringify(response, null, 1))
-
-//   //   const pages = {
-//   //     currentPage: Number(response.page),
-//   //     totalPages: Number(response.total_pages)
-//   //   }
-
-//   //   const posts = response.results.map(post => {
-//   //     return {
-//   //       slug: post.uid,
-//   //       image: {
-//   //         url: post.data.image.url,
-//   //         alt: post.data.image.alt
-//   //       },
-//   //       categories: RichText.asText(post.data.related_category.data.category),
-//   //       tags: post.tags,
-//   //       author: RichText.asText(post.data.autohr.data.author),
-//   //       title: RichText.asText(post.data.title),
-//   //       snippet: post.data.content.find((content:any) => content.type === 'paragraph')?.text ?? '',
-//   //       updatedAt: new Date(String(post.last_publication_date)).toLocaleDateString('pt-BR',{
-//   //         day: '2-digit',
-//   //         month: 'long',
-//   //         year: 'numeric'
-//   //       }),
-//   //     }
-//   //   } )
-
-//   //   const contents = {
-//   //     posts,
-//   //   }
-
-//   //   return {
-//   //     props: {
-//   //       contents,
-//   //       pages
-//   //     },
-//   //     // revalidate: 60 + 60 //24 hours 60 * 60 * 24
-//   //   }
-
-//   // } catch (error) {
-//   //   return {
-//   //     props: {
-//   //       error: {
-//   //         message: 'Algum erro acontenceu em nosso Servidor, volte mais tarde ou entre em contato para nos comunicar do erro'
-//   //       }
-//   //     }
-//   //   }
-//   // }
-
-//   return {
-//     props: {
-
-//     }
-//   }
-// }

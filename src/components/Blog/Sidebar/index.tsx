@@ -30,7 +30,6 @@ export function Sidebar({filteredCategory, filteredTag, ...rest}: SidebarProps) 
       return
     }
   }, [])
-  console.log('Sidebar: ', data)
   return (
     <Container {...rest}>
       <div className="sidebar-wrapper">

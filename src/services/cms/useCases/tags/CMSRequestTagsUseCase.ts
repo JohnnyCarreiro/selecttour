@@ -14,7 +14,6 @@ export class CMSRequestTagsUseCase {
       const cmsData = await this.cmsProvider.fetchingByTag(queryParams)
       return cmsData
     } catch (error: any) {
-      console.log('USecase', error)
       throw new Error('Deu ruim no prismic')
     }
   }

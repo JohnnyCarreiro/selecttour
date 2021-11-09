@@ -14,7 +14,6 @@ export class CMSRequestPostsUseCase {
       const cmsData = await this.cmsProvider.fetchingAll(queryParams)
       return cmsData
     } catch (error: any) {
-      console.log('USecase', error)
       throw new Error('Deu ruim no prismic')
     }
   }

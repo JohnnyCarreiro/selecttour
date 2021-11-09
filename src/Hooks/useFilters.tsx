@@ -13,9 +13,6 @@ const  FiltersProvider: React.FC = ({ children }) => {
   const [filteredCategory, setFilteredCategory] = useState('')
   const [filteredTag, setFilteredTag] = useState('')
 
-  console.log('Category: ', filteredCategory)
-  console.log('Tag: ', filteredTag)
-
   const setCategory = useCallback((category: string) => {
     setFilteredCategory(category)
     setFilteredTag('')

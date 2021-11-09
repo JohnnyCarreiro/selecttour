@@ -5,11 +5,9 @@ import { NextApiRequest, NextApiResponse } from "next"
 
 export default async (request:NextApiRequest, response:NextApiResponse) => {
   const { body } = request
-  console.log("Body: ", body)
   try {
     switch(true) {
       case !!body.tag_filter :
-        console.log('Caiu no tag')
         const cmsDataTags = await cmsRequestTagsController.handle(request,response)
         response.status(200).send(cmsDataTags)
         break
@@ -23,7 +21,6 @@ export default async (request:NextApiRequest, response:NextApiResponse) => {
         break
     }
   } catch (error) {
-    console.log(error)
     response.status(500).send(error)
   }
 }

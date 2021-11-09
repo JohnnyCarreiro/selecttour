@@ -34,8 +34,6 @@ export class PrismicProvider implements ICMSProvider {
           fetchLinks : ['author.author', 'category.category']
         },
       )
-      // console.log('Complete Response: ', JSON.stringify(response, null, 1))
-      // console.log('tags: ', JSON.stringify(tags, null, 1))
 
       const pages = {
         currentPage: Number(response.page),
@@ -84,7 +82,6 @@ export class PrismicProvider implements ICMSProvider {
       const contents = {
         posts
       }
-      // const data = new ICMSData({contents, pages, filteredCategory: undefined, filteredTags: undefined})
 
       return {
         contents,
@@ -96,7 +93,6 @@ export class PrismicProvider implements ICMSProvider {
       }
 
     } catch (error: any) {
-      console.log('Prismic Provider', error)
       throw new Error('Deu Merda')
     }
   }
@@ -120,13 +116,11 @@ export class PrismicProvider implements ICMSProvider {
     try {
       const category = await prismic.query([
         Prismic.predicates.at('document.type', 'category'),
-        Prismic.predicates.fulltext('my.category.uid', String(category_filter))// .toLowerCase().replace(' ', '-')Do this on the function wich will call this method
+        Prismic.predicates.fulltext('my.category.uid', String(category_filter))
       ])
-      console.log(category.results.filter(category => category.uid === String(category_filter))[0].id)
       const filteredCategoryId = category.results.filter(category => category.uid === String(category_filter))[0].id
       const filteredCategory = category.results.filter(category => category.uid === String(category_filter))[0].uid
 
-      console.log('Category: ', filteredCategory)
       const response = await prismic.query([
         Prismic.predicates.at('document.type', 'post'),
         Prismic.predicates.at('my.post.related_category', filteredCategoryId )
@@ -201,13 +195,9 @@ export class PrismicProvider implements ICMSProvider {
     try {
       const tag = await prismic.query([
         Prismic.predicates.at('document.type', 'category'),
-        Prismic.predicates.fulltext('my.category.uid', String(tag_filter))// .toLowerCase().replace(' ', '-')Do this on the function wich will call this method
+        Prismic.predicates.fulltext('my.category.uid', String(tag_filter))
       ])
-      // console.log(tag.results.filter(tag => tag.uid === String(tag_filter))[0].id)
-      // // const filteredCategoryId = category.results.filter(category => category.uid === String(category_filter))[0].id
-      // const filteredCategory = category.results.filter(category => category.uid === String(category_filter))[0].uid
 
-      // const filteredTagId = tag.results.filter(tag => tag.uid === String(tag_filter))[0].id
       const filteredTag = tags.filter(tag => tag === String(tag_filter))
 
       const response = await prismic.query([
@@ -222,7 +212,6 @@ export class PrismicProvider implements ICMSProvider {
           fetchLinks : ['author.author', 'category.category']
         },
       )
-      console.log('Tags: ', JSON.stringify(response, null, 2))
 
       const pages = {
         currentPage: Number(response.page),
