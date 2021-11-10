@@ -1,11 +1,13 @@
-import React, { HTMLAttributes, useCallback, useContext, useEffect, useState } from 'react'
+import React, { AnchorHTMLAttributes, useCallback, useContext, useEffect, useState} from 'react'
 import Router, { useRouter } from 'next/router'
 import { FaFacebookSquare, FaInstagramSquare, FaLinkedinIn, FaTimes, FaBars } from 'react-icons/fa'
 import Logo from '../../assets/imgs/LOGO.svg'
 import { NavContext } from '../../Contexts/NavContext'
 
 import { BottomNavBar, Container, NavContainer } from './styles'
-interface NavProps {
+import { useContactsContesxt } from '@/Hooks/Home/useContacts'
+
+interface IContactsProps {
   contacts:{
     whatsapp_number: string
     whatsapp_message: string
@@ -15,24 +17,31 @@ interface NavProps {
     instagram: string
     linkedin: string
   }
-  // current:string
-  current?:  React.RefObject<HTMLElement>
 }
-export const Header: React.FC<NavProps> = ({current, contacts}) => {
+
+interface IHeaderProps {
+  hasBlogPosts: boolean
+}
+
+export const Header: React.FC<IHeaderProps> = ({hasBlogPosts}) => {
 
   const { pathname } = useRouter()
   const currentPage = pathname.replace('/', '').split('/')[0]
 
+  const { useContacts } = useContactsContesxt()
+
+  const [contacts, setContacts] = useState<IContactsProps['contacts']>(useContacts as IContactsProps['contacts'])
+  const [phone, setPhone] = useState('')
+
+
   const {
-    whatsapp_number,
-    whatsapp_message,
     phone_number,
     email,
     facebook,
     instagram,
     linkedin
   } = contacts
-  const phone = phone_number.replace('-', '').replace(' ', '')
+  // const phone = phone_number.replace('-', '').replace(' ', '')
   const [ display, setDisplay ] = useState(false)
   const handleShowingMenu = () => {
     setDisplay(!display)
@@ -49,7 +58,12 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
     {navLinkName: 'Contatos', navLinkId: 'Contacts', scrollToId: 'contacts'},
   ]
 
-  interface NavLinkProps extends HTMLAttributes<HTMLElement> {
+  if(hasBlogPosts) {
+    console.log('Temposts')
+    // navLinks = [...navLinks, {navLinkName: 'Blog', navLinkId: 'Blog', scrollToId: 'Blog'},]
+  }
+
+  interface NavLinkProps extends AnchorHTMLAttributes<HTMLElement> {
     navLinkName: string
     navLinkId: string
     scrollToId: string
@@ -58,7 +72,11 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
 
   useEffect(() => {
     setDocument(document)
-  },[])
+    if(!!contacts){
+      setContacts(useContacts)
+      setPhone(phone_number?.replace('-', '').replace(' ', ''))
+    }
+  })
 
   const NavLink = ({navLinkName, navLinkId, scrollToId, ...rest}: NavLinkProps) => {
     const { activeLinkId, setActiveLink } = useContext(NavContext)
@@ -86,12 +104,21 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
             >
               {navLinkName}
             </a>
-          ) :
+          ): navLinkName !== 'Blog' ?
           (
             <a
               id={navLinkId}
               className={activeLinkId === navLinkId ? 'active' : ''}
               onClick={handleClick}
+              {...rest}
+            >
+              {navLinkName}
+            </a>
+          ):(
+            <a
+              id={navLinkId}
+              className={activeLinkId === navLinkId ? 'active' : ''}
+              onClick={closeMobileMenu}
               {...rest}
             >
               {navLinkName}
@@ -137,6 +164,14 @@ export const Header: React.FC<NavProps> = ({current, contacts}) => {
                     navLinkId={navLinkId}
                     scrollToId={scrollToId}
                   />
+              )}
+              {hasBlogPosts && (
+                <NavLink
+                  navLinkName={'Blog'}
+                  navLinkId={'Blog'}
+                  scrollToId={''}
+                  href={'/blog'}
+                />
               )}
               </ul>
               {/* <ul>
