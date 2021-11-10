@@ -1,7 +1,7 @@
 export interface IContent {
   content: Array<IHome>
 }
-interface IHome {
+export interface IHome {
   show_case_section:{
     main_title: string
     sub_title?: string
