@@ -1,5 +1,7 @@
 export interface IContent {
-  content: Array<IHome>
+  content: IHome
+  hasBlogposts: boolean
+  hasMoreThanthreePosts: boolean
 }
 export interface IHome {
   show_case_section:{
