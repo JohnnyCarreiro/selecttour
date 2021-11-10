@@ -12,11 +12,11 @@ export function useOnScreen<T extends HTMLElement> (ref: React.MutableRefObject<
       }
     )
 
-      observer.observe(ref.current);
+      observer.observe(ref.current)
       return () => {
-        observer.disconnect();
+        observer.disconnect()
       }
     })
 
-    return isOnScreen;
+    return isOnScreen
   };

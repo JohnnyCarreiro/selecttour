@@ -1,3 +1,4 @@
+import { ContactsProvider } from '@/Hooks/Home/useContacts'
 import React, { createContext, useCallback, useState } from 'react'
 
 interface NavContextData{
@@ -19,7 +20,9 @@ const NavProvider: React.FC = ({ children }) => {
 
   return (
     <NavContext.Provider value={{setActiveLink, activeLinkId}}>
-      { children }
+      <ContactsProvider>
+        { children }
+      </ContactsProvider>
     </NavContext.Provider>
   )
 }
