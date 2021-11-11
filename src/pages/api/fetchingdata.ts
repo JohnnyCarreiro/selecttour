@@ -2,11 +2,16 @@ import { cmsRequestTagsController } from "@/services/cms/useCases/tags"
 import { cmsRequestCategoriesController } from "@/services/cms/useCases/categories"
 import { cmsRequestPostsController } from "@/services/cms/useCases/posts"
 import { NextApiRequest, NextApiResponse } from "next"
+import { cmsRequestHomeController } from "@/services/cms/useCases/home"
 
 export default async (request:NextApiRequest, response:NextApiResponse) => {
   const { body } = request
   try {
     switch(true) {
+      case !!body.home :
+        const cmsHomeContent = await cmsRequestHomeController.handle(request,response)
+        response.status(200).send(cmsHomeContent)
+        break
       case !!body.tag_filter :
         const cmsDataTags = await cmsRequestTagsController.handle(request,response)
         response.status(200).send(cmsDataTags)
