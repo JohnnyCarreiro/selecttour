@@ -3,12 +3,12 @@ import { NavProvider } from "@/Contexts/NavContext"
 import React, { useState } from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { ThemeProvider } from "styled-components"
-import { ToastProvider } from "./Toast"
+import { ToastProvider } from "../Hooks/Toast"
 
 import theme from '@/styles/theme'
 import { ReactQueryDevtools } from "react-query/devtools"
 import { GlobalStyle } from "@/styles/GlobalStyle"
-import { FiltersProvider } from "./useFilters"
+import { FiltersProvider } from "../Hooks/useFilters"
 
 
 export const Contexts: React.FC = ({children}) => {
