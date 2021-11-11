@@ -5,7 +5,7 @@ import Logo from '../../assets/imgs/LOGO.svg'
 import { NavContext } from '../../Contexts/NavContext'
 
 import { BottomNavBar, Container, NavContainer } from './styles'
-import { useContactsContesxt } from '@/Hooks/Home/useContacts'
+import { useSiteContexts } from '@/Contexts/useSiteContext'
 
 interface IContactsProps {
   contacts:{
@@ -28,7 +28,7 @@ export const Header: React.FC<IHeaderProps> = ({hasBlogPosts}) => {
   const { pathname } = useRouter()
   const currentPage = pathname.replace('/', '').split('/')[0]
 
-  const { useContacts } = useContactsContesxt()
+  const { useContacts } = useSiteContexts()
 
   const [contacts, setContacts] = useState<IContactsProps['contacts']>(useContacts as IContactsProps['contacts'])
   const [phone, setPhone] = useState('')
@@ -57,11 +57,6 @@ export const Header: React.FC<IHeaderProps> = ({hasBlogPosts}) => {
     {navLinkName: 'Destinos', navLinkId: 'Top-destinations', scrollToId: 'top-destinations'},
     {navLinkName: 'Contatos', navLinkId: 'Contacts', scrollToId: 'contacts'},
   ]
-
-  if(hasBlogPosts) {
-    console.log('Temposts')
-    // navLinks = [...navLinks, {navLinkName: 'Blog', navLinkId: 'Blog', scrollToId: 'Blog'},]
-  }
 
   interface NavLinkProps extends AnchorHTMLAttributes<HTMLElement> {
     navLinkName: string
