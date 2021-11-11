@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
-import { GetServerSideProps, GetStaticProps } from 'next'
-import Prismic from '@prismicio/client'
-import { RichText } from 'prismic-dom'
+import { GetServerSideProps } from 'next'
 
 import { Header } from '@/components/Header'
 import { TextBlock } from '@/components/TextBlock'
@@ -18,7 +16,6 @@ import { useNav } from '../Hooks/useNav'
 
 import { Container } from '../styles/Home'
 
-import { getPrismicClient } from '@/services/prismic'
 import { IContent, IHome } from '@/interfaces/IHome'
 import { getHomeContent, useHomeContent } from '@/Hooks/Home/useHome'
 import { dehydrate, QueryClient } from 'react-query'
