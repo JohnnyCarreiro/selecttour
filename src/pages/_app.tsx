@@ -12,7 +12,7 @@ import { GlobalStyle } from 'styles/GlobalStyle'
 import { NavProvider } from '@/Contexts/NavContext'
 import { BlogPostProvider } from '@/Contexts/BlogPostContext'
 import { ToastProvider } from '@/Hooks/Toast'
-import { Contexts } from '@/Hooks/Contexts'
+import { Contexts } from '@/Contexts/Contexts'
 
 interface MyAppProps extends AppProps {}
 
