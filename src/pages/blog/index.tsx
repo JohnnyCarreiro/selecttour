@@ -4,9 +4,6 @@ import Head from 'next/head'
 import { QueryClient, } from "react-query"
 import { dehydrate } from "react-query/hydration"
 
-import Prismic from '@prismicio/client'
-import { RichText } from 'prismic-dom'
-
 import { Container } from '@/styles/Blog'
 import { Hero } from '@/components/Blog/Hero'
 import { Header } from '@/components/Header'
@@ -14,7 +11,6 @@ import { MainPost } from '@/components/Blog/MainPost'
 import { Posts } from '@/components/Blog/Posts'
 import { Sidebar } from '@/components/Blog/Sidebar'
 import { Footer } from '@/components/Footer'
-import { getPrismicClient } from '@/services/prismic'
 import { BlogPostProvider } from '@/Contexts/BlogPostContext'
 import Button from '@/components/Button'
 import { getPosts, usePosts } from "@/Hooks/usePosts"
@@ -59,16 +55,6 @@ export interface IContentProps {
 
 export default function Blog<NextPage>(props: IContentProps) {
 
-  const contacts = {
-    whatsapp_number: '',
-    whatsapp_message: '',
-    phone_number: '',
-    email: '',
-    facebook: '',
-    instagram: '',
-    linkedin: '',
-  }
-
   const STALE_TIME = 10 * 1000
   const STALE_TIME_BLOG = 10 * 1000
   const [page, setPage] =useState<number>()
@@ -82,8 +68,6 @@ export default function Blog<NextPage>(props: IContentProps) {
     isFetching: blogIsFetching,
     error: blogError
   } = useBlogHomeContent(STALE_TIME_BLOG)
-
-  console.log(blogData)
 
   useEffect(() => {
     if(data){
@@ -122,12 +106,13 @@ export default function Blog<NextPage>(props: IContentProps) {
       <Head>
         <title>Select Tour - Blog</title>
       </Head>
-      <Header contacts={contacts} />
+      <Header hasBlogPosts={!!blogData} />
       <Hero image={mainImage ? mainImage?.url : ''} >
         <div className="wrapper">
           <div className="hero-content" >
             <img src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
             <h1>{blogData && blogData.hero_title}</h1>
+            {blogIsLoading || blogIsFetching && <h3>Carregando informacões ...</h3>}
           </div>
         </div>
       </Hero>
