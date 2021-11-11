@@ -1,5 +1,5 @@
-import { ContactsProvider } from '@/Hooks/Home/useContacts'
-import React, { createContext, useCallback, useState } from 'react'
+import React, { createContext, useState } from 'react'
+import { SiteProvider } from './useSiteContext'
 
 interface NavContextData{
   activeLinkId: string
@@ -20,9 +20,9 @@ const NavProvider: React.FC = ({ children }) => {
 
   return (
     <NavContext.Provider value={{setActiveLink, activeLinkId}}>
-      <ContactsProvider>
+      <SiteProvider>
         { children }
-      </ContactsProvider>
+      </SiteProvider>
     </NavContext.Provider>
   )
 }
