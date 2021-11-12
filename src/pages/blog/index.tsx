@@ -16,6 +16,8 @@ import Button from '@/components/Button'
 import { getPosts, usePosts } from "@/Hooks/usePosts"
 import { useFilters } from "@/Hooks/useFilters"
 import { getBlogHomeContent, useBlogHomeContent } from '@/Hooks/useBlogHome'
+import { useSiteContexts } from '@/Contexts/useSiteContext'
+import WhatsappButton from '@/components/WhatsappButton'
 
 type PostData = {
   slug: string
@@ -58,6 +60,8 @@ export default function Blog<NextPage>(props: IContentProps) {
   const STALE_TIME = 10 * 1000
   const STALE_TIME_BLOG = 10 * 1000
   const [page, setPage] =useState<number>()
+
+  const { useContacts } = useSiteContexts()
 
   const { filteredTag, filteredCategory } = useFilters()
 
@@ -195,6 +199,9 @@ export default function Blog<NextPage>(props: IContentProps) {
           </aside>
         </div>
       </section>
+      {useContacts && (
+        <WhatsappButton content={useContacts} />
+      )}
       <Footer />
     </Container>
   )

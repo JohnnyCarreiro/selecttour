@@ -1,7 +1,6 @@
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next"
+import { GetStaticPaths, GetStaticProps } from "next"
 import { useRouter } from "next/router"
 import Head from "next/head"
-import Link from "next/link"
 import Prismic from '@prismicio/client'
 import { RichText } from "prismic-dom"
 import { parseCookies, setCookie } from "nookies"
@@ -16,6 +15,8 @@ import { useEffect, useState } from "react"
 import { useFilters } from "@/Hooks/useFilters"
 import { getPosts, usePosts } from "@/Hooks/usePosts"
 import { QueryClient } from "react-query"
+import WhatsappButton from "@/components/WhatsappButton"
+import { useSiteContexts } from "@/Contexts/useSiteContext"
 
 interface IPostProps {
   post: {
@@ -36,15 +37,8 @@ interface IPostProps {
 export default function Post({ post, error }: IPostProps) {
 
   const { locale } = useRouter()
-  const contacts = {
-    whatsapp_number: '',
-    whatsapp_message: '',
-    phone_number: '',
-    email: '',
-    facebook: '',
-    instagram: '',
-    linkedin: '',
-  }
+  const { useContacts } = useSiteContexts()
+
 
   const STALE_TIME = 10 * 1000
   const page = 1
@@ -69,7 +63,7 @@ export default function Post({ post, error }: IPostProps) {
               </div>
             </div>
           </Hero>
-          <Header contacts={contacts} />
+          <Header hasBlogPosts={true}/>
           <main className={''} >
             <section className="wrapper">
               <div className="main-section">
@@ -125,6 +119,9 @@ export default function Post({ post, error }: IPostProps) {
           </main>
           <Footer />
         </>
+      )}
+      {useContacts && (
+        <WhatsappButton content={useContacts} />
       )}
     </Container>
   )

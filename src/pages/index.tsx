@@ -20,6 +20,8 @@ import { IContent, IHome } from '@/interfaces/IHome'
 import { getHomeContent, useHomeContent } from '@/Hooks/Home/useHome'
 import { dehydrate, QueryClient } from 'react-query'
 import { useHomePackages } from '@/Hooks/Home/useHomePackages'
+import WhatsappButton from '@/components/WhatsappButton'
+import { useSiteContexts } from '@/Contexts/useSiteContext'
 
 export const Home:React.FC<IContent> = () => {
   const STALE_TIME = 10 * 1000
@@ -28,6 +30,7 @@ export const Home:React.FC<IContent> = () => {
 
   const [content, setContent] = useState<IHome>(data?.content as IHome)
   const [packages, setPackages] = useState<Partial<IHome>>({} as Partial<IHome>)
+  const { useContacts } = useSiteContexts()
 
   const {
     data:packages_data ,
@@ -186,6 +189,9 @@ export const Home:React.FC<IContent> = () => {
               </div>
             </section>
           </>
+        )}
+        {useContacts && (
+          <WhatsappButton content={useContacts} />
         )}
       </main>
       <Footer/>
