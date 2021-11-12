@@ -1,6 +1,10 @@
 import styled, { keyframes } from 'styled-components'
 
 export const Container = styled.div `
+  position: relative;
+  main {
+    position: relative;
+  }
   background: ${({theme}) => theme.colors.gray_1000};
   .wrapper {
     display: flex;
