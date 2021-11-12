@@ -1,10 +1,11 @@
 import { ICMSData } from "../../entities/CMSData"
+import { IHomeData } from "../../entities/CMSHomeData"
 import { ICMSProvider, IQueryParams } from "../../providers/ICMSProvider"
 
 export class CMSRequestPostsUseCase {
 
   constructor(
-    private cmsProvider: ICMSProvider
+    private cmsProvider: ICMSProvider<IHomeData>
   ){}//Create a CMS provider to handle with the request
 
   async execute(queryParams: IQueryParams): Promise<ICMSData>{
