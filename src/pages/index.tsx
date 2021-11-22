@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
-import { GetServerSideProps, GetStaticProps } from 'next'
-import Image from 'next/image'
+import { GetStaticProps } from 'next'
 
 import { Header } from '@/components/Header'
 import { TextBlock } from '@/components/TextBlock'

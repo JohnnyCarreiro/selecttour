@@ -1,4 +1,4 @@
-import { useRef, useContext, useMemo, useEffect, createRef } from 'react'
+import { useContext, useEffect, createRef } from 'react'
 import { useOnScreen } from './useOnScreen'
 import { NavContext } from '../Contexts/NavContext'
 

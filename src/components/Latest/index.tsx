@@ -1,6 +1,4 @@
 import { ReactNode } from 'react'
-import { FaStar } from 'react-icons/fa'
-import Button from '../Button'
 
 import { Container } from './styles'
 

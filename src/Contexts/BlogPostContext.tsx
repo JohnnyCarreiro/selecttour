@@ -1,5 +1,5 @@
 import React, { createContext, HTMLAttributes, ReactNode, useCallback, useContext, useEffect, useState } from 'react'
-import { setCookie, parseCookies } from 'nookies'
+import { parseCookies } from 'nookies'
 
 type CategoryContent = { category:string }
 

@@ -10,7 +10,6 @@ import { Container } from '@/styles/Blog'
 import { Sidebar } from "@/components/Blog/Sidebar"
 import { Footer } from "@/components/Footer"
 import { getPrismicClient } from "@/services/prismic"
-import { useEffect, useState } from "react"
 import { useFilters } from "@/Hooks/useFilters"
 import { getPosts, usePosts } from "@/Hooks/usePosts"
 import { QueryClient } from "react-query"

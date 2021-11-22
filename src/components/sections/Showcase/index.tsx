@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { ReactNode, HTMLAttributes } from 'react'
 
 import { Container } from './styles'

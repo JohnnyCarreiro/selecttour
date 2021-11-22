@@ -1,5 +1,4 @@
 import { ContactForm } from '@/components/contactForm'
-import { ReactNode } from 'react'
 
 import { Container } from './styles'
 

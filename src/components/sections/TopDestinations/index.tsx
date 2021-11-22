@@ -1,6 +1,5 @@
-import { ReactNode, useState } from 'react'
+import { useState } from 'react'
 import { Destination } from '@/components/Destination'
-import KnowMoreModal from '@/components/modals/KnowMoreModal'
 
 
 import { Container } from './styles'

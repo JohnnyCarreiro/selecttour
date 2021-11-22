@@ -1,4 +1,3 @@
-import { set } from 'lodash'
 import { Dispatch, ReactNode, SetStateAction, useState } from 'react'
 import { FaStar } from 'react-icons/fa'
 import Button from '../Button'

@@ -1,7 +1,5 @@
 import { IContentProps } from "@/pages/blog"
 import { api } from "@/utils/api"
-import { NextPage } from "next"
-import { ParsedUrlQuery } from "querystring"
 import { useQuery } from "react-query"
 
 export async function getBlogHomeContent(): Promise<IContentProps["blogHome"]>{
