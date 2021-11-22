@@ -14,7 +14,7 @@ import { useEffect, useState } from "react"
 import { useFilters } from "@/Hooks/useFilters"
 import { getPosts, usePosts } from "@/Hooks/usePosts"
 import { QueryClient } from "react-query"
-import WhatsappButton from "@/components/WhatsappButton"
+import { WhatsappButton } from "@/components/WhatsappButton"
 import { useSiteContexts } from "@/Contexts/useSiteContext"
 
 interface IPostProps {
@@ -42,7 +42,7 @@ export default function Post({ post, error }: IPostProps) {
   const { useContacts } = useSiteContexts()
 
 
-  const STALE_TIME = 10 * 1000
+  const STALE_TIME = 60 * 60 * 24 * 7 * 1000 // one week in mileseconds
   const page = 1
   const { filteredTag, filteredCategory } = useFilters()
   const { data, isLoading, isFetching } = usePosts(STALE_TIME, page, filteredTag, filteredCategory)
@@ -178,8 +178,7 @@ export const getStaticPaths: GetStaticPaths = async  () => {
   }
 }
 const queryClient = new QueryClient()
-const STALE_TIME = 10 * 1000
-
+const STALE_TIME = 60 * 60 * 24 * 7 * 1000 // one week in mileseconds
 
 export const getStaticProps: GetStaticProps = async (context) => {
 
@@ -217,7 +216,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       props:{
         post,
       },
-      revalidate: 60 * 60 // 60 * 60 * 24 * 7
+      revalidate: 60 * 60 * 24 * 7 // 60 * 60 * 24 * 7
     }
   } catch (error) {
     return {

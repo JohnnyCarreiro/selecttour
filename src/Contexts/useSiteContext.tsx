@@ -8,7 +8,7 @@ interface FilterContextData{
 }
 
 const SiteContext = createContext<FilterContextData>({} as FilterContextData)
-const STALE_TIME = 10 * 1000
+const STALE_TIME = 60 * 60 * 24 * 7 * 1000 // one week in mileseconds
 
 const  SiteProvider: React.FC = ({ children }) => {
   const [useContacts, setUseContacts] = useState<IHome['site_contacts_section']>({} as IHome['site_contacts_section'])

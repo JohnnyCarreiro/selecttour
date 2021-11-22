@@ -26,8 +26,8 @@ import { useSiteContexts } from '@/Contexts/useSiteContext'
 
 
 export const Home:React.FC<IContent> = () => {
-  const STALE_TIME = 10 * 1000
-  const STALE_TIME_PACKAGES = 10 * 1000
+  const STALE_TIME = 60 * 60 * 24 * 7 * 1000 // one week in mileseconds
+  const STALE_TIME_PACKAGES = 60 * 60 * 24 * 1000 // one day in mileseconds
   const { data, isLoading, isFetching, error } = useHomeContent(STALE_TIME)
 
   const [content, setContent] = useState<IHome>(data?.content as IHome)
@@ -243,7 +243,7 @@ export const getStaticProps: GetStaticProps = async () => {
       props: {
         dehydratedState: dehydrate(queryClient),
       },
-      revalidate: 60 * 60
+      revalidate: 60 * 60 * 24
     }
   } catch (error) {
     return {

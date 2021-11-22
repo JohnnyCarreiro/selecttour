@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {  GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { QueryClient, } from "react-query"
 import { dehydrate } from "react-query/hydration"
@@ -17,7 +17,7 @@ import { getPosts, usePosts } from "@/Hooks/usePosts"
 import { useFilters } from "@/Hooks/useFilters"
 import { getBlogHomeContent, useBlogHomeContent } from '@/Hooks/useBlogHome'
 import { useSiteContexts } from '@/Contexts/useSiteContext'
-import WhatsappButton from '@/components/WhatsappButton'
+import { WhatsappButton } from '@/components/WhatsappButton'
 
 type PostData = {
   slug: string
@@ -58,8 +58,8 @@ export interface IContentProps {
 
 export default function Blog<NextPage>(props: IContentProps) {
 
-  const STALE_TIME = 10 * 1000
-  const STALE_TIME_BLOG = 10 * 1000
+  const STALE_TIME = 60 * 60 * 24 * 1000 // one day in mileseconds
+  const STALE_TIME_BLOG = 60 * 60 * 24 * 7 * 1000 // one week in mileseconds
   const [page, setPage] =useState<number>()
 
   const { useContacts } = useSiteContexts()
@@ -233,10 +233,10 @@ export default function Blog<NextPage>(props: IContentProps) {
 Blog.provider = BlogPostProvider
 
 const queryClient = new QueryClient()
-const STALE_TIME = 10 * 1000 // 10 sec // 60 * 60 * 24 * 1000 //24 hours
-const STALE_TIME_BLOG = 10 * 1000 // 10 sec // 60 * 60 * 24 * 1000 //24 hours
+const STALE_TIME = 60 * 60 * 24 * 1000 // 60 * 60 * 24 * 1000 //24 hours
+const STALE_TIME_BLOG = 60 * 60 * 24 * 7 * 1000 // 60 * 60 * 24 * 7 * 1000 //one week
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
 
   try {
     const tag = ''
@@ -255,6 +255,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: {
         dehydratedState: dehydrate(queryClient),
       },
+      revalidate: 60 * 60 * 24 // 24 hours
     }
   } catch (error) {
     return {

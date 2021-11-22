@@ -19,7 +19,7 @@ interface SidebarProps extends HTMLAttributes<HTMLElement>{
 
 export function Sidebar({filteredCategory, filteredTag, ifNotHome, ...rest}: SidebarProps) {
   const [page, setPage] =useState<number>(1)
-  const STALE_TIME = 10 * 1000
+  const STALE_TIME = 60 * 60 * 24 * 1000 // one day in mileseconds
   const { data, isLoading, isFetching, error } = usePosts(STALE_TIME, page, filteredTag, filteredCategory)
   const router = useRouter()
 
