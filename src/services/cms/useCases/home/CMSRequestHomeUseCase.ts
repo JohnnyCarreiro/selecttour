@@ -16,8 +16,6 @@ export class CMSRequestHomeUseCase {
       const cmsData = await this.cmsProvider.fetchingHomeContent()
       const cmsPost = await this.cmsProvider.fetchingAll({page})
 
-      console.log('CmsData: ', !!cmsData)
-
       return {
         content: cmsData,
         hasBlogposts: !!cmsPost.contents.posts,
