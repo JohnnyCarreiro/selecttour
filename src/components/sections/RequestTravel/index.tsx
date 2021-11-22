@@ -34,6 +34,8 @@ interface RequestFormData {
   current?:  Promise<React.RefObject<HTMLDivElement>>
 }
 
+export const config = { amp: true }
+
 export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
 
   const formRef = useRef<FormHandles>(null)
@@ -139,7 +141,7 @@ export const RequestTravel:React.FC<RequestFormData> = ({current}) => {
     <Container className="elevation">
      <Form ref={formRef} onSubmit={handleSubmit} >
        <div className="travel-tab">
-         <h3>Viagens e Pacotes</h3>
+         <h2>Viagens e Pacotes</h2>
        </div>
        <div className="travel-form">
          <div className="travel-chec"></div>

@@ -29,7 +29,7 @@ export const MainPost: React.FC<MainPostProps> = ({contentData, ...rest}) => {
     <Container {...rest}>
       <div className="main-post-content">
         <a className="main-post-link-image"href={`/blog/${slug}`}>
-          <img src={image.url} alt={image.alt} />
+          <img loading={"lazy"} src={image.url} alt={image.alt} />
         </a>
         <div className="main-post-info">
           <h2 className="main-post-title">

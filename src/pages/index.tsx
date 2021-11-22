@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, GetStaticProps } from 'next'
+import Image from 'next/image'
 
 import { Header } from '@/components/Header'
 import { TextBlock } from '@/components/TextBlock'
@@ -23,6 +24,7 @@ import { useHomePackages } from '@/Hooks/Home/useHomePackages'
 import WhatsappButton from '@/components/WhatsappButton'
 import { useSiteContexts } from '@/Contexts/useSiteContext'
 
+
 export const Home:React.FC<IContent> = () => {
   const STALE_TIME = 10 * 1000
   const STALE_TIME_PACKAGES = 10 * 1000
@@ -38,9 +40,6 @@ export const Home:React.FC<IContent> = () => {
     isFetching:packages_isFetching ,
     error:packages_error
   } = useHomePackages(STALE_TIME_PACKAGES)
-
-  console.log("Packages: ",packages, content)
-
 
   useEffect(() => {
     if(data){
@@ -75,7 +74,30 @@ export const Home:React.FC<IContent> = () => {
   return (
     <Container>
       <Head>
-        <title>Select Tour - Mais que uma uma Viagem</title>
+      {data && (
+        <>
+          <title>Select Tour - Mais que uma uma Viagem</title>
+
+          <meta name="description" content={about_us_section.content} />
+
+          <meta property="og:site_name" content="Select Tour Viagens" />
+
+          <meta property="og:title" content={'Select Tour - Mais que uma uma Viagem'} />
+          <meta property="og:description" content={about_us_section.content} />
+          {/* Images */}
+          <meta property="og:image" content={'https://selecttour.cdn.prismic.io/selecttour/b7be64f6-4edf-4d0d-99ad-6e732633294f_LOGO.svg'} />
+          <meta property="og:image:type" content="image/png" />
+
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={'Select Tour - Mais que uma uma Viagem'} />
+          <meta name="twitter:description" content={about_us_section.content} />
+          <meta name="twitter:image" content={'https://selecttour.cdn.prismic.io/selecttour/b7be64f6-4edf-4d0d-99ad-6e732633294f_LOGO.svg'} />
+          {/* <link rel="canonical" href="https://www.selecttourviagens.com.br"/> */}
+        </>
+      )}
       </Head>
       {data && (
         <Header hasBlogPosts={data.hasBlogposts}/>
@@ -88,7 +110,13 @@ export const Home:React.FC<IContent> = () => {
           <Showcase>
             <div className="wrapper">
               <div className="sowcase-content" >
-                <img src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
+                <img
+                  loading="lazy"
+                  src="./assets/images/LOGO.svg"
+                  alt="Logo Select Tour"
+                  // width={'422.19px'}
+                  // height={'121.41px'}
+                />
                 {isLoading && (
                   <p>Carregando ...</p>
                 )}
@@ -190,8 +218,8 @@ export const Home:React.FC<IContent> = () => {
             </section>
           </>
         )}
-        {useContacts && (
-          <WhatsappButton content={useContacts} />
+        {content && (
+          <WhatsappButton content={content.site_contacts_section} />
         )}
       </main>
       <Footer/>
@@ -204,7 +232,7 @@ export default Home
 const queryClient = new QueryClient()
 const STALE_TIME = 10 * 1000 // 10 sec // 60 * 60 * 24 * 1000 //24 hours
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
 
   try {
     await queryClient.prefetchQuery(["main_home"], async () => {
@@ -215,6 +243,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       props: {
         dehydratedState: dehydrate(queryClient),
       },
+      revalidate: 60 * 60
     }
   } catch (error) {
     return {

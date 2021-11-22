@@ -16,6 +16,8 @@ interface TestimonialsProps {
   children?: ReactNode
 }
 
+export const config = { amp: true }
+
 export const Testimonials: React.FC<TestimonialsProps> = ({ children, content_data }) => {
   const { title, subtitle, testimonials } = content_data
   return (

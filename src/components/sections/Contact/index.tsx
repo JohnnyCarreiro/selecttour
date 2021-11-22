@@ -12,6 +12,8 @@ interface LatestsProps {
   }
 }
 
+export const config = { amp: true }
+
 export const  Contact: React.FC<LatestsProps> =({ content_data }) => {
   const {
     title,

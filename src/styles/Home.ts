@@ -14,6 +14,7 @@ export const Container = styled.div `
   }
   .sowcase-content {
     text-align: center;
+    display: block;
     h1 {
       margin-top: 2rem;
       font: ${({theme}) => theme.texts.main_title};

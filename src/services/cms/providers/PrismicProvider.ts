@@ -4,7 +4,7 @@ import { ICMSProvider, IQueryParams } from "./ICMSProvider"
 
 import Prismic from '@prismicio/client'
 import { RichText } from 'prismic-dom'
-import { CMSHomeData, IHomeData } from "../entities/CMSHomeData"
+import { IHomeData } from "../entities/CMSHomeData"
 
 export class PrismicProvider implements ICMSProvider<IHomeData> {
   constructor(){}
@@ -12,125 +12,129 @@ export class PrismicProvider implements ICMSProvider<IHomeData> {
   async fetchingHomeContent(): Promise<IHomeData> {
     const prismic = getPrismicClient()
 
-    const response = await prismic.query([
-      Prismic.predicates.at('document.type', 'selecttour')
-    ])
+    try {
+      const response = await prismic.query([
+        Prismic.predicates.at('document.type', 'selecttour')
+      ])
 
-    const content = response.results.map(content => {
-      const showCase = content.data
-      const howWeWork = content.data.body.find((section: any) => section.slice_label === 'how_we_work')
-      const packages = content.data.body.find((section: any) => section.slice_label === 'top_package')
-      const aboutUs = content.data.body.find((section: any) => section.slice_label === 'about_us')
-      const topDestinations = content.data.body.find((section: any) => section.slice_label === 'destinations')
-      const ourTeam = content.data.body.find((section: any) => section.slice_label === 'our_team')
-      const testimonials = content.data.body.find((section: any) => section.slice_label === 'testimonials')
-      const contacts = content.data.body.find((section: any) => section.slice_label === 'contact_form')
-      const siteContacts = content.data.body.find((section: any) => section.slice_label === 'site_contacts')
+      const content = response.results.map(content => {
+        const showCase = content.data
+        const howWeWork = content.data.body.find((section: any) => section.slice_label === 'how_we_work')
+        const packages = content.data.body.find((section: any) => section.slice_label === 'top_package')
+        const aboutUs = content.data.body.find((section: any) => section.slice_label === 'about_us')
+        const topDestinations = content.data.body.find((section: any) => section.slice_label === 'destinations')
+        const ourTeam = content.data.body.find((section: any) => section.slice_label === 'our_team')
+        const testimonials = content.data.body.find((section: any) => section.slice_label === 'testimonials')
+        const contacts = content.data.body.find((section: any) => section.slice_label === 'contact_form')
+        const siteContacts = content.data.body.find((section: any) => section.slice_label === 'site_contacts')
+
+        return {
+          show_case_section:{
+            main_title: RichText.asText(showCase.main_title),
+            sub_title: RichText.asText(showCase.main_subtitle),
+          },
+          how_we_work_section: {
+            title: RichText.asText(howWeWork.primary.title),
+            subtitle: RichText.asText(howWeWork.primary.subtitle),
+            image_url: howWeWork.primary.text_image_img.url,
+            content: RichText.asHtml(howWeWork.primary.content)
+          },
+          top_packages_section: {
+            title: RichText.asText(packages.primary.package_title),
+            subtitle: RichText.asText(packages.primary.package_subtitle),
+            packages: packages.items.map((travelPackage: any) => {
+              return {
+                image: travelPackage.package_img.url,
+                destination: RichText.asText(travelPackage.destination),
+                value: RichText.asText(travelPackage.value),
+                time_amount: RichText.asText(travelPackage.time_amount),
+                hotel_classification: RichText.asText(travelPackage.hotel_classification),
+                transportations: RichText.asText(travelPackage.transportations),
+                meal_options: RichText.asText(travelPackage.meal_options),
+                qualification: travelPackage.qualification,
+                know_more_infos: RichText.asHtml(travelPackage.know_more),
+                reservation: RichText.asHtml(travelPackage.reservation),
+              }
+            })
+          },
+          about_us_section: {
+            title: RichText.asText(aboutUs.primary.title),
+            subtitle: RichText.asText(aboutUs.primary.subtitle),
+            image_url: aboutUs.primary.text_image_img.url,
+            content: RichText.asHtml(aboutUs.primary.content)
+          },
+          top_destinations_section: {
+            title: RichText.asText(topDestinations.primary.title),
+            subtitle: RichText.asText(topDestinations.primary.subtitle),
+            destinations: topDestinations.items.map((destination: any) => {
+              return {
+                image: destination.img.url,
+                destination: RichText.asText(destination.country),
+                highlights: RichText.asText(destination.highlights),
+                know_more_infos: RichText.asHtml(destination.know_more),
+              }
+            })
+          },
+          our_team_section: {
+            title: RichText.asText(ourTeam.primary.title),
+            subtitle: RichText.asText(ourTeam.primary.subtitle),
+            image_url: ourTeam.primary.text_image_img.url,
+            content: RichText.asHtml(ourTeam.primary.content)
+          },
+          testimonials_section: {
+            title: RichText.asText(testimonials.primary.title),
+            subtitle: RichText.asText(testimonials.primary.subtitle),
+            testimonials: testimonials.items.map((testimonial: any) => {
+              return {
+                image: testimonial.customer_img.url,
+                name: RichText.asText(testimonial.name),
+                testimonial: RichText.asText(testimonial.testimonial),
+              }
+            })
+          },
+          contact_form_section: {
+            title: RichText.asText(contacts.primary.title),
+            subtitle: RichText.asText(contacts.primary.subtitle),
+            email: RichText.asText(contacts.primary.email),
+            phone: RichText.asText(contacts.primary.phone),
+          },
+          site_contacts_section: {
+            whatsapp_number: RichText.asText(siteContacts.primary.whatsapp_number),
+            whatsapp_message: RichText.asText(siteContacts.primary.whatsapp_message),
+            phone_number: RichText.asText(siteContacts.primary.phone_number),
+            email: RichText.asText(siteContacts.primary.email),
+            facebook: RichText.asText(siteContacts.primary.facebook),
+            instagram: RichText.asText(siteContacts.primary.instagram),
+            linkedin: RichText.asText(siteContacts.primary.linkedin),
+          }
+        }
+      })[0]
+
+      const {
+        about_us_section,
+        contact_form_section,
+        how_we_work_section,
+        our_team_section,
+        show_case_section,
+        site_contacts_section,
+        testimonials_section,
+        top_destinations_section,
+        top_packages_section,
+      } = content
 
       return {
-        show_case_section:{
-          main_title: RichText.asText(showCase.main_title),
-          sub_title: RichText.asText(showCase.main_subtitle),
-        },
-        how_we_work_section: {
-          title: RichText.asText(howWeWork.primary.title),
-          subtitle: RichText.asText(howWeWork.primary.subtitle),
-          image_url: howWeWork.primary.text_image_img.url,
-          content: RichText.asHtml(howWeWork.primary.content)
-        },
-        top_packages_section: {
-          title: RichText.asText(packages.primary.package_title),
-          subtitle: RichText.asText(packages.primary.package_subtitle),
-          packages: packages.items.map((travelPackage: any) => {
-            return {
-              image: travelPackage.package_img.url,
-              destination: RichText.asText(travelPackage.destination),
-              value: RichText.asText(travelPackage.value),
-              time_amount: RichText.asText(travelPackage.time_amount),
-              hotel_classification: RichText.asText(travelPackage.hotel_classification),
-              transportations: RichText.asText(travelPackage.transportations),
-              meal_options: RichText.asText(travelPackage.meal_options),
-              qualification: travelPackage.qualification,
-              know_more_infos: RichText.asHtml(travelPackage.know_more),
-              reservation: RichText.asHtml(travelPackage.reservation),
-            }
-          })
-        },
-        about_us_section: {
-          title: RichText.asText(aboutUs.primary.title),
-          subtitle: RichText.asText(aboutUs.primary.subtitle),
-          image_url: aboutUs.primary.text_image_img.url,
-          content: RichText.asHtml(aboutUs.primary.content)
-        },
-        top_destinations_section: {
-          title: RichText.asText(topDestinations.primary.title),
-          subtitle: RichText.asText(topDestinations.primary.subtitle),
-          destinations: topDestinations.items.map((destination: any) => {
-            return {
-              image: destination.img.url,
-              destination: RichText.asText(destination.country),
-              highlights: RichText.asText(destination.highlights),
-              know_more_infos: RichText.asHtml(destination.know_more),
-            }
-          })
-        },
-        our_team_section: {
-          title: RichText.asText(ourTeam.primary.title),
-          subtitle: RichText.asText(ourTeam.primary.subtitle),
-          image_url: ourTeam.primary.text_image_img.url,
-          content: RichText.asHtml(ourTeam.primary.content)
-        },
-        testimonials_section: {
-          title: RichText.asText(testimonials.primary.title),
-          subtitle: RichText.asText(testimonials.primary.subtitle),
-          testimonials: testimonials.items.map((testimonial: any) => {
-            return {
-              image: testimonial.customer_img.url,
-              name: RichText.asText(testimonial.name),
-              testimonial: RichText.asText(testimonial.testimonial),
-            }
-          })
-        },
-        contact_form_section: {
-          title: RichText.asText(contacts.primary.title),
-          subtitle: RichText.asText(contacts.primary.subtitle),
-          email: RichText.asText(contacts.primary.email),
-          phone: RichText.asText(contacts.primary.phone),
-        },
-        site_contacts_section: {
-          whatsapp_number: RichText.asText(siteContacts.primary.whatsapp_number),
-          whatsapp_message: RichText.asText(siteContacts.primary.whatsapp_message),
-          phone_number: RichText.asText(siteContacts.primary.phone_number),
-          email: RichText.asText(siteContacts.primary.email),
-          facebook: RichText.asText(siteContacts.primary.facebook),
-          instagram: RichText.asText(siteContacts.primary.instagram),
-          linkedin: RichText.asText(siteContacts.primary.linkedin),
-        }
+        about_us_section,
+        contact_form_section,
+        how_we_work_section,
+        our_team_section,
+        show_case_section,
+        site_contacts_section,
+        testimonials_section,
+        top_destinations_section,
+        top_packages_section
       }
-    })[0]
-
-    const {
-      about_us_section,
-      contact_form_section,
-      how_we_work_section,
-      our_team_section,
-      show_case_section,
-      site_contacts_section,
-      testimonials_section,
-      top_destinations_section,
-      top_packages_section,
-    } = content
-
-    return {
-      about_us_section,
-      contact_form_section,
-      how_we_work_section,
-      our_team_section,
-      show_case_section,
-      site_contacts_section,
-      testimonials_section,
-      top_destinations_section,
-      top_packages_section
+    } catch (error) {
+      throw new Error('Error to fetching Main Home Data')
     }
   }
 
@@ -193,7 +197,8 @@ export class PrismicProvider implements ICMSProvider<IHomeData> {
           id: String(content.uid),
           hero_title: RichText.asText(content.data.title),
           title: RichText.asText(content.data.subtitle),
-          content: RichText.asHtml(content.data.texts)
+          content: RichText.asHtml(content.data.texts),
+          snippet: content.data.texts.find((content:any) => content.type === 'paragraph')?.text ?? ''
         }
       })[0]
 
@@ -212,7 +217,8 @@ export class PrismicProvider implements ICMSProvider<IHomeData> {
       }
 
     } catch (error: any) {
-      throw new Error('Deu Merda')
+      console.log(error)
+      throw new Error('Error on fetching all posts Data')
     }
   }
 
@@ -304,7 +310,7 @@ export class PrismicProvider implements ICMSProvider<IHomeData> {
 
       return data
     } catch (error) {
-      throw new Error('Deu Ruim')
+      throw new Error('Error on fetching by Category')
     }
   }
   async fetchingByTag(queryParams: Partial<IQueryParams>): Promise<ICMSData> {
@@ -396,7 +402,7 @@ export class PrismicProvider implements ICMSProvider<IHomeData> {
 
       return data
     } catch (error) {
-      throw new Error('Deu Ruim')
+      throw new Error('Error on fetching by tag')
     }
   }
 }

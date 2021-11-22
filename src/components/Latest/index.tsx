@@ -16,7 +16,7 @@ export const Latest:React.FC<PackageProps> = ({ children }) => {
         <p>01/01/2021</p>
       </div>
       <div className="img-container">
-        <img src="assets/images/travel.png" alt="Destino" />
+        <img loading={"lazy"} src="assets/images/travel.png" alt="Destino" />
       </div>
       <div className="latest-info">
         <h3>Titulo do post</h3>

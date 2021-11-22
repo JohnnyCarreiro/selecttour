@@ -43,32 +43,34 @@ export default class MyDocument extends Document {
       <Html lang="pt-BR" >
         <Head>
           <meta charSet="utf-8" />
-          {/* <link rel="preconnect" href="https://fonts.gstatic.com" /> */}
-          {/* <link
+          <link rel="preload" href="https://fonts.gstatic.com" />
+          <link
             href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&display=swap"
             rel="stylesheet"
-          /> */}
+          />
           <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png" />
           <link rel="icon" href="/assets/images/favicon.png" />
           <meta name="theme-color" content="#673AB6" />
           {/* <style data-href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&display=swap" /> */}
-          <link
+          {/* <link
             rel="preload"
             as="style"
             href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&display=swap"
           />
           <link
-            rel="stylesheet"
+            rel="preload"
+            // rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&display=swap"
             media="print"
             // onLoad={this.componentDidMount()}
           />
           <noscript>
             <link
-              rel="stylesheet"
+              // rel="stylesheet"
+              rel="preload"
               href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&display=swap"
             />
-          </noscript>
+          </noscript> */}
         </Head>
         <body>
           <Main />

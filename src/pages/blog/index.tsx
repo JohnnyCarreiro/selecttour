@@ -40,6 +40,7 @@ export interface IContentProps {
     hero_title:string
     title: string
     content: string
+    snippet: string
   }
   contents:{
     posts: Array<PostData>
@@ -109,12 +110,35 @@ export default function Blog<NextPage>(props: IContentProps) {
     <Container>
       <Head>
         <title>Select Tour - Blog</title>
+        {blogData && data && (
+          <>
+            <title>Select Tour - Mais que uma uma Viagem</title>
+
+            <meta name="description" content={blogData.snippet} />
+
+            <meta property="og:site_name" content={blogData.title} />
+
+            <meta property="og:title" content={blogData.title} />
+            <meta property="og:description" content={blogData.snippet} />
+            {/* Images */}
+            <meta property="og:image" content={data.contents.posts[0].image.url} />
+            <meta property="og:image:type" content="image/png" />
+
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
+
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content={blogData.title} />
+            <meta name="twitter:description" content={blogData.snippet} />
+            <meta name="twitter:image" content={data.contents.posts[0].image.url} />
+          </>
+        )}
       </Head>
       <Header hasBlogPosts={!!blogData} />
       <Hero image={mainImage ? mainImage?.url : ''} >
         <div className="wrapper">
           <div className="hero-content" >
-            <img src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
+            <img loading={"lazy"} src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
             <h1>{blogData && blogData.hero_title}</h1>
             {blogIsLoading || blogIsFetching && <h3>Carregando informacões ...</h3>}
           </div>

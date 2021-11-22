@@ -16,12 +16,15 @@ export class CMSRequestHomeUseCase {
       const cmsData = await this.cmsProvider.fetchingHomeContent()
       const cmsPost = await this.cmsProvider.fetchingAll({page})
 
+      console.log('CmsData: ', !!cmsData)
+
       return {
         content: cmsData,
         hasBlogposts: !!cmsPost.contents.posts,
         hasMoreThanthreePosts: cmsPost.contents.posts && cmsPost.contents.posts.length >= 3
       }
     } catch (error: any) {
+      console.log(error)
       throw new Error('Deu ruim no prismic')
     }
   }

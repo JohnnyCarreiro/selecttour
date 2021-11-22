@@ -45,7 +45,7 @@ export const Package:React.FC<PackageProps> = ({ children, package_data, openMod
     <>
       <Container className="elevation">
         <div className="img-container">
-          <img src={image} alt="Destino" />
+          <img loading={"lazy"} src={image} alt="Destino" />
         </div>
         <div className="destination-info">
           <div className="destination-header">

@@ -23,6 +23,8 @@ interface TopPackagesProps {
   children?: ReactNode
 }
 
+export const config = { amp: true }
+
 export const TopPackages: React.FC<TopPackagesProps> = ({ children, content_data }) => {
 
   const {

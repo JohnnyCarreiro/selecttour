@@ -15,7 +15,7 @@ export const Testimonial:React.FC<TestimonialProps> = ({ children, content_data 
   return (
     <Container>
       <div className="image-container">
-        <img src={image} alt="" />
+        <img loading={"lazy"} src={image} alt="" />
       </div>
       <div className="content">
         <h3>{name}</h3>

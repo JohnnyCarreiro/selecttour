@@ -31,7 +31,7 @@ export const Post: React.FC<PostProps> = ({post}) => {
       <div className="divider" />
       <div className="snippet-post-content">
         <a className="snippet-post-link-image" href={`/blog/${slug}`}>
-          <img src={image.url} alt={image.alt} />
+          <img loading={"lazy"} src={image.url} alt={image.alt} />
         </a>
         <div className="snippet-post-info">
           <h2 className="snippet-post-title">

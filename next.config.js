@@ -18,9 +18,17 @@ module.exports = {
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: ["@svgr/webpack"]
+      use: ["@svgr/webpack"],
     });
 
     return config;
+  },
+  images: {
+    domains: ['selecttour.cdn.prismic.io']
+  },
+  experimental: {
+    amp: {
+      // skipValidation: true
+    }
   }
 };

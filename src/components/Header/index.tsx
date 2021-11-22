@@ -23,6 +23,9 @@ interface IHeaderProps {
   hasBlogPosts: boolean
 }
 
+export const config = { amp: true }
+
+
 export const Header: React.FC<IHeaderProps> = ({hasBlogPosts}) => {
 
   const { pathname } = useRouter()

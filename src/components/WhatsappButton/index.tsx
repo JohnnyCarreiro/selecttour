@@ -3,6 +3,8 @@ import { FaWhatsapp } from 'react-icons/fa'
 
 import { Container } from './styles'
 
+// export const config = { amp: false }
+
 interface WhatsappButtonProps {
   children?: ReactNode
   content: {
@@ -17,8 +19,7 @@ function WhatsappButton({ children, content }: WhatsappButtonProps) {
 
   const encodedWhatsappMessage = encodeURI(whatsapp_message)
   const encodedWhatsappUri = encodeURI(`https://api.whatsapp.com/send?phone=${whatsapp_number}&text=${whatsapp_message}`)
-  console.log(encodedWhatsappMessage, encodedWhatsappUri)
-  console.log(content)
+
   return (
     <Container>
       <a

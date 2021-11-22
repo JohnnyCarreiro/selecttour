@@ -18,6 +18,8 @@ interface TopPackagesProps {
   }
 }
 
+export const config = { amp: true }
+
 export const TopDestinations: React.FC<TopPackagesProps> = ({ content_data }) => {
   const [isOpenModal, setModalState] = useState(false)
   const {

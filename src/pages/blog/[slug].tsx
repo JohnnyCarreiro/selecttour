@@ -3,7 +3,6 @@ import { useRouter } from "next/router"
 import Head from "next/head"
 import Prismic from '@prismicio/client'
 import { RichText } from "prismic-dom"
-import { parseCookies, setCookie } from "nookies"
 
 import { Hero } from "@/components/Blog/Hero"
 import { Header } from "@/components/Header"
@@ -27,12 +26,15 @@ interface IPostProps {
     }
     title: string
     content: string
+    snippet: string
     updatedAt: string
   },
   error?: {
     slug: string
   }
 }
+
+// export const config = { amp: true }
 
 export default function Post({ post, error }: IPostProps) {
 
@@ -51,11 +53,34 @@ export default function Post({ post, error }: IPostProps) {
         <>
           <Head>
             <title>{post.slug} | My Blog</title>
+            { post && (
+              <>
+                <title>Select Tour - Mais que uma uma Viagem</title>
+
+                <meta name="description" content={post.snippet} />
+
+                <meta property="og:site_name" content={post.title} />
+
+                <meta property="og:title" content={post.title} />
+                <meta property="og:description" content={post.snippet} />
+                {/* Images */}
+                <meta property="og:image" content={post.image.url} />
+                <meta property="og:image:type" content="image/png" />
+
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={post.title} />
+                <meta name="twitter:description" content={post.snippet} />
+                <meta name="twitter:image" content={post.image.url} />
+              </>
+            )}
           </Head>
           <Hero image={post.image.url} title={post.image.alt} >
             <div className="wrapper">
               <div className="hero-content" >
-                <img src={"/assets/images/LOGO.svg"} alt={"Logo Select Tour"} />
+                <img loading={"lazy"} src={"/assets/images/LOGO.svg"} alt={"Logo Select Tour"} />
                 <h1>{'Blog muitcho loko'}</h1>
                 { post.title && (
                   <h2>{post.title}</h2>
@@ -98,7 +123,7 @@ export default function Post({ post, error }: IPostProps) {
           <Hero image={post?.image.url} title="Algo deu Errado">
             <div className="wrapper">
               <div className="hero-content" >
-                <img src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
+                <img loading={"lazy"} src="/assets/images/LOGO.svg" alt="Logo Select Tour" />
                 <h1>{'Blog muitcho loko'}</h1>
               </div>
             </div>
@@ -179,6 +204,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         url: response.data.image.url,
         alt: response.data.image.alt
       },
+      snippet:response.data.content.find((content:any) => content.type === 'paragraph')?.text ?? '',
       content: RichText.asHtml(response.data.content),
       updatedAt: new Date(String(response.last_publication_date)).toLocaleDateString('pt-BR',{
         day: '2-digit',
