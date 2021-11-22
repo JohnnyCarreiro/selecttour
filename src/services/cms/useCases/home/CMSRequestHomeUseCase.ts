@@ -24,7 +24,6 @@ export class CMSRequestHomeUseCase {
         hasMoreThanthreePosts: cmsPost.contents.posts && cmsPost.contents.posts.length >= 3
       }
     } catch (error: any) {
-      console.log(error)
       throw new Error('Deu ruim no prismic')
     }
   }

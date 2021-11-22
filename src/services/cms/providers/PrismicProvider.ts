@@ -217,7 +217,6 @@ export class PrismicProvider implements ICMSProvider<IHomeData> {
       }
 
     } catch (error: any) {
-      console.log(error)
       throw new Error('Error on fetching all posts Data')
     }
   }
