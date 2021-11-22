@@ -159,7 +159,7 @@ export class PrismicProvider implements ICMSProvider<IHomeData> {
       ],
         {
           orderings : '[document.last_publication_date desc]' ,
-          pageSize : 2,
+          pageSize : 10,
           page,
           fetchLinks : ['author.author', 'category.category']
         },
@@ -251,7 +251,7 @@ export class PrismicProvider implements ICMSProvider<IHomeData> {
       ],
         {
           orderings : '[document.last_publication_date desc]' ,
-          pageSize : 2,
+          pageSize : 10,
           page,
           fetchLinks : ['author.author', 'category.category']
         },
@@ -343,7 +343,7 @@ export class PrismicProvider implements ICMSProvider<IHomeData> {
       ],
         {
           orderings : '[document.last_publication_date desc]' ,
-          pageSize : 2,
+          pageSize : 10,
           page,
           fetchLinks : ['author.author', 'category.category']
         },

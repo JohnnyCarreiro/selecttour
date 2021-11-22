@@ -15,6 +15,7 @@ import { getPosts, usePosts } from "@/Hooks/usePosts"
 import { QueryClient } from "react-query"
 import { WhatsappButton } from "@/components/WhatsappButton"
 import { useSiteContexts } from "@/Contexts/useSiteContext"
+import { useBlogHomeContent } from "@/Hooks/useBlogHome"
 
 interface IPostProps {
   post: {
@@ -39,12 +40,21 @@ export default function Post({ post, error }: IPostProps) {
 
   const { locale } = useRouter()
   const { useContacts } = useSiteContexts()
+  const STALE_TIME_BLOG = 60 * 60 * 24 * 7 * 1000 // one week in mileseconds
+
 
 
   const STALE_TIME = 60 * 60 * 24 * 7 * 1000 // one week in mileseconds
   const page = 1
   const { filteredTag, filteredCategory } = useFilters()
   const { data, isLoading, isFetching } = usePosts(STALE_TIME, page, filteredTag, filteredCategory)
+
+  const {
+    data: blogData,
+    isLoading: blogIsLoading,
+    isFetching: blogIsFetching,
+    error: blogError
+  } = useBlogHomeContent(STALE_TIME_BLOG)
 
   return (
     <Container>
@@ -80,10 +90,11 @@ export default function Post({ post, error }: IPostProps) {
             <div className="wrapper">
               <div className="hero-content" >
                 <img loading={"lazy"} src={"/assets/images/LOGO.svg"} alt={"Logo Select Tour"} />
-                <h1>{'Blog muitcho loko'}</h1>
-                { post.title && (
+                <h1>{blogData && blogData.hero_title}</h1>
+                {blogIsLoading || blogIsFetching && <h3>Carregando informacões ...</h3>}
+                {/* { post.title && (
                   <h2>{post.title}</h2>
-                ) }
+                ) } */}
               </div>
             </div>
           </Hero>
