@@ -21,7 +21,7 @@ import { IContent, IHome } from '@/interfaces/IHome'
 import { getHomeContent, useHomeContent } from '@/Hooks/Home/useHome'
 import { dehydrate, QueryClient } from 'react-query'
 import { useHomePackages } from '@/Hooks/Home/useHomePackages'
-import WhatsappButton from '@/components/WhatsappButton'
+import {WhatsappButton} from '@/components/WhatsappButton'
 import { useSiteContexts } from '@/Contexts/useSiteContext'
 
 

@@ -13,7 +13,7 @@ interface WhatsappButtonProps {
   }
 }
 
-function WhatsappButton({ children, content }: WhatsappButtonProps) {
+export const WhatsappButton: React.FC< WhatsappButtonProps> = ({ children, content }) => {
 
   const { whatsapp_number, whatsapp_message } = content
 
@@ -33,5 +33,3 @@ function WhatsappButton({ children, content }: WhatsappButtonProps) {
     </Container>
   )
 }
-
-export default WhatsappButton
